@@ -2,7 +2,7 @@ import {Sprite} from "../sprite-wrapper";
 import Phaser from "phaser";
 import PIXI from "pixi";
 
-let platformGroup = undefined;
+export let platformGroup = undefined;
 export function setupPlatformGroup(game) {
     platformGroup = game.add.group();
 }
@@ -15,7 +15,9 @@ export class Platform extends Sprite {
 
     configure(game) {
         super.configure(game);
-        game.physics.enable(this, Phaser.Physics.ARCADE);
+        this.configureSprite(function () {
+            game.physics.arcade.enable(this);
+        });
     }
 
 }
@@ -29,8 +31,10 @@ export class Ground extends Platform {
 
     configure(game) {
         super.configure(game);
-        this.sprite.texture.baseTexture.scaleMode = PIXI.scaleModes.NEAREST;
-        this.sprite.scale.setTo(5, 5);
+        this.configureSprite(function () {
+            this.texture.baseTexture.scaleMode = PIXI.scaleModes.NEAREST;
+            this.scale.setTo(5, 5);
+        });
     }
 
 }

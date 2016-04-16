@@ -57,6 +57,14 @@ export class Sprite extends GameConfigurable {
         throw "game sprite not initialized";
     }
 
+    /**
+     * Call {@code fn} with a lexical this of the phaser sprite.
+     * @param fn - The configure function
+     */
+    configureSprite(fn) {
+        fn.call(this.sprite);
+    }
+
     setPosition(x, y) {
         this.x = x;
         this.y = y;
