@@ -36,13 +36,14 @@ export class TileMap extends GameConfigurable {
             map.setCollision(1);
             let layer = map.createLayer("ground");
             layer.texture.baseTexture.scaleMode = PIXI.scaleModes.NEAREST;
-            layer.scale = {x: 3, y: 3};
+            layer.scale = {x: 1, y: 1};
             dumpTiles(map, layer);
             layer.resizeWorld();
-
+            layer.debug = false;
+            /*
             tileLoopGen(map, layer, tile => {
                 map.setCollision(tile.index, true, layer);
-            });
+            }); */
             globals.collisionLayer = layer;
         });
     }

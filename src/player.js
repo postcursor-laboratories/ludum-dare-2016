@@ -3,8 +3,8 @@ import {globals} from "./globals";
 
 export class Player extends Entity {
 
-    constructor(image, x, y) {
-        super(image, x, y);
+    constructor(x, y) {
+        super("playerStatic", x, y);
         this.jumpSpeed = 200;
     }
     
@@ -20,7 +20,7 @@ export class Player extends Entity {
     update() {
         this.gameRef.physics.arcade.collide(this.sprite, globals.collisionLayer);
 
-        if (this.sprite.body.touching.down) {
+        if (this.sprite.body.touching.down || this.sprite.body.onFloor()) {
             this.sprite.body.velocity.x *= 0.9;
         } else {
             this.sprite.body.velocity.x *= 0.98;
@@ -29,7 +29,8 @@ export class Player extends Entity {
             this.move(DIRECTION.LEFT);
         } else if (this.controls.right.isDown) {
             this.move(DIRECTION.RIGHT);
-        } else if (this.controls.up.isDown) {
+        }
+        if (this.controls.up.isDown) {
             this.move(DIRECTION.UP);
         }
     }

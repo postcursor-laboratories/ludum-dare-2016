@@ -6,13 +6,13 @@ import {Sprite} from "./sprite-wrapper";
  */
 export class Game {
 
-    constructor(width, height, antialias = true) {
+    constructor(width, height, antialias = false) {
         this.allSprites = [];
         this.phaserGame = new Phaser.Game(width, height, Phaser.AUTO, "", {
             preload: () => this.preload(),
             create: () => this.create(),
             update: () => this.update()
-        });
+        }, antialias, antialias);
     }
 
     getImages() {

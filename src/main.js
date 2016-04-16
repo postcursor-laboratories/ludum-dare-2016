@@ -9,13 +9,14 @@ import {globals} from "./globals";
 class MainGame extends Game {
 
     constructor() {
-        super();
+        super(160, 160);
         this.tileMap = new TileMap();
         globals.tileMap = this.tileMap;
     }
 
     getImages() {
-        return [new Resource("ground", "img/StoneFloorSmooth.png")];
+        return [new Resource("ground", "img/StoneFloorSmooth.png"),
+                new Resource("playerStatic", "img/PlayerStatic.png")];
     }
 
     getPreLoadConfigurables() {
@@ -35,8 +36,10 @@ class MainGame extends Game {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         setupPlatformGroup(game);
         game.physics.arcade.gravity.y = 100;
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.stage.smoothed = false;
         return [
-            new Player("ground", 100, 40)
+            new Player(100, 40)
         ];
     }
 
