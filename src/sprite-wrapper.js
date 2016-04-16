@@ -1,4 +1,7 @@
-import {GameConfigurable} from "./game";
+import {GameConfigurable} from "./game-helpers";
+
+export const allSprites = [];
+
 /**
  * A wrapper around a Phaser sprite. Essentially just a little interfacing.
  */
@@ -14,6 +17,7 @@ export class Sprite extends GameConfigurable {
         };
         this.__gameSprite = undefined;
         this.gameRef = undefined;
+        allSprites.push(this);
     }
 
     configure(game) {

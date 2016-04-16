@@ -1,35 +1,5 @@
 import Phaser from "phaser";
 
-export class Resource {
-
-    constructor(name, location) {
-        this.name = name;
-        this.location = location;
-    }
-
-    getName() {
-        return this.name;
-    }
-
-    getLocation() {
-        return this.location;
-    }
-
-}
-
-export class GameConfigurable {
-
-    static of(f) {
-        let ret = new GameConfigurable();
-        ret.configure = f;
-        return ret;
-    }
-
-    configure(game) {
-    }
-
-}
-
 /**
  * A basic game container. Extend this for your actual game.
  */
@@ -73,6 +43,7 @@ export class Game {
     }
 
     update() {
+        this.phaserGame.world.forEach(s => s.update(), this);
     }
 
 }

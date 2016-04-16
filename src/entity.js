@@ -1,6 +1,5 @@
 import {Sprite} from "./sprite-wrapper";
 
-
 export const DIRECTION = {
     UP: 0,
     DOWN: 1,

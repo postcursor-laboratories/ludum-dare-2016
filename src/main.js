@@ -1,7 +1,7 @@
-import {Game, Resource, GameConfigurable} from "./game";
+import {Resource, GameConfigurable} from "./game-helpers";
+import {Game} from "./game";
 import {platformGroup, Ground} from "./sprites/platforms";
 import Phaser from "phaser";
-import {Sprite} from "./sprite-wrapper";
 
 class MainGame extends Game {
 
