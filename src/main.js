@@ -2,6 +2,7 @@ import {Resource, GameConfigurable} from "./game-helpers";
 import {Game} from "./game";
 import {setupPlatformGroup, Ground} from "./sprites/platforms";
 import Phaser from "phaser";
+import {Player} from "./player"
 
 class MainGame extends Game {
 
@@ -22,7 +23,8 @@ class MainGame extends Game {
             new Ground(50, 500),
             new Ground(50 + (16 * 5), 500),
             new Ground(50 + (16 * 5) * 2, 500),
-            new Ground(50 + (16 * 5) * 3, 500)
+            new Ground(50 + (16 * 5) * 3, 500),
+            new Player("ground", 100, 40)
         ];
     }
 
