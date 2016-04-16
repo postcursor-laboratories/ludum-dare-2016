@@ -4,12 +4,13 @@ import {GameConfigurable} from "./game";
  */
 export class Sprite extends GameConfigurable {
 
-    constructor(image, x, y) {
+    constructor(image, x, y, group=undefined) {
         super();
         this.__unconstructedData = {
             image: image,
             x: x,
-            y: y
+            y: y,
+            group: group
         };
         this.__gameSprite = undefined;
         this.gameRef = undefined;
@@ -17,9 +18,11 @@ export class Sprite extends GameConfigurable {
 
     configure(game) {
         let data = this.__unconstructedData;
+        let group = data.group;
         this.__unconstructedData = undefined;
         this.gameRef = game;
-        return this.__gameSprite = game.add.sprite(data.x, data.y, data.image);
+        let addSprite = group ? group.create.bind(group) : game.add.sprite.bind(game.add);
+        return this.__gameSprite = addSprite(data.x, data.y, data.image);
     }
 
     set x(x) {
@@ -36,6 +39,14 @@ export class Sprite extends GameConfigurable {
 
     get y() {
         return (this.__unconstructedData || this.__gameSprite).y;
+    }
+
+    set group(group) {
+        this.__unconstructedData.group = group;
+    }
+
+    get group() {
+        return this.__unconstructedData.group;
     }
 
     get sprite() {

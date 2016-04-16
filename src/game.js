@@ -19,6 +19,12 @@ export class Resource {
 
 export class GameConfigurable {
 
+    static of(f) {
+        let ret = new GameConfigurable();
+        ret.configure = f;
+        return ret;
+    }
+
     configure(game) {
     }
 
@@ -52,9 +58,18 @@ export class Game {
     }
 
     create() {
-        this.getConfigurables().forEach(ele => {
-            ele.configure(this.phaserGame);
-        });
+        let configurables = this.getConfigurables();
+        let nextConfigs = [];
+        while (configurables.length > 0) {
+            configurables.forEach(ele => {
+                let extraConfigs = ele.configure(this.phaserGame);
+                if (extraConfigs) {
+                    Array.prototype.push.apply(nextConfigs, extraConfigs);
+                }
+            });
+            configurables = nextConfigs;
+            nextConfigs = [];
+        }
     }
 
     update() {
