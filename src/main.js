@@ -17,7 +17,7 @@ class MainGame extends Game {
 
     configure(game) {
         game.physics.startSystem(Phaser.Physics.ARCADE);
-        setupPlatformGroup();
+        setupPlatformGroup(game);
         return [
             new Ground(50, 500),
             new Ground(50 + (16 * 5), 500),
