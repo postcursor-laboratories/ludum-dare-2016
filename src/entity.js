@@ -1,4 +1,5 @@
 import {Sprite} from "./sprite-wrapper";
+import Phaser from "phaser";
 
 export const DIRECTION = {
     UP: 0,

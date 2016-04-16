@@ -1,7 +1,8 @@
 import {Entity, DIRECTION} from "./entity";
+import {Character} from "./character";
 import {globals} from "./globals";
 
-export class Player extends Entity {
+export class Player extends Character {
 
     constructor(x, y) {
         super("player", x, y);
@@ -13,14 +14,6 @@ export class Player extends Entity {
     configure(game) {
         super.configure(game);
         this.controls = game.input.keyboard.createCursorKeys();
-        this.sprite.animations.add("walk", [0, 1, 2, 3]);
-        this.sprite.animations.add("stationary", [4, 5]);
-        this.sprite.animations.add("jump", [12]);
-        this.facing = DIRECTION.RIGHT;
-    }
-    
-    jump() {
-        this.move(DIRECTION.UP, this.jumpSpeed);
     }
 
     update() {
@@ -33,19 +26,15 @@ export class Player extends Entity {
         }
 
         if (this.controls.left.isDown) {
-            this.setFacing(DIRECTION.LEFT);
-            this.sprite.body.velocity.x = Math.max(-this.moveSpeed, this.sprite.body.velocity.x - 10)
-            this.sprite.animations.play("walk", Math.min(4, Math.round(Math.abs(this.sprite.body.velocity.x) * 2)), true);
+            this.move(DIRECTION.LEFT);
         } else if (this.controls.right.isDown) {
-            this.setFacing(DIRECTION.RIGHT);
-            this.sprite.body.velocity.x = Math.min(this.moveSpeed, this.sprite.body.velocity.x + 10)
-            this.sprite.animations.play("walk", Math.min(4, Math.round(Math.abs(this.sprite.body.velocity.x) * 2)), true);
+            this.move(DIRECTION.RIGHT);
         } else {
             this.sprite.animations.play("stationary", 4, true);
         }
 
         if (this.controls.up.isDown && (this.sprite.body.touching.down || this.sprite.body.onFloor())) {
-            this.jump()
+            this.jump();
             this.jumpAnimationCounter = 20;
         }
 
