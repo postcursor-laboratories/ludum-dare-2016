@@ -67,7 +67,16 @@ function commonTransform(customOpts, watch) {
     b = b.transform("browserify-shim");
     var doBundle = function doBundle() {
         timelog("Bundling again!");
-        return b.bundle()
+        return b.bundle(
+            function err(err) {
+                if (!err) {
+                    timelog("An error didn't occur. I think.");
+                    return;
+                }
+                timelog("An error occured:");
+                console.log(err.toString());
+                console.log(err.codeFrame);
+            })
             //.pipe(showProgress(process.stdout))
             .pipe(fs.createWriteStream(magicTouchFile("bin/game.js")))
             .on("finish", function () {
