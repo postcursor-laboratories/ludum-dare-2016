@@ -1,5 +1,5 @@
 import {Entity, DIRECTION} from "./entity";
-import {platformGroup} from "./sprites/platforms";
+import {globals} from "./globals";
 
 export class Player extends Entity {
 
@@ -18,7 +18,7 @@ export class Player extends Entity {
     }
 
     update() {
-        this.gameRef.physics.arcade.collide(this.sprite, platformGroup);
+        this.gameRef.physics.arcade.collide(this.sprite, globals.collisionLayer);
 
         if (this.sprite.body.touching.down) {
             this.sprite.body.velocity.x *= 0.9;
