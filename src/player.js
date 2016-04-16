@@ -32,11 +32,11 @@ export class Player extends Entity {
         if (this.controls.left.isDown) {
             this.setFacing(DIRECTION.LEFT);
             this.sprite.body.velocity.x = Math.max(-this.moveSpeed, this.sprite.body.velocity.x - 10)
-            this.sprite.animations.play("walk", Math.min(4, Math.round(Math.abs(this.sprite.body.velocity.x) * 1.5)), true);
+            this.sprite.animations.play("walk", Math.min(4, Math.round(Math.abs(this.sprite.body.velocity.x) * 2)), true);
         } else if (this.controls.right.isDown) {
             this.setFacing(DIRECTION.RIGHT);
             this.sprite.body.velocity.x = Math.min(this.moveSpeed, this.sprite.body.velocity.x + 10)
-            this.sprite.animations.play("walk", Math.min(4, Math.round(Math.abs(this.sprite.body.velocity.x) * 1.5)), true);
+            this.sprite.animations.play("walk", Math.min(4, Math.round(Math.abs(this.sprite.body.velocity.x) * 2)), true);
         } else {
             this.sprite.animations.play("stationary", 4, true);
         }
