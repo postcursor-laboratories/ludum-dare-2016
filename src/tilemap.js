@@ -23,7 +23,6 @@ function dumpTiles(map, layer) {
 
 export class TileMap extends GameConfigurable {
 
-
     configure(game) {
         game.load.tilemap("test", "tilemaps/tilemap_test.json", null, Phaser.Tilemap.TILED_JSON);
         game.load.image("stoneTiles", "img/horizontal_platform.png");
@@ -33,10 +32,10 @@ export class TileMap extends GameConfigurable {
         return GameConfigurable.of(game => {
             let map = game.add.tilemap("test");
             map.addTilesetImage("Stone", "stoneTiles");
-            map.setCollision(1);
             let layer = map.createLayer("ground");
             layer.texture.baseTexture.scaleMode = PIXI.scaleModes.NEAREST;
             layer.setScale(2, 2);
+            map.setCollision(1, true, layer);
             dumpTiles(map, layer);
             layer.resizeWorld();
             layer.debug = false;
