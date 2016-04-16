@@ -20,17 +20,19 @@ export class Player extends Entity {
     update() {
         this.gameRef.physics.arcade.collide(this.sprite, globals.collisionLayer);
 
-        if (this.sprite.body.touching.down || this.sprite.body.onFloor()) {
-            this.sprite.body.velocity.x *= 0.9;
+        if ((this.sprite.body.touching.down || this.sprite.body.onFloor()) && !(this.controls.left.isDown || this.controls.right.isDown)) {
+            this.sprite.body.velocity.x *= 0.8;
         } else {
             this.sprite.body.velocity.x *= 0.98;
         }
+
         if (this.controls.left.isDown) {
-            this.move(DIRECTION.LEFT);
+            this.sprite.body.velocity.x = Math.max(-this.moveSpeed, this.sprite.body.velocity.x - 10)
         } else if (this.controls.right.isDown) {
-            this.move(DIRECTION.RIGHT);
+            this.sprite.body.velocity.x = Math.min(this.moveSpeed, this.sprite.body.velocity.x + 10)
         }
-        if (this.controls.up.isDown) {
+
+        if (this.controls.up.isDown && (this.sprite.body.touching.down || this.sprite.body.onFloor())) {
             this.move(DIRECTION.UP);
         }
     }
