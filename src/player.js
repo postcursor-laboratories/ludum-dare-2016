@@ -4,7 +4,7 @@ import {globals} from "./globals";
 export class Player extends Entity {
 
     constructor(x, y) {
-        super("playerStatic", x, y);
+        super("player", x, y);
         this.jumpSpeed = 200;
     }
     

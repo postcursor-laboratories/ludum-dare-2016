@@ -16,7 +16,7 @@ class MainGame extends Game {
 
     getImages() {
         return [new Resource("ground", "img/StoneFloorSmooth.png"),
-                new Resource("playerStatic", "img/PlayerStatic.png")];
+                new Resource("player", "img/PlayerStatic.png")];
     }
 
     getPreLoadConfigurables() {
