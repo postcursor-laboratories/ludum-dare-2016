@@ -1,6 +1,6 @@
 import {Resource, GameConfigurable} from "./game-helpers";
 import {Game} from "./game";
-import {platformGroup, Ground} from "./sprites/platforms";
+import {setupPlatformGroup, Ground} from "./sprites/platforms";
 import Phaser from "phaser";
 
 class MainGame extends Game {
@@ -17,11 +17,7 @@ class MainGame extends Game {
 
     configure(game) {
         game.physics.startSystem(Phaser.Physics.ARCADE);
-        platformGroup[0] = (function createPlatformGroup() {
-            let platforms = game.add.group();
-            platforms.enableBody = true;
-            return platforms;
-        })();
+        setupPlatformGroup();
         return [
             new Ground(50, 500),
             new Ground(50 + (16 * 5), 500),

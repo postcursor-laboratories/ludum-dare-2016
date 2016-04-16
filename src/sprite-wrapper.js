@@ -1,7 +1,5 @@
 import {GameConfigurable} from "./game-helpers";
 
-export const allSprites = [];
-
 /**
  * A wrapper around a Phaser sprite. Essentially just a little interfacing.
  */
@@ -17,7 +15,6 @@ export class Sprite extends GameConfigurable {
         };
         this.__gameSprite = undefined;
         this.gameRef = undefined;
-        allSprites.push(this);
     }
 
     configure(game) {
@@ -26,7 +23,7 @@ export class Sprite extends GameConfigurable {
         this.__unconstructedData = undefined;
         this.gameRef = game;
         let addSprite = group ? group.create.bind(group) : game.add.sprite.bind(game.add);
-        return this.__gameSprite = addSprite(data.x, data.y, data.image);
+        this.__gameSprite = addSprite(data.x, data.y, data.image);
     }
 
     set x(x) {

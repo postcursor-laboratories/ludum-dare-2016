@@ -2,12 +2,15 @@ import {Sprite} from "../sprite-wrapper";
 import Phaser from "phaser";
 import PIXI from "pixi";
 
-export let platformGroup = [];
+let platformGroup = undefined;
+export function setupPlatformGroup(game) {
+    platformGroup = game.add.group();
+}
 
 export class Platform extends Sprite {
 
     constructor(image, x, y) {
-        super(image, x, y, platformGroup[0]);
+        super(image, x, y, platformGroup);
     }
 
     configure(game) {
