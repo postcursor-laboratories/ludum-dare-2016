@@ -23,10 +23,10 @@ class MainGame extends Game {
             return platforms;
         })();
         return [
-            new Ground(50, 50),
-            new Ground(50 + (16 * 5), 50),
-            new Ground(50 + (16 * 5) * 2, 50),
-            new Ground(50 + (16 * 5) * 3, 50)
+            new Ground(50, 500),
+            new Ground(50 + (16 * 5), 500),
+            new Ground(50 + (16 * 5) * 2, 500),
+            new Ground(50 + (16 * 5) * 3, 500)
         ];
     }
 

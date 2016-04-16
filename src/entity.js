@@ -11,14 +11,15 @@ export class Entity extends Sprite {
 
     constructor(image, x, y) {
         super(image, x, y);
+        this.moveSpeed = 150;
     }
 
     configure(game) {
+        super.configure(game);
         game.physics.arcade.enable(this);
         this.sprite.body.bounce.y = 0.2;
         this.sprite.body.gravity.y = 300;
         this.sprite.body.collideWorldBounds = true;
-        this.moveSpeed = 150;
     }
 
     move(direction, speed) {
