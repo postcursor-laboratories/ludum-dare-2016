@@ -35,7 +35,7 @@ class MainGame extends Game {
     configure(game) {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         setupPlatformGroup(game);
-        game.physics.arcade.gravity.y = 100;
+        game.physics.arcade.gravity.y = 300;
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.stage.smoothed = false;
         game.stage.backgroundColor = 0x694400;
