@@ -117,11 +117,8 @@ gulp.task("copy-static", function () {
 gulp.task("copy-static-on-my-watch", function () {
     gulp.copy(["static/**"], "bin", true);
 });
-gulp.task("copy-phaser", function () {
-    return gulp.copy(["node_modules/phaser/dist/phaser.js"], "bin", false);
-});
-gulp.task("site", ["transform", "copy-static", "copy-phaser"]);
-gulp.task("dev-server", ["transform-on-my-watch", "copy-static-on-my-watch", "copy-phaser"], function () {
+gulp.task("site", ["transform", "copy-static"]);
+gulp.task("dev-server", ["transform-on-my-watch", "copy-static-on-my-watch"], function () {
     connect.server({
         root: "bin",
         port: 1337,
