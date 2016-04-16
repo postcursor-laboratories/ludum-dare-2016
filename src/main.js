@@ -3,11 +3,19 @@ import {Game} from "./game";
 import {setupPlatformGroup, Ground} from "./sprites/platforms";
 import Phaser from "phaser";
 import {Player} from "./player";
+import {TileMap} from "./tilemap";
 
 class MainGame extends Game {
 
     getImages() {
         return [new Resource("ground", "img/StoneFloorSmooth.png")];
+    }
+
+    getPreLoadConfigurables() {
+        return [
+            GameConfigurable.of(game => game.add.plugin(Phaser.Plugin.Tiled)),
+            new TileMap()
+        ];
     }
 
     getConfigurables() {
@@ -17,15 +25,11 @@ class MainGame extends Game {
     }
 
     configure(game) {
-        game.add.plugin(Phaser.Plugin.Tiled);
         game.physics.startSystem(Phaser.Physics.ARCADE);
         setupPlatformGroup(game);
         game.physics.arcade.gravity.y = 100;
+        this.tileMap = game.add.tiledmap("map");
         return [
-            new Ground(50, 500),
-            new Ground(50 + (16 * 5), 500),
-            new Ground(50 + (16 * 5) * 2, 500),
-            new Ground(50 + (16 * 5) * 3, 500),
             new Player("ground", 100, 40)
         ];
     }

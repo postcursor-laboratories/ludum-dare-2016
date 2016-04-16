@@ -19,11 +19,27 @@ export class Game {
         return [];
     }
 
+    getPreLoadConfigurables() {
+        return [];
+    }
+
     getConfigurables() {
         return [];
     }
 
     preload() {
+        let configurables = this.getPreLoadConfigurables();
+        let nextConfigs = [];
+        while (configurables.length > 0) {
+            configurables.forEach(ele => {
+                let extraConfigs = ele.configure(this.phaserGame);
+                if (extraConfigs) {
+                    Array.prototype.push.apply(nextConfigs, extraConfigs);
+                }
+            });
+            configurables = nextConfigs;
+            nextConfigs = [];
+        }
         this.getImages().forEach(ele => {
             this.phaserGame.load.image(ele.getName(), ele.getLocation());
         });
