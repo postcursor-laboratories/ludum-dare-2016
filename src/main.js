@@ -1,5 +1,6 @@
 import {Game, Resource, GameConfigurable} from "./game";
 import {platformGroup, Ground} from "./sprites/platforms";
+import Phaser from "phaser";
 import {Sprite} from "./sprite-wrapper";
 
 class MainGame extends Game {
@@ -15,6 +16,7 @@ class MainGame extends Game {
     }
 
     configure(game) {
+        game.physics.startSystem(Phaser.Physics.ARCADE);
         platformGroup[0] = (function createPlatformGroup() {
             let platforms = game.add.group();
             platforms.enableBody = true;
