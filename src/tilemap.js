@@ -26,7 +26,7 @@ export class TileMap extends GameConfigurable {
 
     configure(game) {
         game.load.tilemap("test", "tilemaps/tilemap_test.json", null, Phaser.Tilemap.TILED_JSON);
-        game.load.image("stoneTiles", "img/StoneFloorSmooth.png");
+        game.load.image("stoneTiles", "img/horizontal_platform.png");
     }
 
     getNormalConfigurable() {
