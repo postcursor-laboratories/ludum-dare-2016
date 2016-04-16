@@ -5,11 +5,11 @@ class MainGame extends Game {
 
 
     getImages() {
-        return [new Resource("tmp", "img/tmp.jpg")];
+        return [];
     }
 
     getConfigurables() {
-        return [new Sprite("tmp", 200, 200)];
+        return [];
     }
 
 }
