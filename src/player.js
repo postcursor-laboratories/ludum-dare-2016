@@ -6,6 +6,8 @@ export class Player extends Entity {
     constructor(x, y) {
         super("player", x, y);
         this.jumpSpeed = 200;
+        this.jumpAnimationCounter = 0;
+        this.facing = DIRECTION.RIGHT;
     }
     
     configure(game) {
@@ -13,6 +15,7 @@ export class Player extends Entity {
         this.controls = game.input.keyboard.createCursorKeys();
         this.sprite.animations.add("walk", [0, 1, 2, 3]);
         this.sprite.animations.add("stationary", [4, 5]);
+        this.sprite.animations.add("jump", [12]);
         this.facing = DIRECTION.RIGHT;
     }
     
@@ -43,6 +46,12 @@ export class Player extends Entity {
 
         if (this.controls.up.isDown && (this.sprite.body.touching.down || this.sprite.body.onFloor())) {
             this.jump()
+            this.jumpAnimationCounter = 20;
+        }
+
+        if (this.jumpAnimationCounter > 0) {
+            this.sprite.animations.play("jump", 1, true);
+            this.jumpAnimationCounter--;
         }
     }
 
