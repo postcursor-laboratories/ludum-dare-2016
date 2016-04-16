@@ -1,3 +1,3 @@
-# phaser-bootstrap
+# Promethium
 
-A simple startup for Phaser-based games.
+A game about elements and shape-shifting.
