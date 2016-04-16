@@ -17,7 +17,7 @@ export class Entity extends Sprite {
     configure(game) {
         super.configure(game);
         game.physics.enable(this.sprite);
-        this.sprite.body.bounce.y = 0.2;
+        this.sprite.body.bounce.y = 0.1;
         this.sprite.body.collideWorldBounds = true;
     }
 

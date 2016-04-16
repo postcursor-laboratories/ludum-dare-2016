@@ -38,6 +38,7 @@ class MainGame extends Game {
         game.physics.arcade.gravity.y = 100;
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.stage.smoothed = false;
+        game.stage.backgroundColor = 0x694400;
         return [
             new Player(100, 40)
         ];
