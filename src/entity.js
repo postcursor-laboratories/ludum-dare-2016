@@ -18,10 +18,6 @@ export class Entity extends Sprite {
         this.moveSpeed = 150;
     }
 
-    doLogic() {
-        throw "The entity base class has no logic to run.";
-    }
-
     move(direction) {
         switch (direction) {
             case DIRECTION.UP:
