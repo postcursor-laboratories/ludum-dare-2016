@@ -19,6 +19,7 @@ class MainGame extends Game {
     configure(game) {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         setupPlatformGroup(game);
+        game.physics.arcade.gravity.y = 100;
         return [
             new Ground(50, 500),
             new Ground(50 + (16 * 5), 500),

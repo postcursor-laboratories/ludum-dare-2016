@@ -17,6 +17,8 @@ export class Platform extends Sprite {
         super.configure(game);
         this.configureSprite(function () {
             game.physics.arcade.enable(this);
+            this.immovable = true;
+            this.body.moves = false;
         });
     }
 

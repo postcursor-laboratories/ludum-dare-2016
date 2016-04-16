@@ -18,7 +18,7 @@ export class Player extends Entity {
     }
 
     update() {
-        this.gameRef.physics.arcade.collide(this, platformGroup);
+        this.gameRef.physics.arcade.collide(this.sprite, platformGroup);
         if (this.controls.left.isDown) {
             this.move(DIRECTION.LEFT);
         } else if (this.controls.right.isDown) {
