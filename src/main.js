@@ -9,7 +9,7 @@ import {globals} from "./globals";
 class MainGame extends Game {
 
     constructor() {
-        super(160, 160);
+        super(960, 640);
         this.tileMap = new TileMap();
         globals.tileMap = this.tileMap;
     }
@@ -36,7 +36,6 @@ class MainGame extends Game {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         setupPlatformGroup(game);
         game.physics.arcade.gravity.y = 300;
-        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         game.stage.smoothed = false;
         game.stage.backgroundColor = 0x694400;
         return [

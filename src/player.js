@@ -58,10 +58,10 @@ export class Player extends Entity {
     setFacing(direction) {
         if (direction == DIRECTION.LEFT) {
             this.facing = direction;
-            this.sprite.scale.x = -1;
+            this.sprite.scale.x = -Math.abs(this.sprite.scale.x);
         } else if (direction == DIRECTION.RIGHT) {
             this.facing = direction;
-            this.sprite.scale.x = 1;
+            this.sprite.scale.x = Math.abs(this.sprite.scale.x);
         }
     }
 }

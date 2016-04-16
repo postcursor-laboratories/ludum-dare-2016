@@ -20,6 +20,7 @@ export class Entity extends Sprite {
         this.sprite.body.bounce.y = 0.1;
         this.sprite.body.collideWorldBounds = true;
         this.sprite.anchor.setTo(0.5, 1);
+        this.sprite.scale = new Phaser.Point(2, 2);
     }
 
     move(direction, speed) {
