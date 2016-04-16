@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import {Sprite} from "./sprite-wrapper";
 
 /**
  * A basic game container. Extend this for your actual game.
@@ -6,6 +7,7 @@ import Phaser from "phaser";
 export class Game {
 
     constructor(width, height, antialias = true) {
+        this.allSprites = [];
         this.phaserGame = new Phaser.Game(width, height, Phaser.AUTO, "", {
             preload: () => this.preload(),
             create: () => this.create(),
@@ -33,6 +35,9 @@ export class Game {
         while (configurables.length > 0) {
             configurables.forEach(ele => {
                 let extraConfigs = ele.configure(this.phaserGame);
+                if (ele instanceof Sprite) {
+                    this.allSprites.push(ele);
+                }
                 if (extraConfigs) {
                     Array.prototype.push.apply(nextConfigs, extraConfigs);
                 }
@@ -43,7 +48,7 @@ export class Game {
     }
 
     update() {
-        this.phaserGame.world.forEach(s => s.update(), this);
+        this.allSprites.forEach(s => s.update());
     }
 
 }

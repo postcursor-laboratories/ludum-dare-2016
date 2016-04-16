@@ -33,8 +33,4 @@ export class Ground extends Platform {
         this.sprite.scale.setTo(5, 5);
     }
 
-    update() {
-        console.log("I'm a useless platform.");
-    }
-
 }
