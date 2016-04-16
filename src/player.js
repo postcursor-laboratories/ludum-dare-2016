@@ -11,6 +11,9 @@ export class Player extends Entity {
     configure(game) {
         super.configure(game);
         this.controls = game.input.keyboard.createCursorKeys();
+        this.sprite.animations.add("walk", [0, 1, 2, 3]);
+        this.sprite.animations.add("stationary", [4, 5]);
+        this.facing = DIRECTION.RIGHT;
     }
     
     jump() {
@@ -27,13 +30,29 @@ export class Player extends Entity {
         }
 
         if (this.controls.left.isDown) {
+            this.setFacing(DIRECTION.LEFT);
             this.sprite.body.velocity.x = Math.max(-this.moveSpeed, this.sprite.body.velocity.x - 10)
+            this.sprite.animations.play("walk", 4, true);
         } else if (this.controls.right.isDown) {
+            this.setFacing(DIRECTION.RIGHT);
             this.sprite.body.velocity.x = Math.min(this.moveSpeed, this.sprite.body.velocity.x + 10)
+            this.sprite.animations.play("walk", 4, true);
+        } else {
+            this.sprite.animations.play("stationary", 4, true);
         }
 
         if (this.controls.up.isDown && (this.sprite.body.touching.down || this.sprite.body.onFloor())) {
             this.move(DIRECTION.UP);
+        }
+    }
+
+    setFacing(direction) {
+        if (direction == DIRECTION.LEFT) {
+            this.facing = direction;
+            this.sprite.scale.x = -1;
+        } else if (direction == DIRECTION.RIGHT) {
+            this.facing = direction;
+            this.sprite.scale.x = 1;
         }
     }
 }

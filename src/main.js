@@ -15,11 +15,11 @@ class MainGame extends Game {
     }
 
     getImages() {
-        return [new Resource("ground", "img/StoneFloorSmooth.png"),
-                new Resource("player", "img/PlayerStatic.png")];
+        return [new Resource("ground", "img/StoneFloorSmooth.png")];
     }
 
     getPreLoadConfigurables() {
+        this.phaserGame.load.spritesheet("player", "img/PlayerSpritemap.png", 16, 32);
         return [
             this.tileMap
         ];
