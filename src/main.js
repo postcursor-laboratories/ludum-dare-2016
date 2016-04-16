@@ -2,7 +2,7 @@ import {Resource, GameConfigurable} from "./game-helpers";
 import {Game} from "./game";
 import {setupPlatformGroup, Ground} from "./sprites/platforms";
 import Phaser from "phaser";
-import {Player} from "./player"
+import {Player} from "./player";
 
 class MainGame extends Game {
 
@@ -17,6 +17,7 @@ class MainGame extends Game {
     }
 
     configure(game) {
+        game.add.plugin(Phaser.Plugin.Tiled);
         game.physics.startSystem(Phaser.Physics.ARCADE);
         setupPlatformGroup(game);
         game.physics.arcade.gravity.y = 100;
