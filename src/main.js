@@ -61,8 +61,8 @@ class MainGame extends Game {
         game.stage.smoothed = false;
         game.stage.backgroundColor = 0x694400;
         return [
-            new Player(this.elementalPlayers, 100, 40, 0),
-	    new Enemy("robot", 400, 40)
+            new Player(this.elementalPlayers, 100, 1400, 0),
+	    new Enemy("robot", 400, 1400)
         ];
     }
 
