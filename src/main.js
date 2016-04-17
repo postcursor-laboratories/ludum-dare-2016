@@ -33,7 +33,7 @@ class MainGame extends Game {
                     new ElementalPlayerDescriptor(game, "earth", 32, 32, 200, 100, 3, 4, [4, 2, 4, 1], EarthSpells.rockThrowSpell, EarthSpells.fissureSpell),
                     new ElementalPlayerDescriptor(game, "water", 16, 32, 300, 200, 6, 4, [4, 4, 4, 2]),
                     new ElementalPlayerDescriptor(game, "fire" , 32, 32, 350, 300, 6, 4, [4, 4, 4, 4]),
-                    new ElementalPlayerDescriptor(game, "air"  , 16, 16, 400, 400, 4, 4, [4, 4, 4, 4])
+                    new ElementalPlayerDescriptor(game, "air"  , 32, 32, 400, 400, 4, 4, [4, 4, 4, 4])
                 ];
             }),
             GameConfigurable.of(game =>
