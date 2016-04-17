@@ -9,26 +9,17 @@ var watch = require("gulp-watch");
 var fs = require("fs");
 var mkdirp = require("mkdirp");
 var merge = require("merge");
-var dateFormat = require("dateformat");
 var path = require("path");
+
+var utilities = require("./buildscripts/util");
+var timelog = utilities.timelog;
+var magicTouchFile = utilities.magicTouchFile;
+
+require("./buildscripts/spritesheet");
 
 // Eww.
 var preludeFilePath = path.resolve("./node_modules/browser-pack/prelude.js");
 var preludeText = fs.readFileSync(preludeFilePath, {encoding: "utf8"});
-
-function timelog() {
-    var modargs = [dateFormat(new Date(), "[hh:MM:ss]")];
-    modargs.push.apply(modargs, arguments);
-    console.log.apply(console, modargs);
-}
-
-function magicTouchFile(f) {
-    var parent = f.substring(0, f.lastIndexOf("/"));
-    // Sooooo goood!
-    mkdirp.sync(parent);
-    fs.closeSync(fs.openSync(f, "w"));
-    return f;
-}
 
 // Ensure bin exists
 mkdirp.sync("./bin/");
@@ -117,8 +108,8 @@ gulp.task("copy-static", function () {
 gulp.task("copy-static-on-my-watch", function () {
     gulp.copy(["static/**"], "bin", true);
 });
-gulp.task("site", ["transform", "copy-static"]);
-gulp.task("dev-server", ["transform-on-my-watch", "copy-static-on-my-watch"], function () {
+gulp.task("site", ["transform", "copy-static", "sheets"]);
+gulp.task("dev-server", ["transform-on-my-watch", "copy-static-on-my-watch", "sheets-watch"], function () {
     connect.server({
         root: "bin",
         port: 1337,

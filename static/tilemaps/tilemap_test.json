@@ -13,13 +13,13 @@
         }, 
         {
          "draworder":"topdown",
-         "height":24,
+         "height":0,
          "name":"entities",
          "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":128,
+         "width":0,
          "x":0,
          "y":0
         }],
@@ -29,30 +29,16 @@
  "tileheight":16,
  "tilesets":[
         {
-         "columns":1,
+         "columns":2,
          "firstgid":1,
-         "image":"..\/img\/horizontal_platform.png",
+         "image":"..\/..\/bin\/sprites\/tiles.png",
          "imageheight":16,
-         "imagewidth":16,
+         "imagewidth":32,
          "margin":0,
-         "name":"Stone",
+         "name":"tiles",
          "spacing":0,
-         "tilecount":1,
+         "tilecount":2,
          "tileheight":16,
-         "tileproperties":
-            {
-             "0":
-                {
-                 "doCollide":true
-                }
-            },
-         "tilepropertytypes":
-            {
-             "0":
-                {
-                 "doCollide":"bool"
-                }
-            },
          "tilewidth":16
         }],
  "tilewidth":16,
