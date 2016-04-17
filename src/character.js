@@ -18,7 +18,7 @@ export class Character extends Entity {
         this.facing = DIRECTION.RIGHT;
     }
 
-    setTexture(texture, frame=undefined) {
+    setTexture(texture, frame = undefined) {
         let args = [texture];
         if (frame !== undefined) {
             args.push(frame);
@@ -27,7 +27,7 @@ export class Character extends Entity {
         this.sprite.loadTexture.apply(this.sprite, args);
         this.addAnimations();
     }
-    
+
     addAnimations() {
         this.sprite.animations.add("walk", [0, 1, 2, 3]);
         this.sprite.animations.add("stationary", [4, 5]);

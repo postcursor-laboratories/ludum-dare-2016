@@ -5,7 +5,7 @@ import {GameConfigurable} from "./game-helpers";
  */
 export class Sprite extends GameConfigurable {
 
-    constructor(image, x, y, group=undefined) {
+    constructor(image, x, y, group = undefined) {
         super();
         this.__unconstructedData = {
             image: image,

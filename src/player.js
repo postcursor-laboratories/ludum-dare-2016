@@ -1,4 +1,4 @@
-import {Entity, DIRECTION} from "./entity";
+import {DIRECTION} from "./entity";
 import {Character} from "./character";
 import {globals} from "./globals";
 import Phaser from "phaser";
@@ -9,7 +9,7 @@ export class Player extends Character {
         super("human", x, y);
         this.elementalPlayers = elementalPlayers;
     }
-    
+
     configure(game) {
         super.configure(game);
         this.gameRef.camera.follow(this.sprite, Phaser.Camera.FOLLOW_PLATFORMER);

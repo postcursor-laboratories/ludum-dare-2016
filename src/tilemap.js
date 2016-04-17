@@ -40,9 +40,9 @@ export class TileMap extends GameConfigurable {
             layer.resizeWorld();
             layer.debug = false;
             /*
-            tileLoopGen(map, layer, tile => {
-                map.setCollision(tile.index, true, layer);
-            }); */
+             tileLoopGen(map, layer, tile => {
+             map.setCollision(tile.index, true, layer);
+             }); */
             globals.collisionLayer = layer;
         });
     }

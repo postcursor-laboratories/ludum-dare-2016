@@ -1,6 +1,6 @@
 import {Resource, GameConfigurable} from "./game-helpers";
 import {Game} from "./game";
-import {setupPlatformGroup, Ground} from "./sprites/platforms";
+import {setupPlatformGroup} from "./sprites/platforms";
 import Phaser from "phaser";
 import {Player} from "./player";
 import {TileMap} from "./tilemap";

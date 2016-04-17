@@ -1,5 +1,4 @@
 import {Sprite} from "../sprite-wrapper";
-import Phaser from "phaser";
 import PIXI from "pixi";
 
 export let platformGroup = undefined;
