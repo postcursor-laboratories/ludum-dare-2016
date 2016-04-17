@@ -1,21 +1,26 @@
 import {Entity, DIRECTION} from "./entity";
 import {Character} from "./character";
 import {globals} from "./globals";
-import Phaser from "phaser"
+import Phaser from "phaser";
 
 export class Player extends Character {
 
-    constructor(x, y) {
-        super("player", x, y);
-        this.jumpSpeed = 200;
-        this.jumpAnimationCounter = 0;
-        this.facing = DIRECTION.RIGHT;
+    constructor(elementalPlayers, x, y) {
+        super("human", x, y);
+        this.elementalPlayers = elementalPlayers;
+        this.loadElemental(this.elementalPlayers[0]);
     }
     
     configure(game) {
         super.configure(game);
         this.gameRef.camera.follow(this.sprite, Phaser.Camera.FOLLOW_LOCKON);
         this.controls = game.input.keyboard.createCursorKeys();
+    }
+
+    loadElemental(elementalDescriptor) {
+        this.jumpSpeed = elementalDescriptor.jumpSpeed;
+        this.moveSpeed = elementalDescriptor.moveSpeed;
+        this.sprite.setTexture(this.gameRef.cache.getPixiTexture(elementalDescriptor.elementalName));
     }
 
     basicAttack() {
