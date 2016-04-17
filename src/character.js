@@ -77,7 +77,7 @@ export class Character extends Entity {
     }
 
     update() {
-        globals.collisionLayers.forEach(layer => this.gameRef.physics.arcade.collide(this.sprite, layer));
+        this.checkCollision();
 
         if (this.sprite.body.touching.down || this.sprite.body.onFloor()) {
             this.sprite.body.velocity.x *= 0.8;
@@ -91,6 +91,10 @@ export class Character extends Entity {
             this.attemptAnim("jump", 5, false);
             this.jumpAnimationCounter--;
         }
+    }
+    
+    checkCollision() {
+        globals.collisionLayers.forEach(layer => this.gameRef.physics.arcade.collide(this.sprite, layer));
     }
 
     setFacing(direction) {

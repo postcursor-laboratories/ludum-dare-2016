@@ -95,7 +95,7 @@ export class Player extends Character {
     }
 
     update() {
-        globals.collisionLayers.forEach(layer => this.gameRef.physics.arcade.collide(this.sprite, layer));
+        this.checkCollision();
 
         if ((this.sprite.body.touching.down || this.sprite.body.touching.up || this.sprite.body.onFloor()) && this.sprite.animations.currentAnim.name == "jump") {
             console.log("hi");
