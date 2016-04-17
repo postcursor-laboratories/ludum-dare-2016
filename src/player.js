@@ -29,6 +29,14 @@ export class Player extends Character {
         this.basicAttackKey.onDown.add(() => this.basicAttack());
         this.spellOneKey = game.input.keyboard.addKey(Phaser.KeyCode.X);
         this.spellOneKey.onDown.add(() => this.spellOne());
+        this.spellTwoKey = game.input.keyboard.addKey(Phaser.KeyCode.C);
+        this.spellTwoKey.onDown.add(() => this.spellTwo());
+
+        this.sprite.body.setSize(this.sprite.body.width, this.sprite.body.height * 0.8);
+    }
+
+    spellTwo() {
+        this.currentElemental.spellTwo(this);
     }
 
     spellOne() {

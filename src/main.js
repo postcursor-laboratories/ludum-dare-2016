@@ -19,7 +19,7 @@ class MainGame extends Game {
 
     getImages() {
         return [new Resource("ground", "img/StoneFloorSmooth.png"),
-                new Resource("rockProjectile", "img/rockprojectile.png"),
+                new Resource("rockProjectile", "img/rockProjectile.png"),
                 new Resource("rockParticle", "img/rockParticle.png"),
                 new Resource("magicParticle", "img/magicParticle.png")];
     }
@@ -30,7 +30,7 @@ class MainGame extends Game {
             GameConfigurable.of(game => {
                 this.elementalPlayers = [
                     new ElementalPlayerDescriptor(game, "human", 16, 32, 400, 300, 5, 4, [4, 2, 4, 1]),
-                    new ElementalPlayerDescriptor(game, "earth", 32, 32, 200, 100, 3, 4, [4, 2, 4, 1], EarthSpells.rockThrowSpell),
+                    new ElementalPlayerDescriptor(game, "earth", 32, 32, 200, 100, 3, 4, [4, 2, 4, 1], EarthSpells.rockThrowSpell, EarthSpells.fissureSpell),
                     new ElementalPlayerDescriptor(game, "water", 16, 32, 300, 200, 6, 4, [4, 4, 4, 2]),
                     new ElementalPlayerDescriptor(game, "fire" , 32, 32, 350, 300, 6, 4, [4, 4, 4, 4]),
                     new ElementalPlayerDescriptor(game, "air"  , 16, 16, 400, 400, 4, 4, [4, 4, 4, 4])
