@@ -7,7 +7,9 @@ export class Character extends Entity {
         super(sprite, x, y);
         this.jumpSpeed = 200;
         this.jumpAnimationCounter = 0;
+        this.jumpingTime = 25;
         this.facing = DIRECTION.RIGHT;
+        this.animationPriority = ["basicAttack", "jump", "walk", "stationary"];
     }
 
     configure(game) {
@@ -16,10 +18,20 @@ export class Character extends Entity {
         this.sprite.animations.add("stationary", [4, 5]);
         this.sprite.animations.add("jump", [12]);
         this.facing = DIRECTION.RIGHT;
+        this.sprite.animations.stop();
+    }
+
+    attemptAnim(name, frameRate, loop) {
+        if (this.canOverrideAnimation(name)) {
+            this.sprite.animations.play(name, frameRate, loop, false);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     jump() {
-        this.jumpAnimationCounter = 20;
+        this.jumpAnimationCounter = this.jumpingTime;
         super.move(DIRECTION.UP, this.jumpSpeed);
     }
 
@@ -27,17 +39,28 @@ export class Character extends Entity {
         switch (direction) {
             case DIRECTION.LEFT:
                 this.setFacing(DIRECTION.LEFT);
-                this.sprite.body.velocity.x = Math.max(-this.moveSpeed, this.sprite.body.velocity.x - 10)
-                this.sprite.animations.play("walk", Math.min(4, Math.round(Math.abs(this.sprite.body.velocity.x) * 2)), true);
+                this.sprite.body.velocity.x = Math.max(-this.moveSpeed, this.sprite.body.velocity.x - 10);
+                this.attemptAnim("walk", Math.max(4, Math.round(Math.abs(this.sprite.body.velocity.x) / 15)), false);
                 break;
             case DIRECTION.RIGHT:
                 this.setFacing(DIRECTION.RIGHT);
-                this.sprite.body.velocity.x = Math.min(this.moveSpeed, this.sprite.body.velocity.x + 10)
-                this.sprite.animations.play("walk", Math.min(4, Math.round(Math.abs(this.sprite.body.velocity.x) * 2)), true);
+                this.sprite.body.velocity.x = Math.min(this.moveSpeed, this.sprite.body.velocity.x + 10);
+                this.attemptAnim("walk", Math.max(4, Math.round(Math.abs(this.sprite.body.velocity.x) / 15)), false);
                 break;
             default:
                 throw "Unrecognized direction in Character.move";
         }
+    }
+
+    canOverrideAnimation(animationName) {
+        if (this.sprite.animations.currentAnim.isFinished || !this.sprite.animations.currentAnim.isPlaying) {
+            return true;
+        }
+        return this.animationPriority.indexOf(animationName) < this.animationPriority.indexOf(this.sprite.animations.currentAnim.name);
+    }
+
+    basicAttack() {
+        throw "Cannot call basicAttack on Character class";
     }
 
     update() {
@@ -49,10 +72,10 @@ export class Character extends Entity {
             this.sprite.body.velocity.x *= 0.98;
         }
 
-        this.sprite.animations.play("stationary", 4, true);
+        this.attemptAnim("stationary", 4, true);
 
         if (this.jumpAnimationCounter > 0) {
-            this.sprite.animations.play("jump", 1, true);
+            this.attemptAnim("jump", 5, false);
             this.jumpAnimationCounter--;
         }
     }

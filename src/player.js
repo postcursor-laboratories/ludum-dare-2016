@@ -1,6 +1,7 @@
 import {Entity, DIRECTION} from "./entity";
 import {Character} from "./character";
 import {globals} from "./globals";
+import Phaser from "phaser"
 
 export class Player extends Character {
 
@@ -13,7 +14,12 @@ export class Player extends Character {
     
     configure(game) {
         super.configure(game);
+        this.gameRef.camera.follow(this.sprite, Phaser.Camera.FOLLOW_LOCKON);
         this.controls = game.input.keyboard.createCursorKeys();
+    }
+
+    basicAttack() {
+
     }
 
     update() {
@@ -30,16 +36,15 @@ export class Player extends Character {
         } else if (this.controls.right.isDown) {
             this.move(DIRECTION.RIGHT);
         } else {
-            this.sprite.animations.play("stationary", 4, true);
+            this.attemptAnim("stationary", 4, true);
         }
 
         if (this.controls.up.isDown && (this.sprite.body.touching.down || this.sprite.body.onFloor())) {
             this.jump();
-            this.jumpAnimationCounter = 20;
         }
 
         if (this.jumpAnimationCounter > 0) {
-            this.sprite.animations.play("jump", 1, true);
+            this.attemptAnim("jump", 5, false);
             this.jumpAnimationCounter--;
         }
     }
