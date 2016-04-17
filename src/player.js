@@ -12,7 +12,7 @@ export class Player extends Character {
     
     configure(game) {
         super.configure(game);
-        this.gameRef.camera.follow(this.sprite, Phaser.Camera.FOLLOW_LOCKON);
+        this.gameRef.camera.follow(this.sprite, Phaser.Camera.FOLLOW_PLATFORMER);
         this.controls = game.input.keyboard.createCursorKeys();
         this.loadElemental(this.elementalPlayers.human);
     }
@@ -20,7 +20,7 @@ export class Player extends Character {
     loadElemental(elementalDescriptor) {
         this.jumpSpeed = elementalDescriptor.jumpSpeed;
         this.moveSpeed = elementalDescriptor.moveSpeed;
-        this.sprite.loadTexture(elementalDescriptor.elementalName, 0);
+        this.setTexture(elementalDescriptor.elementalName, 0);
         this.addAnimations();
     }
 
