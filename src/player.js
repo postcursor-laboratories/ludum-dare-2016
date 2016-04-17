@@ -18,13 +18,14 @@ export class Player extends Character {
         this.shapeshiftKeys = [game.input.keyboard.addKey(Phaser.KeyCode.ONE),
             game.input.keyboard.addKey(Phaser.KeyCode.TWO),
             game.input.keyboard.addKey(Phaser.KeyCode.THREE),
-            game.input.keyboard.addKey(Phaser.KeyCode.FOUR)];
+            game.input.keyboard.addKey(Phaser.KeyCode.FOUR),
+            game.input.keyboard.addKey(Phaser.KeyCode.FIVE)];
         this.shapeshiftKeys.forEach((obj, index) =>
             obj.onDown.add(event => {
-                console.log(index);
-                console.log(this.elementalPlayers[index + 1]);
-                this.attemptShapeshift(this.elementalPlayers[index + 1]);
+                this.attemptShapeshift(this.elementalPlayers[index]);
             }));
+        this.basicAttackKey = game.input.keyboard.addKey(Phaser.KeyCode.Z);
+        this.basicAttackKey.onDown.add(() => this.basicAttack());
     }
 
     attemptShapeshift(elementalDescriptor) {
@@ -34,12 +35,13 @@ export class Player extends Character {
     loadElemental(elementalDescriptor) {
         this.jumpSpeed = elementalDescriptor.jumpSpeed;
         this.moveSpeed = elementalDescriptor.moveSpeed;
+        this.attackSpeed = elementalDescriptor.attackSpeed;
         this.setTexture(elementalDescriptor.elementalName, 0);
         this.addAnimations();
     }
 
     basicAttack() {
-
+        this.attemptAnim("basicAttack", this.attackSpeed, false);
     }
 
     update() {

@@ -30,8 +30,9 @@ export class Character extends Entity {
 
     addAnimations() {
         this.sprite.animations.add("walk", [0, 1, 2, 3]);
-        this.sprite.animations.add("stationary", [4, 5]);
-        this.sprite.animations.add("jump", [12]);
+        this.sprite.animations.add("stationary", [4, 5, 6, 7]);
+        this.sprite.animations.add("basicAttack", [8, 9, 10, 11]);
+        this.sprite.animations.add("jump", [12, 13, 14, 15]);
         this.sprite.animations.stop();
     }
 
