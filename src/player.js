@@ -33,7 +33,7 @@ export class Player extends Character {
         this.spellTwoKey = game.input.keyboard.addKey(Phaser.KeyCode.C);
         this.spellTwoKey.onDown.add(() => this.spellTwo());
 
-        this.sprite.body.setSize(16, this.sprite.body.height * 0.8);
+        this.sprite.body.setSize(10, this.sprite.body.height * 0.8);
     }
 
     spellTwo() {
