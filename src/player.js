@@ -6,16 +6,17 @@ import {Sprite} from "./sprite-wrapper";
 
 export class Player extends Character {
 
-    constructor(elementalPlayers, x, y) {
+    constructor(elementalPlayers, x, y, firstElemental) {
         super("human", x, y);
         this.elementalPlayers = elementalPlayers;
+        this.firstElemental = firstElemental;
     }
 
     configure(game) {
         super.configure(game);
         this.gameRef.camera.follow(this.sprite, Phaser.Camera.FOLLOW_PLATFORMER);
         this.controls = game.input.keyboard.createCursorKeys();
-        this.loadElemental(this.elementalPlayers[0]);
+        this.loadElemental(this.elementalPlayers[this.firstElemental]);
         this.shapeshiftKeys = [game.input.keyboard.addKey(Phaser.KeyCode.ONE),
             game.input.keyboard.addKey(Phaser.KeyCode.TWO),
             game.input.keyboard.addKey(Phaser.KeyCode.THREE),
@@ -32,7 +33,7 @@ export class Player extends Character {
         this.spellTwoKey = game.input.keyboard.addKey(Phaser.KeyCode.C);
         this.spellTwoKey.onDown.add(() => this.spellTwo());
 
-        this.sprite.body.setSize(this.sprite.body.width, this.sprite.body.height * 0.8);
+        this.sprite.body.setSize(16, this.sprite.body.height * 0.8);
     }
 
     spellTwo() {
