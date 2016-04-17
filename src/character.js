@@ -14,10 +14,24 @@ export class Character extends Entity {
 
     configure(game) {
         super.configure(game);
+        this.addAnimations();
+        this.facing = DIRECTION.RIGHT;
+    }
+
+    setTexture(texture, frame=undefined) {
+        let args = [texture];
+        if (frame !== undefined) {
+            args.push(frame);
+        }
+        this.sprite.animations.stop();
+        this.sprite.loadTexture.apply(this.sprite, args);
+        this.addAnimations();
+    }
+    
+    addAnimations() {
         this.sprite.animations.add("walk", [0, 1, 2, 3]);
         this.sprite.animations.add("stationary", [4, 5]);
         this.sprite.animations.add("jump", [12]);
-        this.facing = DIRECTION.RIGHT;
         this.sprite.animations.stop();
     }
 

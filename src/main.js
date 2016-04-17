@@ -21,6 +21,15 @@ class MainGame extends Game {
 
     getPreLoadConfigurables() {
         return [
+            GameConfigurable.of(game => {
+                this.elementalPlayers = {
+                    "human": new ElementalPlayerDescriptor(game, "human", 16, 32, 200, 200),
+                    "earth": new ElementalPlayerDescriptor(game, "earth", 32, 32, 100, 100),
+                    "water": new ElementalPlayerDescriptor(game, "water", 16, 32, 200, 200),
+                    "fire": new ElementalPlayerDescriptor(game, "fire", 16, 32, 250, 300),
+                    "air": new ElementalPlayerDescriptor(game, "air", 16, 16, 300, 400)
+                };
+            }),
             this.tileMap
         ];
     }
@@ -38,15 +47,8 @@ class MainGame extends Game {
         game.physics.arcade.gravity.y = 300;
         game.stage.smoothed = false;
         game.stage.backgroundColor = 0x694400;
-        let elementalPlayers = {
-            "human": new ElementalPlayerDescriptor(game, "human", 16, 32, 200, 200),
-            "earth": new ElementalPlayerDescriptor(game, "earth", 32, 32, 100, 100),
-            "water": new ElementalPlayerDescriptor(game, "water", 16, 32, 200, 200),
-            "fire" : new ElementalPlayerDescriptor(game, "fire" , 16, 32, 250, 300),
-            "air"  : new ElementalPlayerDescriptor(game, "air"  , 16, 16, 300, 400)
-        };
         return [
-            new Player(elementalPlayers, 100, 40)
+            new Player(this.elementalPlayers, 100, 40)
         ];
     }
 

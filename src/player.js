@@ -8,19 +8,20 @@ export class Player extends Character {
     constructor(elementalPlayers, x, y) {
         super("human", x, y);
         this.elementalPlayers = elementalPlayers;
-        this.loadElemental(this.elementalPlayers[0]);
     }
     
     configure(game) {
         super.configure(game);
         this.gameRef.camera.follow(this.sprite, Phaser.Camera.FOLLOW_LOCKON);
         this.controls = game.input.keyboard.createCursorKeys();
+        this.loadElemental(this.elementalPlayers.human);
     }
 
     loadElemental(elementalDescriptor) {
         this.jumpSpeed = elementalDescriptor.jumpSpeed;
         this.moveSpeed = elementalDescriptor.moveSpeed;
-        this.sprite.setTexture(this.gameRef.cache.getPixiTexture(elementalDescriptor.elementalName));
+        this.sprite.loadTexture(elementalDescriptor.elementalName, 0);
+        this.addAnimations();
     }
 
     basicAttack() {
