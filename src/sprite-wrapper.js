@@ -75,7 +75,9 @@ export class Sprite extends GameConfigurable {
     }
 
     checkCollision() {
-        globals.collisionLayers.forEach(layer => this.gameRef.physics.arcade.collide(this.sprite, layer));
+        let any = false;
+        globals.collisionLayers.forEach(layer => any |= this.gameRef.physics.arcade.collide(this.sprite, layer));
+        return any;
     }
 
 }
