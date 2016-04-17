@@ -36,10 +36,10 @@ export class Player extends Character {
         transformationSprite.sprite.scale.setTo(2, 2);
         transformationSprite.sprite.animations.add("forward", [0, 1, 2, 3, 4]);
         transformationSprite.sprite.animations.add("backward", [5, 6, 7, 8, 9]);
-        transformationSprite.sprite.animations.play("forward", 5, false);
+        transformationSprite.sprite.animations.play("forward", 10, false);
         transformationSprite.sprite.animations.currentAnim.onComplete.add(event => {
             this.loadElemental(elementalDescriptor);
-            transformationSprite.sprite.animations.play("backward", 5, false);
+            transformationSprite.sprite.animations.play("backward", 10, false);
             transformationSprite.sprite.animations.currentAnim.onComplete.add(event => {
                 this.sprite.body.enable = true;
                 transformationSprite.sprite.destroy();
