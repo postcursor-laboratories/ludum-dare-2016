@@ -30,7 +30,6 @@ function dumpTiles(map, layer) {
 function applyCollision(map, layers, tileSets) {
     map.tilesets.forEach(tset => {
         if (tileSets.indexOf(tset.name) >= 0) {
-            console.log(tset);
             for (let i = 0; i < tset.total; i++) {
                 let props = tset.tileProperties[i] || {collide: false};
                 if (props.collide) {
