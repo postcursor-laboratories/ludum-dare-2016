@@ -22,13 +22,13 @@ class MainGame extends Game {
     getPreLoadConfigurables() {
         return [
             GameConfigurable.of(game => {
-                this.elementalPlayers = {
-                    "human": new ElementalPlayerDescriptor(game, "human", 16, 32, 200, 200),
-                    "earth": new ElementalPlayerDescriptor(game, "earth", 32, 32, 100, 100),
-                    "water": new ElementalPlayerDescriptor(game, "water", 16, 32, 200, 200),
-                    "fire": new ElementalPlayerDescriptor(game, "fire", 16, 32, 250, 300),
-                    "air": new ElementalPlayerDescriptor(game, "air", 16, 16, 300, 400)
-                };
+                this.elementalPlayers = [
+                    new ElementalPlayerDescriptor(game, "human", 16, 32, 200, 200),
+                    new ElementalPlayerDescriptor(game, "earth", 32, 32, 100, 100),
+                    new ElementalPlayerDescriptor(game, "water", 16, 32, 200, 200),
+                    new ElementalPlayerDescriptor(game, "fire", 16, 32, 250, 300),
+                    new ElementalPlayerDescriptor(game, "air", 16, 16, 300, 400)
+                ];
             }),
             this.tileMap
         ];

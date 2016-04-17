@@ -14,7 +14,21 @@ export class Player extends Character {
         super.configure(game);
         this.gameRef.camera.follow(this.sprite, Phaser.Camera.FOLLOW_PLATFORMER);
         this.controls = game.input.keyboard.createCursorKeys();
-        this.loadElemental(this.elementalPlayers.human);
+        this.loadElemental(this.elementalPlayers[0]);
+        this.shapeshiftKeys = [game.input.keyboard.addKey(Phaser.KeyCode.ONE),
+            game.input.keyboard.addKey(Phaser.KeyCode.TWO),
+            game.input.keyboard.addKey(Phaser.KeyCode.THREE),
+            game.input.keyboard.addKey(Phaser.KeyCode.FOUR)];
+        this.shapeshiftKeys.forEach((obj, index) =>
+            obj.onDown.add(event => {
+                console.log(index);
+                console.log(this.elementalPlayers[index + 1]);
+                this.attemptShapeshift(this.elementalPlayers[index + 1]);
+            }));
+    }
+
+    attemptShapeshift(elementalDescriptor) {
+        this.loadElemental(elementalDescriptor);
     }
 
     loadElemental(elementalDescriptor) {
