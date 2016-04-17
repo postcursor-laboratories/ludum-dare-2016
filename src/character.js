@@ -92,10 +92,6 @@ export class Character extends Entity {
             this.jumpAnimationCounter--;
         }
     }
-    
-    checkCollision() {
-        globals.collisionLayers.forEach(layer => this.gameRef.physics.arcade.collide(this.sprite, layer));
-    }
 
     setFacing(direction) {
         if (direction == DIRECTION.LEFT) {

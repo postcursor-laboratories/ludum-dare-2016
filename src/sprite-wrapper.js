@@ -1,4 +1,5 @@
 import {GameConfigurable} from "./game-helpers";
+import {globals} from "./globals";
 
 /**
  * A wrapper around a Phaser sprite. Essentially just a little interfacing.
@@ -71,6 +72,10 @@ export class Sprite extends GameConfigurable {
     }
 
     update() {
+    }
+
+    checkCollision() {
+        globals.collisionLayers.forEach(layer => this.gameRef.physics.arcade.collide(this.sprite, layer));
     }
 
 }
