@@ -56,6 +56,7 @@ class MainGame extends Game {
     configure(game) {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         setupPlatformGroup(game);
+        globals.enemyGroup = game.add.group();
         game.physics.arcade.gravity.y = 300;
         game.stage.smoothed = false;
         game.stage.backgroundColor = 0x694400;

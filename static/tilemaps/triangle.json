@@ -17,15 +17,15 @@
  "tileheight":16,
  "tilesets":[
         {
-         "columns":20,
+         "columns":21,
          "firstgid":1,
          "image":"..\/..\/bin\/sprites\/tiles.png",
          "imageheight":16,
-         "imagewidth":320,
+         "imagewidth":336,
          "margin":0,
          "name":"tiles",
          "spacing":0,
-         "tilecount":20,
+         "tilecount":21,
          "tileheight":16,
          "tileproperties":
             {

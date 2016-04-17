@@ -25,6 +25,7 @@ export class Sprite extends GameConfigurable {
         this.gameRef = game;
         let addSprite = group ? group.create.bind(group) : game.add.sprite.bind(game.add);
         this.__gameSprite = addSprite(data.x, data.y, data.image);
+        this.sprite.wrapper = this;
     }
 
     set x(x) {
