@@ -13,7 +13,7 @@ class MainGame extends Game {
 
     constructor() {
         super(960, 640);
-        this.tileMap = new TileMap();
+        this.tileMap = new TileMap(new Resource("triangle", "tilemaps/triangle.json"));
         globals.tileMap = this.tileMap;
     }
 

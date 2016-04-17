@@ -77,7 +77,7 @@ export class Character extends Entity {
     }
 
     update() {
-        this.gameRef.physics.arcade.collide(this.sprite, globals.collisionLayer);
+        globals.collisionLayers.forEach(layer => this.gameRef.physics.arcade.collide(this.sprite, layer));
 
         if (this.sprite.body.touching.down || this.sprite.body.onFloor()) {
             this.sprite.body.velocity.x *= 0.8;
