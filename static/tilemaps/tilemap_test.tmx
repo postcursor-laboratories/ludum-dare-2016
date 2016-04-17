@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="24" tilewidth="16" tileheight="16" nextobjectid="26">
- <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16" tilecount="2" columns="2">
-  <image source="../../bin/sprites/tiles.png" width="32" height="16"/>
+ <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16" tilecount="20" columns="20">
+  <image source="../../bin/sprites/tiles.png" width="320" height="16"/>
  </tileset>
  <layer name="ground" width="128" height="24">
   <data encoding="csv">
