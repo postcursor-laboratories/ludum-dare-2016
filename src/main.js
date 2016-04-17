@@ -3,6 +3,7 @@ import {Game} from "./game";
 import {setupPlatformGroup} from "./sprites/platforms";
 import Phaser from "phaser";
 import {Player} from "./player";
+import {Enemy} from "./enemy";
 import {TileMap} from "./tilemap";
 import {globals} from "./globals";
 import {ElementalPlayerDescriptor} from "./elemental-player";
@@ -37,7 +38,9 @@ class MainGame extends Game {
                 ];
             }),
             GameConfigurable.of(game =>
-                game.load.spritesheet("transformation", "img/transform.png", 48, 48)),
+				game.load.spritesheet("transformation", "img/transform.png", 48, 48)),
+	    GameConfigurable.of(game =>
+				game.load.spritesheet("robot", "img/robots/ranged.png", 32, 32)),
             this.ezEmit,
             this.tileMap
         ];
@@ -57,7 +60,8 @@ class MainGame extends Game {
         game.stage.smoothed = false;
         game.stage.backgroundColor = 0x694400;
         return [
-            new Player(this.elementalPlayers, 100, 40)
+            new Player(this.elementalPlayers, 100, 40),
+	    new Enemy("robot", 400, 40)
         ];
     }
 

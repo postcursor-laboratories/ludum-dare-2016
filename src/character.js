@@ -66,7 +66,10 @@ export class Character extends Entity {
     }
 
     canOverrideAnimation(animationName) {
-        if (this.sprite.animations.currentAnim.isFinished || !this.sprite.animations.currentAnim.isPlaying) {
+        if (this.sprite.animations.currentAnim == null ||
+	    this.sprite.animations.currentAnim.isFinished ||
+	    !this.sprite.animations.currentAnim.isPlaying)
+	{
             return true;
         }
         return this.animationPriority.indexOf(animationName) < this.animationPriority.indexOf(this.sprite.animations.currentAnim.name);
