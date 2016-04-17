@@ -89,6 +89,11 @@ export class Player extends Character {
     update() {
         this.gameRef.physics.arcade.collide(this.sprite, globals.collisionLayer);
 
+        if ((this.sprite.body.touching.down || this.sprite.body.touching.up || this.sprite.body.onFloor()) && this.sprite.animations.currentAnim.name == "jump") {
+            console.log("hi");
+            this.sprite.animations.play("stationary", 4, true);
+        }
+
         if ((this.sprite.body.touching.down || this.sprite.body.onFloor()) && !(this.controls.left.isDown || this.controls.right.isDown)) {
             this.sprite.body.velocity.x *= 0.8;
         } else {
