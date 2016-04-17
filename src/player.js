@@ -37,7 +37,7 @@ export class Player extends Character {
         this.moveSpeed = elementalDescriptor.moveSpeed;
         this.attackSpeed = elementalDescriptor.attackSpeed;
         this.setTexture(elementalDescriptor.elementalName, 0);
-        this.addAnimations();
+        this.addAnimations(elementalDescriptor.spritesheetWidth, elementalDescriptor.animationLengths);
     }
 
     basicAttack() {
@@ -72,10 +72,10 @@ export class Player extends Character {
     }
 
     setFacing(direction) {
-        if (direction == DIRECTION.LEFT) {
+        if (direction === DIRECTION.LEFT) {
             this.facing = direction;
             this.sprite.scale.x = -Math.abs(this.sprite.scale.x);
-        } else if (direction == DIRECTION.RIGHT) {
+        } else if (direction === DIRECTION.RIGHT) {
             this.facing = direction;
             this.sprite.scale.x = Math.abs(this.sprite.scale.x);
         }

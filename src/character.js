@@ -28,7 +28,7 @@ export class Character extends Entity {
         this.addAnimations();
     }
 
-    addAnimations() {
+    addAnimations(spritesheetWidth, animationLengths) {
         this.sprite.animations.add("walk", [0, 1, 2, 3]);
         this.sprite.animations.add("stationary", [4, 5, 6, 7]);
         this.sprite.animations.add("basicAttack", [8, 9, 10, 11]);

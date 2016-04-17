@@ -23,11 +23,11 @@ class MainGame extends Game {
         return [
             GameConfigurable.of(game => {
                 this.elementalPlayers = [
-                    new ElementalPlayerDescriptor(game, "human", 16, 32, 300, 300, 5),
-                    new ElementalPlayerDescriptor(game, "earth", 32, 32, 100, 100, 3),
-                    new ElementalPlayerDescriptor(game, "water", 16, 32, 200, 200, 6),
-                    new ElementalPlayerDescriptor(game, "fire", 16, 32, 250, 300, 6),
-                    new ElementalPlayerDescriptor(game, "air", 16, 16, 300, 400, 4)
+                    new ElementalPlayerDescriptor(game, "human", 16, 32, 300, 300, 5, 4, [4, 2, 4, 1]),
+                    new ElementalPlayerDescriptor(game, "earth", 32, 32, 100, 100, 3, 4, [4, 2, 4, 1]),
+                    new ElementalPlayerDescriptor(game, "water", 16, 32, 200, 200, 6, 4, [4, 4, 4, 2]),
+                    new ElementalPlayerDescriptor(game, "fire" , 16, 32, 250, 300, 6, 4, []),
+                    new ElementalPlayerDescriptor(game, "air"  , 16, 16, 300, 400, 4, 4, [])
                 ];
             }),
             this.tileMap
