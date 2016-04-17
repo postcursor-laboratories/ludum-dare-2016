@@ -27,6 +27,12 @@ export class Player extends Character {
             }));
         this.basicAttackKey = game.input.keyboard.addKey(Phaser.KeyCode.Z);
         this.basicAttackKey.onDown.add(() => this.basicAttack());
+        this.spellOneKey = game.input.keyboard.addKey(Phaser.KeyCode.X);
+        this.spellOneKey.onDown.add(() => this.spellOne());
+    }
+
+    spellOne() {
+        this.currentElemental.spellOne(this);
     }
 
     attemptShapeshift(elementalDescriptor) {
@@ -45,7 +51,6 @@ export class Player extends Character {
                 transformationSprite.sprite.destroy();
             });
         });
-
     }
 
     loadElemental(elementalDescriptor) {
@@ -54,6 +59,7 @@ export class Player extends Character {
         this.attackSpeed = elementalDescriptor.attackSpeed;
         this.setTexture(elementalDescriptor.elementalName, 0);
         this.addAnimations(elementalDescriptor.spritesheetWidth, elementalDescriptor.animationLengths);
+        this.currentElemental = elementalDescriptor;
     }
 
     addAnimations(sheetWidth, animationLengths) {

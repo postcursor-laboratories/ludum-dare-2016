@@ -6,6 +6,8 @@ import {Player} from "./player";
 import {TileMap} from "./tilemap";
 import {globals} from "./globals";
 import {ElementalPlayerDescriptor} from "./elemental-player";
+import {ExplosionEmitterHelper} from "./explosion-emitter-helper";
+import * as EarthSpells from "./spells/earth-spells";
 
 class MainGame extends Game {
 
@@ -16,15 +18,19 @@ class MainGame extends Game {
     }
 
     getImages() {
-        return [new Resource("ground", "img/StoneFloorSmooth.png")];
+        return [new Resource("ground", "img/StoneFloorSmooth.png"),
+                new Resource("rockProjectile", "img/rockprojectile.png"),
+                new Resource("rockParticle", "img/rockParticle.png"),
+                new Resource("magicParticle", "img/magicParticle.png")];
     }
 
     getPreLoadConfigurables() {
+        this.ezEmit = new ExplosionEmitterHelper();
         return [
             GameConfigurable.of(game => {
                 this.elementalPlayers = [
                     new ElementalPlayerDescriptor(game, "human", 16, 32, 300, 300, 5, 4, [4, 2, 4, 1]),
-                    new ElementalPlayerDescriptor(game, "earth", 32, 32, 100, 100, 3, 4, [4, 2, 4, 1]),
+                    new ElementalPlayerDescriptor(game, "earth", 32, 32, 100, 100, 3, 4, [4, 2, 4, 1], EarthSpells.rockThrowSpell),
                     new ElementalPlayerDescriptor(game, "water", 16, 32, 200, 200, 6, 4, [4, 4, 4, 2]),
                     new ElementalPlayerDescriptor(game, "fire" , 32, 32, 250, 300, 6, 4, [4, 4, 4, 4]),
                     new ElementalPlayerDescriptor(game, "air"  , 16, 16, 300, 400, 4, 4, [4, 4, 4, 4])
@@ -32,6 +38,7 @@ class MainGame extends Game {
             }),
             GameConfigurable.of(game =>
                 game.load.spritesheet("transformation", "img/transform.png", 48, 48)),
+            this.ezEmit,
             this.tileMap
         ];
     }

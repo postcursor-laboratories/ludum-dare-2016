@@ -13,6 +13,7 @@ export class Game {
             create: () => this.create(),
             update: () => this.update()
         }, antialias, antialias);
+        this.phaserGame.promethium = this;
     }
 
     getImages() {
