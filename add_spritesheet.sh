@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-cd -P -- "$(dirname -- "$0")"
 
 function defineProperty() {
     local prop="$1"
@@ -14,7 +13,9 @@ function defineProperty() {
 name="$(defineProperty "$1" Name)"
 x="$(defineProperty "$2" 'X-Coord')"
 y="$(defineProperty "$3" 'Y-Coord')"
-filepath="$(defineProperty $4 'File Path')"
+filepath="$(realpath "$(defineProperty $4 'File Path')")"
+
+cd -P -- "$(dirname -- "$0")"
 
 dirtarget="./spritesheets/${name}/${x},${y}"
 filetarget="$dirtarget/${filepath##*/}"
