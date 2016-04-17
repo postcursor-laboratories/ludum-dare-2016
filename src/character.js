@@ -14,7 +14,6 @@ export class Character extends Entity {
 
     configure(game) {
         super.configure(game);
-        this.addAnimations();
         this.facing = DIRECTION.RIGHT;
     }
 
@@ -25,10 +24,9 @@ export class Character extends Entity {
         }
         this.sprite.animations.stop();
         this.sprite.loadTexture.apply(this.sprite, args);
-        this.addAnimations();
     }
 
-    addAnimations(spritesheetWidth, animationLengths) {
+    addAnimations(sheetWidth, animationLengths) {
         this.sprite.animations.add("walk", [0, 1, 2, 3]);
         this.sprite.animations.add("stationary", [4, 5, 6, 7]);
         this.sprite.animations.add("basicAttack", [8, 9, 10, 11]);

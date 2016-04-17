@@ -2,6 +2,7 @@ import {DIRECTION} from "./entity";
 import {Character} from "./character";
 import {globals} from "./globals";
 import Phaser from "phaser";
+import {Sprite} from "./sprite-wrapper";
 
 export class Player extends Character {
 
@@ -29,7 +30,22 @@ export class Player extends Character {
     }
 
     attemptShapeshift(elementalDescriptor) {
-        this.loadElemental(elementalDescriptor);
+        this.sprite.body.enable = false;
+        let transformationSprite = new Sprite("transformation", this.sprite.x - 48, this.sprite.y - 78);
+        transformationSprite.configure(this.gameRef);
+        transformationSprite.sprite.scale.setTo(2, 2);
+        transformationSprite.sprite.animations.add("forward", [0, 1, 2, 3, 4]);
+        transformationSprite.sprite.animations.add("backward", [5, 6, 7, 8, 9]);
+        transformationSprite.sprite.animations.play("forward", 5, false);
+        transformationSprite.sprite.animations.currentAnim.onComplete.add(event => {
+            this.loadElemental(elementalDescriptor);
+            transformationSprite.sprite.animations.play("backward", 5, false);
+            transformationSprite.sprite.animations.currentAnim.onComplete.add(event => {
+                this.sprite.body.enable = true;
+                transformationSprite.sprite.destroy();
+            });
+        });
+
     }
 
     loadElemental(elementalDescriptor) {
@@ -38,6 +54,26 @@ export class Player extends Character {
         this.attackSpeed = elementalDescriptor.attackSpeed;
         this.setTexture(elementalDescriptor.elementalName, 0);
         this.addAnimations(elementalDescriptor.spritesheetWidth, elementalDescriptor.animationLengths);
+    }
+
+    addAnimations(sheetWidth, animationLengths) {
+        let names = ["walk", "stationary", "basicAttack", "jump"];
+        let index = 0;
+        let j = 0;
+        for (let animation of animationLengths) {
+            if (animation > sheetWidth) {
+                throw "sheetWidth exceeded: " + animation + " of " + animationLengths;
+            }
+            let array = [];
+            let i = 0;
+            for (i = 0; i < animation; i++) {
+                array.push(i + index);
+            }
+            index += sheetWidth;
+            this.sprite.animations.add(names[j], array);
+            j++;
+        }
+        this.sprite.animations.stop();
     }
 
     basicAttack() {

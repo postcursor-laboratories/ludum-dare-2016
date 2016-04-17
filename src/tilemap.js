@@ -36,7 +36,6 @@ export class TileMap extends GameConfigurable {
             layer.texture.baseTexture.scaleMode = PIXI.scaleModes.NEAREST;
             layer.setScale(2, 2);
             map.setCollision(1, true, layer);
-            dumpTiles(map, layer);
             layer.resizeWorld();
             layer.debug = false;
             globals.collisionLayer = layer;
