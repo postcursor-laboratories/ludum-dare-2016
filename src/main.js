@@ -5,7 +5,7 @@ import Phaser from "phaser";
 import {Player} from "./player";
 import {TileMap} from "./tilemap";
 import {globals} from "./globals";
-import {ElementalPlayerDescriptor} from "elemental-player";
+import {ElementalPlayerDescriptor} from "./elemental-player";
 
 class MainGame extends Game {
 
