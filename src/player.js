@@ -99,7 +99,6 @@ export class Player extends Character {
         this.checkCollision();
 
         if ((this.sprite.body.touching.down || this.sprite.body.touching.up || this.sprite.body.onFloor()) && this.sprite.animations.currentAnim.name == "jump") {
-            console.log("hi");
             this.sprite.animations.play("stationary", 4, true);
         }
 
