@@ -44,7 +44,7 @@ export class FireballSpell extends Spell {
                 
                 collideBox(fireball.sprite.x+4, fireball.sprite.y+4, 64, 64, globals.enemyGroup, hitEnemy);
                 fireball.destroy();
-                game.promethium.ezEmit.emit("fireballParticle", fireball.sprite.x, fireball.sprite.y, 250, 50);
+                game.promethium.ezEmit.emit("fireballParticle", fireball.sprite.x, fireball.sprite.y, 3000, 50);
                 isDestroyed = true;
             }
         };
@@ -67,7 +67,7 @@ export class FireballSpell extends Spell {
 const HEATWAVE_NAME = "Heatwave";
 const HEATWAVE_MANA = 10;
 const HEATWAVE_COOLDOWN = 1;
-const HEATWAVE_DAMAGE = 2;
+const HEATWAVE_DAMAGE = 5;
 
 export class HeatwaveSpell extends Spell {
     constructor() {
@@ -142,9 +142,7 @@ export class HeatwaveSpell extends Spell {
                 if ((flameBody.touching.down || flameBody.onFloor())) {
                     flameBody.velocity.y = 0;
                     flameBody.allowGravity = false;
-                    if(Math.random() > 0.6){
-                        collideBox(flameBody.sprite.x+8, flameBody.sprite.y+4, 16, 8, globals.enemyGroup, hitEnemy);
-                    }
+                    collideBox(flameBody.sprite.x+8, flameBody.sprite.y+4, 16, 8, globals.enemyGroup, hitEnemy);
                     
                 }
             };
