@@ -74,9 +74,8 @@ export class FrostbiteSpell extends Spell {
 		
 		let frost = new Sprite("frostbite", xCoord, yCoord); 
 		frost.configure(game);
-		frost.sprite.animations.add("frostbite", [0,1,2,3]);
-		frost.animations.play("frostbite",4,false);
 
+		
         playerObj.setControlOverride(true);
 
         frost.update = () => {
@@ -84,12 +83,18 @@ export class FrostbiteSpell extends Spell {
         };
 		
 		let timer = game.time.create(true);
-        timer.add(1000, () => {
+        timer.add(1100, () => {
             playerObj.setControlOverride(false);
             frost.destroy();
 			playerObj.sprite.animations.getAnimation("frost").destroy();
         });
         timer.start();
+		
+		let timer2 = game.time.create(true);
+        timer.add(100, () => {
+			frost.sprite.animations.add("frost2", [0,1,2,3]);
+			frost.animations.play("frost2",4,false);
+        });
 		
 		
     }
