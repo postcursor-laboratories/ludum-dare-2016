@@ -1,6 +1,7 @@
 import {Sprite} from "../sprite-wrapper";
 import {DIRECTION} from "../entity";
 import {Spell} from "./spell";
+import {collideBox} from "../utils/collision";
 
 const SURF_NAME = "Surf";
 const SURF_MANA = 10;
@@ -105,7 +106,7 @@ export class FrostbiteSpell extends Spell {
             let endFreeze = game.time.create(true);
             endFreeze.add(3000, () => {
                 other.body.enable = true;
-                other.tint = 0xffffff
+                other.tint = 0xffffff;
             });
             endFreeze.start();
             
