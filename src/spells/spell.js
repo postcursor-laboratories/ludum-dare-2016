@@ -26,19 +26,24 @@ export class SpellSprite extends Sprite {
  */
 export class Spell {
 
-    constructor(name, image, cooldown, mana, spriteClass = SpellSprite) {
+    constructor(name, cooldown, mana) {
         this.name = name;
-        this.image = image;
         this.cooldown = cooldown;
         this.mana = mana;
-        this.spriteClass = SpellSprite;
     }
+	
+	/**
+	*  @return {boolean} True if the player can cast the spell.
+	*/
+	prerequisite()
+	{
+		
+	}
 
     /**
      * @return {SpellSprite} The new SpellSprite
      */
-    createSprite() {
-        return this.spriteClass(this.image, this.onCollideGround, this.onCollideEnemy);
+    castSpell() {
     }
 
     onCollideGround() {

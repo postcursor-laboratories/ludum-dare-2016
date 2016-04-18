@@ -41,7 +41,7 @@ export class Player extends Character {
     }
 
     spellOne() {
-        this.currentElemental.spellOne(this);
+        this.currentElemental.spellOne.castSpell(this);
     }
 
     attemptShapeshift(elementalDescriptor) {

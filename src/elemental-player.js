@@ -7,7 +7,7 @@ export class ElementalPlayerDescriptor {
         this.attackSpeed = attackSpeed;
         this.spritesheetWidth = spritesheetWidth;
         this.animationLengths = animationLengths;
-        this.spellOne = spellOne;
+        this.spellOne = new spellOne();
         this.spellTwo = spellTwo;
         game.load.spritesheet(elementalName, "img/elementals/" + elementalName + ".png", unitWidth, unitHeight);
     }
