@@ -63,41 +63,41 @@ export class FrostbiteSpell extends Spell {
     }
 
     castSpell(playerObj) {
-		let game = playerObj.gameRef;
+        let game = playerObj.gameRef;
         let facingSign = (playerObj.facing == DIRECTION.LEFT ? -1 : 1);
         let xCoord = playerObj.sprite.x + (facingSign * 16);
         let yCoord = playerObj.sprite.y - 48;
-		
-		playerObj.setControlOverride(true);
-		playerObj.sprite.animations.add("frost", [9]);
-		playerObj.sprite.animations.play("frost", 1, false);
-		
-		let frost = new Sprite("frostbite", xCoord, yCoord); 
-		frost.configure(game);
-		frost.sprite.anchor.x = 0;
-		
-		frost.sprite.scale.setTo(2*facingSign, 2);
-		frost.sprite.animations.add("frost2", [0,1,2,3]);
-		frost.sprite.animations.play("frost2",4,false);
-		
+
+        playerObj.setControlOverride(true);
+        playerObj.sprite.animations.add("frost", [9]);
+        playerObj.sprite.animations.play("frost", 1, false);
+
+        let frost = new Sprite("frostbite", xCoord, yCoord);
+        frost.configure(game);
+        frost.sprite.anchor.x = 0;
+
+        frost.sprite.scale.setTo(2 * facingSign, 2);
+        frost.sprite.animations.add("frost2", [0, 1, 2, 3]);
+        frost.sprite.animations.play("frost2", 4, false);
+
         playerObj.setControlOverride(true);
 
         frost.update = () => {
             //deal damage here!
         };
-		
-		let timer = game.time.create(true);
+
+        let timer = game.time.create(true);
         timer.add(1100, () => {
             playerObj.setControlOverride(false);
             frost.destroy();
-			//playerObj.sprite.animations.getAnimation("frost").destroy();
-			//Destroying the frost animation causes a crash when you next transform
-			//TODO fix that but until then I'm just removing this
-			//Don't spam frostbite, it has a memory leak.
+            //playerObj.sprite.animations.getAnimation("frost").destroy();
+            //Destroying the frost animation causes a crash when you next transform
+            //TODO fix that but until then I'm just removing this
+            //Don't spam frostbite, it has a memory leak.
         });
         timer.start();
-		
-		
+
+
     }
 
 }

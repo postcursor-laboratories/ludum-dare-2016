@@ -30,8 +30,8 @@ class MainGame extends Game {
             new Resource("waterParticle", "img/waterParticle.png"),
             new Resource("fireballProjectile", "img/fireballProjectile.png"),
             new Resource("fireballParticle", "img/fireballParticle.png"),
-			new Resource("heatwaveProjectile", "img/heatwaveProjectile.png")];
-			
+            new Resource("heatwaveProjectile", "img/heatwaveProjectile.png")];
+
     }
 
     getPreLoadConfigurables() {
@@ -50,7 +50,7 @@ class MainGame extends Game {
                 game.load.spritesheet("transformation", "img/transform.png", 48, 48)),
             GameConfigurable.of(game =>
                 game.load.spritesheet("robot-melee", "img/robots/melee.png", 32, 32)),
-			GameConfigurable.of(game =>
+            GameConfigurable.of(game =>
                 game.load.spritesheet("robot-ranged", "img/robots/ranged.png", 32, 32)),
             GameConfigurable.of(game =>
                 game.load.spritesheet("frostbite", "img/frostbite.png", 32, 16)),

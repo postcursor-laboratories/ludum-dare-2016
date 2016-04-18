@@ -22,7 +22,7 @@ export class RangedEnemy extends Enemy {
         let player = mainGame.getPlayer();
         let stillBuf = 5;
 
-        
+
         if (!this.attacking) {
             if (Math.abs(this.x - player.x) <= 256 && Math.abs(this.y - player.y) < 24) {
                 this.basicAttack();

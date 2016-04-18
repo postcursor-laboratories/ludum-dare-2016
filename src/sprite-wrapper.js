@@ -28,7 +28,7 @@ export class Sprite extends GameConfigurable {
         this.sprite.wrapper = this;
         game.promethium.allSprites.push(this);
     }
-    
+
     destroy() {
         this.gameRef.promethium.allSprites.splice(this.gameRef.promethium.allSprites.indexOf(this), 1);
         this.sprite.destroy();

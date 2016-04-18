@@ -12,7 +12,6 @@ export class HUD extends GameConfigurable {
 }
 
 class HealthBar extends Sprite {
-    
-    
-    
+
+
 }
