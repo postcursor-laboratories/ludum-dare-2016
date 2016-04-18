@@ -20,7 +20,7 @@ export class RockThrowSpell extends Spell {
 		return true;
 	}
 	
-	castSpell() {
+	castSpell(playerObj) {
 		
 		let game = playerObj.gameRef;
 		let facingSign = (playerObj.facing == DIRECTION.LEFT ? -1 : 1);
