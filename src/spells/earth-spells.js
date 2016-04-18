@@ -44,7 +44,7 @@ export class RockThrowSpell extends Spell {
                 game.promethium.ezEmit.emit("rockParticle", rock.sprite.x, rock.sprite.y, 2000, 10);
                 rock.destroy();
             }
-            collideBox(rock.sprite.x, rock.sprite.y, 16, 16, globals.enemyGroup, rock.hitEnemy); // if we hit an enemy call hitEnemy
+            collideBox(rock.sprite.x+4, rock.sprite.y+4, 8, 8, globals.enemyGroup, rock.hitEnemy); // if we hit an enemy call hitEnemy
         };
 
     }
@@ -53,6 +53,7 @@ export class RockThrowSpell extends Spell {
 const FISSURE_NAME = "Rock Throw";
 const FISSURE_MANA = 10;
 const FISSURE_COOLDOWN = 1;
+const FISSURE_DAMAGE = 10;
 
 export class FissureSpell extends Spell {
 
@@ -79,11 +80,27 @@ export class FissureSpell extends Spell {
             rocks.push(rock);
             this.magicParticles(xCoord + (i * 13 * facingSign), yCoord);
         }
+        
+        let spritesToReenable = [];
+        
+        let hitEnemy = (other) => {
+            other.wrapper.damage(FISSURE_DAMAGE);
+            other.body.velocity.y = 0;
+            other.body.velocity.x = 0;
+            other.body.enable = false;
+            spritesToReenable.push(other);
+        };
+        
+        collideBox(xCoord+65*facingSign, yCoord, 16, 16, globals.enemyGroup, hitEnemy); // if we hit an enemy call hitEnemy
+        
         let timer = game.time.create(true);
         timer.add(2000, () => {
             rocks.forEach(rock => {
                 game.promethium.ezEmit.emit("rockParticle", rock.sprite.x, rock.sprite.y, 2000, 10);
                 rock.destroy();
+            });
+            spritesToReenable.forEach(other => {
+                other.body.enable = true;
             });
         });
         timer.start();
