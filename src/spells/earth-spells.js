@@ -33,7 +33,6 @@ export class RockThrowSpell extends Spell {
 		rock.sprite.body.velocity.x = facingSign * 400;
 		rock.sprite.body.velocity.y = -50;
 		rock.update = () => {
-            console.log("hi");
 			if (rock.checkCollision()) {
 				game.promethium.ezEmit.emit("rockParticle", rock.sprite.x, rock.sprite.y, 2000, 10);
 				rock.destroy();

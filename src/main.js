@@ -10,6 +10,7 @@ import {ElementalPlayerDescriptor} from "./elemental-player";
 import {ExplosionEmitterHelper} from "./explosion-emitter-helper";
 import * as EarthSpells from "./spells/earth-spells";
 import * as WaterSpells from "./spells/water-spells";
+import * as FireSpells from "./spells/fire-spells";
 
 class MainGame extends Game {
 
@@ -25,7 +26,9 @@ class MainGame extends Game {
                 new Resource("rockProjectile", "img/rockProjectile.png"),
                 new Resource("rockParticle", "img/rockParticle.png"),
                 new Resource("magicParticle", "img/magicParticle.png"),
-                new Resource("waterParticle", "img/waterParticle.png")];
+                new Resource("waterParticle", "img/waterParticle.png"),
+				new Resource("fireballProjectile", "img/fireballProjectile.png"),
+                new Resource("fireballParticle", "img/fireballParticle.png")];
     }
 
     getPreLoadConfigurables() {
@@ -36,7 +39,7 @@ class MainGame extends Game {
                     new ElementalPlayerDescriptor(game, "human", 32, 32, 400, 300, 5, 4, [4, 2, 4, 1]),
                     new ElementalPlayerDescriptor(game, "earth", 32, 32, 200, 100, 3, 4, [4, 2, 4, 1], new EarthSpells.RockThrowSpell(), new EarthSpells.FissureSpell()),
                     new ElementalPlayerDescriptor(game, "water", 32, 32, 300, 200, 6, 4, [4, 4, 4, 2], new WaterSpells.SurfSpell(), new WaterSpells.FrostbiteSpell()),
-                    new ElementalPlayerDescriptor(game, "fire" , 32, 32, 350, 300, 6, 4, [4, 4, 4, 4]),
+                    new ElementalPlayerDescriptor(game, "fire" , 32, 32, 350, 300, 6, 4, [4, 4, 4, 4], new FireSpells.FireballSpell(), new FireSpells.HeatwaveSpell()
                     new ElementalPlayerDescriptor(game, "air"  , 32, 32, 400, 400, 4, 4, [4, 4, 4, 4])
                 ];
             }),
