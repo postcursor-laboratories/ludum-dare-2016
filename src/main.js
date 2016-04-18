@@ -49,6 +49,8 @@ class MainGame extends Game {
                 game.load.spritesheet("transformation", "img/transform.png", 48, 48)),
             GameConfigurable.of(game =>
                 game.load.spritesheet("robot-melee", "img/robots/melee.png", 32, 32)),
+            GameConfigurable.of(game =>
+                game.load.spritesheet("frostbite", "img/frostbite.png", 16, 32)),
             this.ezEmit,
             this.tileMap
         ];
