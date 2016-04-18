@@ -28,7 +28,7 @@ class MainGame extends Game {
             new Resource("magicParticle", "img/magicParticle.png"),
             new Resource("waterParticle", "img/waterParticle.png"),
             new Resource("fireballProjectile", "img/fireballProjectile.png"),
-            new Resource("fireballParticle", "img/fireballParticle.png")];
+            new Resource("fireballParticle", "img/fireballParticle.png"),
 			new Resource("heatwaveProjectile", "img/heatwaveProjectile.png")];
 			
     }
