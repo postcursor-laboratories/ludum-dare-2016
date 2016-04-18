@@ -6,6 +6,7 @@ import {nullFn} from "../utils/nulls";
 const FIREBALL_NAME = "Fireball";
 const FIREBALL_MANA = 10;
 const FIREBALL_COOLDOWN = 1;
+const FIREBALL_DAMAGE = 10;
 
 export class FireballSpell extends Spell {
 
@@ -34,6 +35,12 @@ export class FireballSpell extends Spell {
         let isDestroyed = false;
         fireball.explode = () => {
             if (!isDestroyed) {
+                
+                let hitEnemy = (other) => {
+                    other.wrapper.damage(FIREBALL_DAMAGE);
+                }
+                
+                collideBox(fireball.sprite.x+4, fireball.sprite.y+4, 64, 64, globals.enemyGroup, hitEnemy);
                 fireball.destroy();
                 game.promethium.ezEmit.emit("fireballParticle", fireball.sprite.x, fireball.sprite.y, 250, 50);
                 isDestroyed = true;
@@ -58,6 +65,7 @@ export class FireballSpell extends Spell {
 const HEATWAVE_NAME = "Heatwave";
 const HEATWAVE_MANA = 10;
 const HEATWAVE_COOLDOWN = 1;
+const HEATWAVE_DAMAGE = 1;
 
 export class HeatwaveSpell extends Spell {
     constructor() {
@@ -86,6 +94,12 @@ export class HeatwaveSpell extends Spell {
         wave1.startPosition = xCoord;
         wave1.facingSign = facingSign;
 
+        let hitEnemy = (other) => {
+            game.promethium.ezEmit.emit("fireballParticle", other.x, other.y, 250, 10);
+            rock.destroy();
+            other.wrapper.damage(HEATWAVE_DAMAGE);
+        };
+        
         wave1.update = () => {
             if (wave1.checkCollision() || Math.abs(wave1.sprite.x - wave1.startPosition) > 256) {
                 game.promethium.ezEmit.emit("fireballParticle", wave1.sprite.x, wave1.sprite.y, 125, 25, -100, 100, -100, 100, 1); // supposedly gravity of 0 is default.
@@ -127,6 +141,10 @@ export class HeatwaveSpell extends Spell {
                 if ((flameBody.touching.down || flameBody.onFloor())) {
                     flameBody.velocity.y = 0;
                     flameBody.allowGravity = false;
+                    if(Math.random() > 0.8){
+                        collideBox(flameBody.sprite.x+8, flameBody.sprite.y+4, 16, 8, globals.enemyGroup, hitEnemy);
+                    }
+                    
                 }
             };
 
