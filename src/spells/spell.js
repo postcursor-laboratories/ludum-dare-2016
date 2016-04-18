@@ -1,5 +1,6 @@
 import {Sprite} from "../sprite-wrapper";
 import {globals} from "../globals";
+import {mainGame} from "../main";
 
 export class SpellSprite extends Sprite {
 
@@ -53,6 +54,10 @@ export class Spell {
      * @param enemy {Sprite} The collided enemy sprite
      */
     onCollideEnemy(enemy) {
+    }
+    
+    magicParticles(x, y) {
+        mainGame.ezEmit.emit("magicParticle", x, y, 2000, 20, -200, 200, -200, 200, 0);
     }
 
 }

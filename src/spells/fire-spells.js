@@ -26,7 +26,7 @@ export class FireballSpell extends Spell {
 		let facingSign = (playerObj.facing == DIRECTION.LEFT ? -1 : 1);
 		let xCoord = playerObj.sprite.x + (facingSign * 8);
 		let yCoord = playerObj.sprite.y - 48;
-		game.promethium.ezEmit.emit("magicParticle", xCoord + (facingSign * 16), yCoord, 2000, 20);
+		this.magicParticles(xCoord + (facingSign * 16), yCoord);
 		let fireball = new Sprite("fireballProjectile", xCoord, yCoord);
 		fireball.configure(game);
 		game.physics.arcade.enable(fireball.sprite);

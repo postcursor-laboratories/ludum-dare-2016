@@ -26,7 +26,7 @@ export class RockThrowSpell extends Spell {
 		let facingSign = (playerObj.facing == DIRECTION.LEFT ? -1 : 1);
 		let xCoord = playerObj.sprite.x + (facingSign * 8);
 		let yCoord = playerObj.sprite.y - 48;
-		game.promethium.ezEmit.emit("magicParticle", xCoord + (facingSign * 16), yCoord, 2000, 20);
+		this.magicParticles(xCoord + (facingSign * 16), yCoord);
 		let rock = new Sprite("rockProjectile", xCoord, yCoord);
 		rock.configure(game);
 		game.physics.arcade.enable(rock.sprite);
@@ -71,7 +71,7 @@ export class FissureSpell extends Spell
 			rock.sprite.anchor.setTo(0.5, 0.5);
 			rock.sprite.rotation = Math.random() * 2 * Math.PI;
 			rocks.push(rock);
-			game.promethium.ezEmit.emit("magicParticle", xCoord + (i * 13 * facingSign), yCoord, 2000, 20);
+			this.magicParticles(xCoord + (i * 13 * facingSign), yCoord);
 		}
 		let timer = game.time.create(true);
 		timer.add(2000, () => {
