@@ -100,6 +100,13 @@ export class HeatwaveSpell extends Spell
 			game.physics.arcade.enable(flame.sprite);
 			flame.sprite.body.velocity.x = 0;
 			flame.sprite.body.velocity.y = -150;
+            
+            let timer = game.time.create(true);
+            timer.add(3000, () => {
+
+                flame.destroy();
+            });
+            
 			flame.update = () => {
 				flame.checkCollision();
 				if((flame.sprite.body.touching.down || flame.sprite.body.onFloor()))
