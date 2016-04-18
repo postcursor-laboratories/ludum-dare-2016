@@ -23,7 +23,8 @@ class MainGame extends Game {
         return [new Resource("ground", "img/StoneFloorSmooth.png"),
                 new Resource("rockProjectile", "img/rockProjectile.png"),
                 new Resource("rockParticle", "img/rockParticle.png"),
-                new Resource("magicParticle", "img/magicParticle.png")];
+                new Resource("magicParticle", "img/magicParticle.png"),
+                new Resource("waterParticle", "img/waterParticle.png")];
     }
 
     getPreLoadConfigurables() {

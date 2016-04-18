@@ -7,8 +7,8 @@ import {Spell} from "./spell"
 const SURF_NAME = "Surf";
 const SURF_MANA = 10;
 const SURF_COOLDOWN = 1;
-const SURF_SPEED = 100;
-const SURF_DURATION = 1000;
+const SURF_SPEED = 700;
+const SURF_DURATION = 400;
 
 export class SurfSpell extends Spell {
 	
@@ -31,21 +31,22 @@ export class SurfSpell extends Spell {
 		
 		let surfHandler = new Sprite("waterParticle", xCoord, yCoord); // we need a small, near invisible sprite
 		surfHandler.configure(game);
-		game.promethium.allSprites.push(surfHandler);
 		
 		playerObj.setControlOverride(true); //take that!
 		
 		surfHandler.update = () => {
 			surfHandler.setPosition(playerObj.sprite.x,playerObj.sprite.y);
-			game.promethium.ezEmit.emit("waterParticle", surfHandler.sprite.x, surfHandler.sprite.y, 1000, 5);
+			game.promethium.ezEmit.emit("waterParticle", surfHandler.sprite.x,
+                surfHandler.sprite.y - ((Math.random() - (1/3)) * 40), 2000, 20, -100, 100, -200, 0, 10);
 			playerObj.sprite.body.velocity.x= SURF_SPEED * facingSign;
 		};
 		
 		let timer = game.time.create(true);
 		timer.add(SURF_DURATION, () => {
 			playerObj.setControlOverride(false);
-			playerObj.sprite.body.velocity.x= SURF_SPEED *.3* facingSign;
+            surfHandler.destroy();
 		});
+		timer.start();
 	}
 }
 

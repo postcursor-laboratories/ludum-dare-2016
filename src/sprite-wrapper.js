@@ -26,6 +26,12 @@ export class Sprite extends GameConfigurable {
         let addSprite = group ? group.create.bind(group) : game.add.sprite.bind(game.add);
         this.__gameSprite = addSprite(data.x, data.y, data.image);
         this.sprite.wrapper = this;
+        game.promethium.allSprites.push(this);
+    }
+    
+    destroy() {
+        this.gameRef.promethium.allSprites.splice(this.gameRef.promethium.allSprites.indexOf(this), 1);
+        this.sprite.destroy();
     }
 
     set x(x) {
