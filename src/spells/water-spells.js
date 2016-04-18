@@ -93,7 +93,7 @@ export class FrostbiteSpell extends Spell {
 		let timer2 = game.time.create(true);
         timer2.add(100, () => {
 			frost.sprite.animations.add("frost2", [0,1,2,3]);
-			frost.animations.play("frost2",4,false);
+			frost.sprite.animations.play("frost2",4,false);
         });
 		timer2.start();
 		
