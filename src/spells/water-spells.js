@@ -2,6 +2,7 @@ import {Sprite} from "../sprite-wrapper";
 import {DIRECTION} from "../entity";
 import {Spell} from "./spell";
 import {collideBox} from "../utils/collision";
+import {globals} from "../globals";
 
 const SURF_NAME = "Surf";
 const SURF_MANA = 10;
