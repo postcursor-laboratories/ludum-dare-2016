@@ -31,6 +31,7 @@ export class SurfSpell extends Spell {
 
         let surfHandler = new Sprite("waterParticle", xCoord, yCoord); // we need a small, near invisible sprite
         surfHandler.configure(game);
+        surfHandler.sprite.visible = false;
 
         playerObj.setControlOverride(true); //take that!
 

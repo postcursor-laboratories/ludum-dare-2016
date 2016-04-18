@@ -32,6 +32,7 @@ export class GustSpell extends Spell {
 
         let gustHandler = new Sprite("magicParticle", xCoord, yCoord); // we need a small, near invisible sprite
         gustHandler.configure(game);
+        gustHandler.sprite.visible = false;
 
         playerObj.setControlOverride(true); //take that!
         playerObj.sprite.body.allowGravity = false;
@@ -42,10 +43,8 @@ export class GustSpell extends Spell {
 
         gustHandler.update = () => {
             gustHandler.setPosition(playerObj.sprite.x, playerObj.sprite.y);
-            if ((Math.random() > 0.6)) { // still too many particles
-                game.promethium.ezEmit.emit("magicParticle", gustHandler.sprite.x,
-                    gustHandler.sprite.y - ((Math.random() - (1 / 3)) * 40), 500, 1, -100, 100, -100, 100, -10);
-            }
+            game.promethium.ezEmit.emit("magicParticle", gustHandler.sprite.x,
+                gustHandler.sprite.y - ((Math.random() - (1 / 3)) * 40), 500, 1, -300, 300, -300, 300, -10);
             playerObj.sprite.body.velocity.y *= GUST_DRAG;
             playerObj.sprite.body.velocity.x *= GUST_DRAG;
 
