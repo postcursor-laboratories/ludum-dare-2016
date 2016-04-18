@@ -2,7 +2,7 @@ import {Sprite} from "../sprite-wrapper";
 import {DIRECTION} from "../entity";
 import {Spell} from "./spell";
 
-import {collideBox} from "utils/collision";
+import {collideBox} from "../utils/collision";
 
 const ROCKTHROW_NAME = "Rock Throw";
 const ROCKTHROW_MANA = 10;
