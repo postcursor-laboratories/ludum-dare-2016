@@ -46,14 +46,14 @@ export class FireballSpell extends Spell {
                 fireball.destroy();
                 game.promethium.ezEmit.emit("fireballParticle", fireball.sprite.x, fireball.sprite.y, 250, 50);
                 isDestroyed = true;
-                //Deal damage to surroundings here please
             }
         };
         fireball.update = () => {
             if (fireball.checkCollision()) {
-                game.promethium.ezEmit.emit("fireballParticle", fireball.sprite.x, fireball.sprite.y, 500, 25, -100, 100, -100, 100, 1); // supposedly gravity of 0 is default.
                 fireball.explode();
             }
+            collideBox(fireball.sprite.x+4, fireball.sprite.y+4, 8, 8, globals.enemyGroup, explode);
+            
         };
         let timer = game.time.create(true);
         timer.add(2000, () => {
@@ -98,7 +98,6 @@ export class HeatwaveSpell extends Spell {
 
         let hitEnemy = (other) => {
             game.promethium.ezEmit.emit("fireballParticle", other.x, other.y, 250, 10);
-            rock.destroy();
             other.wrapper.damage(HEATWAVE_DAMAGE);
         };
         
