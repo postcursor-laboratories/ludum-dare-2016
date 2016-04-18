@@ -77,6 +77,7 @@ export class Character extends Entity {
     }
 
     update() {
+        super.update();
         this.checkCollision();
 
         if (this.sprite.body.touching.down || this.sprite.body.onFloor()) {

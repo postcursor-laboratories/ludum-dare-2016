@@ -1,4 +1,5 @@
 import {Sprite} from "./sprite-wrapper";
+import * as hud from "./hud";
 import Phaser from "phaser";
 
 export const DIRECTION = {
@@ -15,6 +16,7 @@ export class Entity extends Sprite {
         this.moveSpeed = 150;
         this.maxHealth = maxHealth;
         this.__health = maxHealth;
+        this.healthBar = new hud.HealthBar(this.maxHealth);
         this.damageReductionFactor = 0;
     }
 
@@ -25,6 +27,7 @@ export class Entity extends Sprite {
         this.sprite.body.collideWorldBounds = true;
         this.sprite.anchor.setTo(0.5, 1);
         this.sprite.scale = new Phaser.Point(2, 2);
+        this.healthBar.configure(game);
     }
 
     damage(amt) {
@@ -38,6 +41,7 @@ export class Entity extends Sprite {
 
     set health(health) {
         this.__health = Math.max(0, Math.min(this.maxHealth, health));
+        this.healthBar.update(this);
         if (this.__health === 0) {
             this.killOnHealthZero();
         }
@@ -84,4 +88,10 @@ export class Entity extends Sprite {
                 throw "Unrecognized direction in Entity.move";
         }
     }
+
+    update() {
+        super.update();
+        this.healthBar.update(this);
+    }
+
 }

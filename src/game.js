@@ -1,5 +1,4 @@
 import Phaser from "phaser";
-import {Sprite} from "./sprite-wrapper";
 
 /**
  * A basic game container. Extend this for your actual game.
@@ -11,7 +10,8 @@ export class Game {
         this.phaserGame = new Phaser.Game(width, height, Phaser.AUTO, "", {
             preload: () => this.preload(),
             create: () => this.create(),
-            update: () => this.update()
+            update: () => this.update(),
+            render: () => this.render()
         }, antialias, antialias);
         this.phaserGame.promethium = this;
     }
@@ -60,9 +60,6 @@ export class Game {
         while (configurables.length > 0) {
             configurables.forEach(ele => {
                 let extraConfigs = ele.configure(this.phaserGame);
-                if (ele instanceof Sprite) {
-                    this.allSprites.push(ele);
-                }
                 if (extraConfigs) {
                     Array.prototype.push.apply(nextConfigs, extraConfigs);
                 }
@@ -72,13 +69,21 @@ export class Game {
         }
     }
 
-    update() {
+    msprite(cb) {
         this.allSprites.forEach(s => {
             if (!s.sprite.alive) {
                 return;
             }
-            s.update();
+            cb(s);
         });
+    }
+
+    update() {
+        this.msprite(s => s.update());
+    }
+
+    render() {
+        this.msprite(s => s.render());
     }
 
 }

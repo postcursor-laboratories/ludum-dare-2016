@@ -108,13 +108,21 @@ export class Player extends Character {
             this.attemptAnim("basicAttack", this.attackSpeed, false);
         }
         const s = this.sprite;
-        collisions.collideBox(s.x + 5, s.y + 5, 20, 20, globals.enemyGroup, enemy => {
+        let width = 20;
+        let xOffset = s.width / 3;
+        if (this.facing === DIRECTION.LEFT) {
+            xOffset *= -1;
+            xOffset -= width * 2;
+        }
+        const yOffset = (2.5 * s.height) / 5;
+        collisions.collideBox(s.x + xOffset, s.y - yOffset, width, 10, globals.enemyGroup, enemy => {
             enemy.wrapper.damage(1 + this.damageReductionFactor);
             console.log(enemy.wrapper.health);
         });
     }
 
     update() {
+        this.healthBar.update(this);
         this.checkCollision();
 
         if ((this.sprite.body.touching.down || this.sprite.body.touching.up || this.sprite.body.onFloor()) && this.sprite.animations.currentAnim.name == "jump") {

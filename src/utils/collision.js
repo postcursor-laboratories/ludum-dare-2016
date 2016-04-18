@@ -23,7 +23,6 @@ export function collideBox(x, y, width, height, group, callback) {
         if (sprite.body) {
             let /*the*/ body /*hit the floor*/ = sprite.body;
             let otherRect = new Phaser.Rectangle(body.x, body.y, body.width, body.height);
-            console.log(collideRect, otherRect);
             if (collideRect.intersects(otherRect)) {
                 callback(sprite);
             }

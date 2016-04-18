@@ -82,6 +82,10 @@ export class Sprite extends GameConfigurable {
     update() {
     }
 
+    render() {
+        //this.gameRef.debug.body(this.sprite);
+    }
+
     checkCollision() {
         let any = false;
         globals.collisionLayers.forEach(layer => any |= this.gameRef.physics.arcade.collide(this.sprite, layer, this.collideCallback));
