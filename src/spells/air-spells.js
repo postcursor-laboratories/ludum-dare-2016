@@ -58,10 +58,12 @@ export class GustSpell extends Spell {
 			if(keyboard.isDown(Phaser.KeyCode.LEFT)) 
 			{
 				playerObj.sprite.body.velocity.x -= GUST_FORCE;
+				playerObj.setFacing(DIRECTION.LEFT);
 			}
 			if(keyboard.isDown(Phaser.KeyCode.RIGHT)) 
 			{
 				playerObj.sprite.body.velocity.x += GUST_FORCE;
+				playerObj.setFacing(DIRECTION.RIGHT);
 			}
 		};
 
