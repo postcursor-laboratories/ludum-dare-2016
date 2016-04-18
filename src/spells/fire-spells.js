@@ -98,9 +98,9 @@ export class HeatwaveSpell extends Spell
 			flame.configure(game);
 			game.physics.arcade.enable(flame.sprite);
 			flame.sprite.body.velocity.x = 0;
-			flame.sprite.body.velocity.y = -300;
+			flame.sprite.body.velocity.y = -150;
 			flame.update = () => {
-				if(flame.checkCollision())
+				if((this.sprite.body.touching.down || this.sprite.body.onFloor()))
 				{
 					flame.sprite.body.velocity.y = 0;
 					flame.sprite.body.allowGravity = false;
