@@ -35,7 +35,7 @@ export class GustSpell extends Spell {
 		playerObj.sprite.body.allowGravity = false;
 		playerObj.sprite.animations.play("jump",4,true);
 		
-		let keyboard = gameRef.input.keyboard;
+		let keyboard = game.input.keyboard;
 		
         gustHandler.update = () => {
             gustHandler.setPosition(playerObj.sprite.x, playerObj.sprite.y);
