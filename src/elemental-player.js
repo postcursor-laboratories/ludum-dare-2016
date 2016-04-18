@@ -6,7 +6,7 @@ const NULL_SPELL = {
 
 export class ElementalPlayerDescriptor {
 
-    constructor(game, elementalName, unitWidth, unitHeight, jumpSpeed, moveSpeed, attackSpeed, spritesheetWidth, animationLengths, damageReductionFactor, spellOne, spellTwo) {
+    constructor(game, elementalName, unitWidth, unitHeight, jumpSpeed, moveSpeed, attackSpeed, spritesheetWidth, animationLengths, damageReductionFactor, attackDamage, spellOne, spellTwo) {
         this.elementalName = elementalName;
         this.jumpSpeed = jumpSpeed;
         this.moveSpeed = moveSpeed;
@@ -14,6 +14,7 @@ export class ElementalPlayerDescriptor {
         this.spritesheetWidth = spritesheetWidth;
         this.animationLengths = animationLengths;
         this.damageReductionFactor = damageReductionFactor;
+        this.attackDamage = attackDamage;
         this.spellOne = spellOne || NULL_SPELL;
         this.spellTwo = spellTwo || NULL_SPELL;
         game.load.spritesheet(elementalName, "img/elementals/" + elementalName + ".png", unitWidth, unitHeight);

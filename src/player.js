@@ -75,6 +75,7 @@ export class Player extends Character {
 
     loadElemental(elementalDescriptor) {
         this.damageReductionFactor = elementalDescriptor.damageReductionFactor;
+        this.attackDamage = elementalDescriptor.attackDamage;
         this.jumpSpeed = elementalDescriptor.jumpSpeed;
         this.moveSpeed = elementalDescriptor.moveSpeed;
         this.attackSpeed = elementalDescriptor.attackSpeed;
@@ -116,8 +117,7 @@ export class Player extends Character {
         }
         const yOffset = (2.5 * s.height) / 5;
         collisions.collideBox(s.x + xOffset, s.y - yOffset, width, 10, globals.enemyGroup, enemy => {
-            enemy.wrapper.damage(1 + this.damageReductionFactor);
-            console.log(enemy.wrapper.health);
+            enemy.wrapper.damage(this.attackDamage);
         });
     }
 

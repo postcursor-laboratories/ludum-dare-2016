@@ -44,16 +44,19 @@ export class RockThrowSpell extends Spell {
                 game.promethium.ezEmit.emit("rockParticle", rock.sprite.x, rock.sprite.y, 2000, 10);
                 rock.destroy();
             }
-            collideBox(rock.sprite.x+4, rock.sprite.y+4, 8, 8, globals.enemyGroup, rock.hitEnemy); // if we hit an enemy call hitEnemy
+            collideBox(rock.sprite.x + 4, rock.sprite.y + 4, 8, 8,
+                globals.enemyGroup, rock.hitEnemy); // if we hit an enemy call hitEnemy
         };
 
     }
 }
 
-const FISSURE_NAME = "Rock Throw";
+const FISSURE_NAME = "Fissure";
 const FISSURE_MANA = 10;
 const FISSURE_COOLDOWN = 1;
 const FISSURE_DAMAGE = 10;
+const FISSURE_ROCK_SPACING = 13;
+const FISSURE_NUM_ROCKS = 10;
 
 export class FissureSpell extends Spell {
 
@@ -72,13 +75,13 @@ export class FissureSpell extends Spell {
         let xCoord = playerObj.sprite.x + (facingSign * 14);
         let yCoord = playerObj.sprite.y - 4;
         let rocks = [];
-        for (let i = 0; i < 10; i++) {
-            let rock = new Sprite("rockProjectile", xCoord + (i * 13 * facingSign), yCoord);
+        for (let i = 0; i < FISSURE_NUM_ROCKS; i++) {
+            let rock = new Sprite("rockProjectile", xCoord + (i * FISSURE_ROCK_SPACING * facingSign), yCoord);
             rock.configure(game);
             rock.sprite.anchor.setTo(0.5, 0.5);
             rock.sprite.rotation = Math.random() * 2 * Math.PI;
             rocks.push(rock);
-            this.magicParticles(xCoord + (i * 13 * facingSign), yCoord);
+            this.magicParticles(xCoord + (i * FISSURE_ROCK_SPACING * facingSign), yCoord);
         }
         
         let spritesToReenable = [];
@@ -91,7 +94,8 @@ export class FissureSpell extends Spell {
             spritesToReenable.push(other);
         };
         
-        collideBox(xCoord+65*facingSign, yCoord, 16, 16, globals.enemyGroup, hitEnemy); // if we hit an enemy call hitEnemy
+        collideBox(xCoord + FISSURE_ROCK_SPACING * FISSURE_NUM_ROCKS * 0.5 * facingSign, yCoord - 8,
+            FISSURE_NUM_ROCKS * FISSURE_ROCK_SPACING * 0.5, 16, globals.enemyGroup, hitEnemy); // if we hit an enemy call hitEnemy
         
         let timer = game.time.create(true);
         timer.add(2000, () => {
