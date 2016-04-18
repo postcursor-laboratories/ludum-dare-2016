@@ -84,10 +84,10 @@ export class FissureSpell extends Spell {
         let spritesToReenable = [];
         
         let hitEnemy = (other) => {
-            other.wrapper.damage(FISSURE_DAMAGE);
             other.body.velocity.y = 0;
             other.body.velocity.x = 0;
             other.body.enable = false;
+            other.wrapper.damage(FISSURE_DAMAGE);
             spritesToReenable.push(other);
         };
         
