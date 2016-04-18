@@ -8,7 +8,7 @@ const ROCKTHROW_NAME = "Rock Throw";
 const ROCKTHROW_MANA = 10;
 const ROCKTHROW_COOLDOWN = 1;
 
-export class rockThrowSpell extends Spell {
+export class RockThrowSpell extends Spell {
 	
 	constructor() {
 		super(ROCKTHROW_NAME, ROCKTHROW_COOLDOWN, ROCKTHROW_MANA);
