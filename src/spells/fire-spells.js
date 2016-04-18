@@ -40,7 +40,7 @@ export class FireballSpell extends Spell {
 		};
 		fireball.update = () => {
 			if (fireball.checkCollision()) {
-				game.promethium.ezEmit.emit("fireballParticle", fireball.sprite.x, fireball.sprite.y, 2000,50,-100, 100, -100, 100,0);
+				game.promethium.ezEmit.emit("fireballParticle", fireball.sprite.x, fireball.sprite.y, 125,25,-100, 100, -100, 100,1); // supposedly gravity of 0 is default.
 				fireball.explode();
 			}
 		};
