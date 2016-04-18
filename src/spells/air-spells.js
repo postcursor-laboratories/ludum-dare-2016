@@ -6,7 +6,9 @@ import Phaser from "phaser"; // Gust uses keyboard controls because I'm bad.
 const GUST_NAME = "Gust";
 const GUST_MANA = 10;
 const GUST_COOLDOWN = 1;
-const GUST_DURATION = 5000
+const GUST_DURATION = 5000;
+const GUST_FORCE = 20;
+const GUST_DRAG = 0.98;
 
 export class GustSpell extends Spell {
 
@@ -40,26 +42,26 @@ export class GustSpell extends Spell {
         gustHandler.update = () => {
             gustHandler.setPosition(playerObj.sprite.x, playerObj.sprite.y);
             game.promethium.ezEmit.emit("magicParticle", gustHandler.sprite.x,
-                gustHandler.sprite.y - ((Math.random() - (1 / 3)) * 40), 1000, 5, -100, 100, -100, 100, 1);
+                gustHandler.sprite.y - ((Math.random() - (1 / 3)) * 40), 1000, 1, -100, 100, -100, 100, -1);
             
-			playerObj.sprite.body.velocity.y *= 0.97;
-			playerObj.sprite.body.velocity.x *= 0.97;
+			playerObj.sprite.body.velocity.y *= GUST_DRAG;
+			playerObj.sprite.body.velocity.x *= GUST_DRAG;
 			
 			if(keyboard.isDown(Phaser.KeyCode.UP)) 
 			{
-				playerObj.sprite.body.velocity.y -= 10;
+				playerObj.sprite.body.velocity.y -= GUST_FORCE;
 			}
 			if(keyboard.isDown(Phaser.KeyCode.DOWN)) 
 			{
-				playerObj.sprite.body.velocity.y += 10;
+				playerObj.sprite.body.velocity.y += GUST_FORCE;
 			}
 			if(keyboard.isDown(Phaser.KeyCode.LEFT)) 
 			{
-				playerObj.sprite.body.velocity.x -= 10;
+				playerObj.sprite.body.velocity.x -= GUST_FORCE;
 			}
 			if(keyboard.isDown(Phaser.KeyCode.RIGHT)) 
 			{
-				playerObj.sprite.body.velocity.x += 10;
+				playerObj.sprite.body.velocity.x += GUST_FORCE;
 			}
 		};
 
