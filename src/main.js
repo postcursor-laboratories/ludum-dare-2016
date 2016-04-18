@@ -3,7 +3,7 @@ import {Game} from "./game";
 import {setupPlatformGroup} from "./sprites/platforms";
 import Phaser from "phaser";
 import {Player} from "./player";
-import {Enemy} from "./enemy";
+import {MeleeEnemy} from "./melee-enemy";
 import {TileMap} from "./tilemap";
 import {globals} from "./globals";
 import {ElementalPlayerDescriptor} from "./elemental-player";
@@ -17,6 +17,7 @@ class MainGame extends Game {
         super(960, 640);
         this.tileMap = new TileMap(new Resource("triangle", "tilemaps/triangle.json"));
         globals.tileMap = this.tileMap;
+	this._playerRef = null;
     }
 
     getImages() {
@@ -42,7 +43,7 @@ class MainGame extends Game {
             GameConfigurable.of(game =>
 				game.load.spritesheet("transformation", "img/transform.png", 48, 48)),
 	    GameConfigurable.of(game =>
-				game.load.spritesheet("robot", "img/robots/ranged.png", 32, 32)),
+				game.load.spritesheet("robot-melee", "img/robots/melee.png", 32, 32)),
             this.ezEmit,
             this.tileMap
         ];
@@ -63,11 +64,17 @@ class MainGame extends Game {
         game.stage.smoothed = false;
         game.stage.backgroundColor = 0x694400;
         return [
-            new Player(this.elementalPlayers, 100, 1400, 0),
-	    new Enemy("robot", 400, 1400)
+            this._playerRef = new Player(this.elementalPlayers, 100, 1400, 0),
+	    new MeleeEnemy(400, 1400)
         ];
+    }
+
+    getPlayer() {
+	if (this._playerRef)
+	    return this._playerRef;
+	throw "Player is falsy!";
     }
 
 }
 
-new MainGame();
+export const mainGame = new MainGame();

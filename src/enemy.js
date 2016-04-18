@@ -9,17 +9,14 @@ export class Enemy extends Character {
 
     configure(game) {
 	super.configure(game);
-	this.facing = DIRECTION.LEFT;
-	this.setFacing(this.facing);
+	this.setFacing(DIRECTION.LEFT);
     }
 
     update() {
 	super.update();
-	
-	// TODO actual code
     }
 
     basicAttack() {
-	super.basicAttack();
+	throw "cannot call basicAttack on generic Enemy";
     }
-}
+};
