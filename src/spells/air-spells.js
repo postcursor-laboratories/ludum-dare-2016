@@ -36,14 +36,16 @@ export class GustSpell extends Spell {
         playerObj.setControlOverride(true); //take that!
 		playerObj.sprite.body.allowGravity = false;
 		playerObj.sprite.animations.play("jump",4,true);
+		playerObj.sprite.body.velocity.y -= 20; // send us up into the air a bit
 		
 		let keyboard = game.input.keyboard;
 		
         gustHandler.update = () => {
             gustHandler.setPosition(playerObj.sprite.x, playerObj.sprite.y);
-            game.promethium.ezEmit.emit("magicParticle", gustHandler.sprite.x,
-                gustHandler.sprite.y - ((Math.random() - (1 / 3)) * 40), 1000, 1, -100, 100, -100, 100, -1);
-            
+            if((Math.random()>0.6){ // still too many particles
+				game.promethium.ezEmit.emit("magicParticle", gustHandler.sprite.x,
+					gustHandler.sprite.y - ((Math.random() - (1 / 3)) * 40), 500, 1, -100, 100, -100, 100, -10);
+            }
 			playerObj.sprite.body.velocity.y *= GUST_DRAG;
 			playerObj.sprite.body.velocity.x *= GUST_DRAG;
 			
@@ -77,7 +79,7 @@ export class GustSpell extends Spell {
     }
 }
 
-const LIGHTNING_NAME = "Heatwave";
+const LIGHTNING_NAME = "Lightning";
 const LIGHTNING_MANA = 10;
 const LIGHTNING_COOLDOWN = 1;
 
