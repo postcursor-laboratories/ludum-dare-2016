@@ -101,8 +101,8 @@ export class HeatwaveSpell extends Spell
 			flame.sprite.body.velocity.x = 0;
 			flame.sprite.body.velocity.y = -150;
             
-            let flame.timer = game.timer.create(true);
-            flame.timer.add(3000, () => {
+            let timer = game.timer.create(true);
+            timer.add(3000, () => {
 
                 flame.destroy();
             });
