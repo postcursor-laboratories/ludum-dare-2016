@@ -45,19 +45,19 @@ export class GustSpell extends Spell {
 			playerObj.sprite.body.velocity.y *= 0.97;
 			playerObj.sprite.body.velocity.x *= 0.97;
 			
-			if(isDown(Phaser.KeyCode.UP)) 
+			if(keyboard.isDown(Phaser.KeyCode.UP)) 
 			{
 				playerObj.sprite.body.velocity.y -= 10;
 			}
-			if(isDown(Phaser.KeyCode.DOWN)) 
+			if(keyboard.isDown(Phaser.KeyCode.DOWN)) 
 			{
 				playerObj.sprite.body.velocity.y += 10;
 			}
-			if(isDown(Phaser.KeyCode.LEFT)) 
+			if(keyboard.isDown(Phaser.KeyCode.LEFT)) 
 			{
 				playerObj.sprite.body.velocity.x -= 10;
 			}
-			if(isDown(Phaser.KeyCode.RIGHT)) 
+			if(keyboard.isDown(Phaser.KeyCode.RIGHT)) 
 			{
 				playerObj.sprite.body.velocity.x += 10;
 			}
