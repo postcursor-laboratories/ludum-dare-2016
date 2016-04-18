@@ -2,7 +2,7 @@ import {Sprite} from "../sprite-wrapper";
 import {DIRECTION} from "../entity";
 import {globals} from "../globals";
 import Phaser from "phaser";
-import {Spell} from "spell"
+import {Spell} from "./spell"
 
 const ROCKTHROW_NAME = "Rock Throw";
 const ROCKTHROW_MANA = 10;
