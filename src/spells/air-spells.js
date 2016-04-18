@@ -42,7 +42,7 @@ export class GustSpell extends Spell {
 		
         gustHandler.update = () => {
             gustHandler.setPosition(playerObj.sprite.x, playerObj.sprite.y);
-            if((Math.random()>0.6){ // still too many particles
+            if((Math.random()>0.6)){ // still too many particles
 				game.promethium.ezEmit.emit("magicParticle", gustHandler.sprite.x,
 					gustHandler.sprite.y - ((Math.random() - (1 / 3)) * 40), 500, 1, -100, 100, -100, 100, -10);
             }
