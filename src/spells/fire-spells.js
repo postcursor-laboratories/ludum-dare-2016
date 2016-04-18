@@ -37,7 +37,7 @@ export class FireballSpell extends Spell {
         };
         fireball.update = () => {
             if (fireball.checkCollision()) {
-                game.promethium.ezEmit.emit("fireballParticle", fireball.sprite.x, fireball.sprite.y, 250, 25, -100, 100, -100, 100, 1); // supposedly gravity of 0 is default.
+                game.promethium.ezEmit.emit("fireballParticle", fireball.sprite.x, fireball.sprite.y, 500, 25, -100, 100, -100, 100, 1); // supposedly gravity of 0 is default.
                 fireball.explode();
             }
         };
@@ -88,17 +88,17 @@ export class HeatwaveSpell extends Spell
 			}
 			if (Math.abs(wave1.sprite.x-wave1.startPosition) >= wave1.lastPosition + 16)
 			{
-				wave1.summonFire();
 				wave1.lastPosition += 16;
+				wave1.summonFire();
 			}
 		};
 		wave1.summonFire = () => {
-			game.promethium.ezEmit.emit("fireballParticle", (wave1.lastPosition +16) * wave1.facingSign, yCoord, 2000, 5);
-			let flame = new Sprite("heatwaveProjectile", (wave1.lastPosition +16) * wave1.facingSign, yCoord);
+			game.promethium.ezEmit.emit("fireballParticle",xCoord+ wave1.lastPosition * wave1.facingSign, yCoord, 2000, 5);
+			let flame = new Sprite("heatwaveProjectile", xCoord+wave1.lastPosition * wave1.facingSign, yCoord);
 			flame.configure(game);
 			game.physics.arcade.enable(flame.sprite);
 			flame.sprite.body.velocity.x = 0;
-			flame.sprite.body.velocity.y = -200;
+			flame.sprite.body.velocity.y = -300;
 			flame.update = () => {
 				if(flame.checkCollision())
 				{
