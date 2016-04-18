@@ -1,6 +1,7 @@
 import {Sprite} from "../sprite-wrapper";
 import {DIRECTION} from "../entity";
 import {Spell} from "./spell";
+import {nullFn} from "../utils/nulls";
 
 const FIREBALL_NAME = "Fireball";
 const FIREBALL_MANA = 10;
@@ -96,21 +97,32 @@ export class HeatwaveSpell extends Spell {
             let flame = new Sprite("heatwaveProjectile", xCoord + wave1.lastPosition * wave1.facingSign, yCoord);
             flame.configure(game);
             game.physics.arcade.enable(flame.sprite);
-            flame.sprite.body.velocity.x = 0;
-            flame.sprite.body.velocity.y = -150;
+
+            let flameBody = flame.sprite.body;
+            flameBody.velocity.x = 0;
+            flameBody.velocity.y = -150;
 
             let timer = game.time.create(true);
             timer.add(3000, () => {
-
-                flame.destroy();
+                flameBody.velocity.y = -75;
+                flameBody.allowGravity = true;
+                ["up", "down", "left", "right"].forEach(f => {
+                    flameBody.checkCollision[f] = false;
+                });
+                flame.sprite.tint = 0x8A8A8A;
+                flame.update = () => {
+                    if (!flame.sprite.inWorld) {
+                        flame.destroy();
+                    }
+                };
             });
             timer.start();
 
             flame.update = () => {
                 flame.checkCollision();
-                if ((flame.sprite.body.touching.down || flame.sprite.body.onFloor())) {
-                    flame.sprite.body.velocity.y = 0;
-                    flame.sprite.body.allowGravity = false;
+                if ((flameBody.touching.down || flameBody.onFloor())) {
+                    flameBody.velocity.y = 0;
+                    flameBody.allowGravity = false;
                 }
             };
 

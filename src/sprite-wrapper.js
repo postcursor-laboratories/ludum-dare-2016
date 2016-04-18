@@ -16,6 +16,7 @@ export class Sprite extends GameConfigurable {
         };
         this.__gameSprite = undefined;
         this.gameRef = undefined;
+        this.collideCallback = null;
     }
 
     configure(game) {
@@ -83,7 +84,7 @@ export class Sprite extends GameConfigurable {
 
     checkCollision() {
         let any = false;
-        globals.collisionLayers.forEach(layer => any |= this.gameRef.physics.arcade.collide(this.sprite, layer));
+        globals.collisionLayers.forEach(layer => any |= this.gameRef.physics.arcade.collide(this.sprite, layer, this.collideCallback));
         return any;
     }
 
