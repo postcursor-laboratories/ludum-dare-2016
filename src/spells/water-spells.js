@@ -65,8 +65,8 @@ export class FrostbiteSpell extends Spell {
     castSpell(playerObj) {
 		let game = playerObj.gameRef;
         let facingSign = (playerObj.facing == DIRECTION.LEFT ? -1 : 1);
-        let xCoord = playerObj.sprite.x + (facingSign * 30);
-        let yCoord = playerObj.sprite.y - 4;
+        let xCoord = playerObj.sprite.x + (facingSign * 16);
+        let yCoord = playerObj.sprite.y - 48;
 		
 		playerObj.setControlOverride(true);
 		playerObj.sprite.animations.add("frost", [9]);
@@ -75,6 +75,10 @@ export class FrostbiteSpell extends Spell {
 		let frost = new Sprite("frostbite", xCoord, yCoord); 
 		frost.configure(game);
 
+		
+		frost.sprite.scale.setTo(2, 2);
+		frost.sprite.animations.add("frost2", [0,1,2,3]);
+		frost.sprite.animations.play("frost2",4,false);
 		
         playerObj.setControlOverride(true);
 
@@ -92,8 +96,6 @@ export class FrostbiteSpell extends Spell {
 		
 		let timer2 = game.time.create(true);
         timer2.add(100, () => {
-			frost.sprite.animations.add("frost2", [0,1,2,3]);
-			frost.sprite.animations.play("frost2",4,false);
         });
 		timer2.start();
 		
