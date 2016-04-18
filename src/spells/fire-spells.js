@@ -46,6 +46,7 @@ export class FireballSpell extends Spell {
 
             fireball.explode();
         });
+        timer.start();
     }
 }
 
@@ -101,11 +102,12 @@ export class HeatwaveSpell extends Spell
 			flame.sprite.body.velocity.x = 0;
 			flame.sprite.body.velocity.y = -150;
             
-            let timer = game.timer.create(true);
+            let timer = game.time.create(true);
             timer.add(3000, () => {
 
                 flame.destroy();
             });
+            timer.start();
             
 			flame.update = () => {
 				flame.checkCollision();
