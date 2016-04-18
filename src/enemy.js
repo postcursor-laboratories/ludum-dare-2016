@@ -1,10 +1,12 @@
 import {DIRECTION} from "./entity";
 import {Character} from "./character";
+import {globals} from "./globals";
 
 export class Enemy extends Character {
 
-    constructor(sprite, x, y) {
-        super(sprite, x, y);
+    constructor(sprite, x, y, maxHealth) {
+        super(sprite, x, y, maxHealth);
+        this.group = globals.enemyGroup;
     }
 
     configure(game) {

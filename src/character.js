@@ -2,8 +2,8 @@ import {Entity, DIRECTION} from "./entity";
 
 export class Character extends Entity {
 
-    constructor(sprite, x, y) {
-        super(sprite, x, y);
+    constructor(sprite, x, y, maxHealth) {
+        super(sprite, x, y, maxHealth);
         this.jumpSpeed = 200;
         this.jumpAnimationCounter = 0;
         this.jumpingTime = 25;

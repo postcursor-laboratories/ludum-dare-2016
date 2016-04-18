@@ -5,7 +5,7 @@ import {DIRECTION} from "./entity";
 export class MeleeEnemy extends Enemy {
 
     constructor(x, y) {
-        super("robot-melee", x, y);
+        super("robot-melee", x, y, 100);
         this.attacking = false;
     }
 

@@ -2,11 +2,15 @@ import {DIRECTION} from "./entity";
 import {Character} from "./character";
 import Phaser from "phaser";
 import {Sprite} from "./sprite-wrapper";
+import {globals} from "./globals";
+import * as collisions from "./utils/collision";
+
+const PLAYER_HEALTH = 100;
 
 export class Player extends Character {
 
     constructor(elementalPlayers, x, y, firstElemental) {
-        super("human", x, y);
+        super("human", x, y, PLAYER_HEALTH);
         this.elementalPlayers = elementalPlayers;
         this.firstElemental = firstElemental;
     }
@@ -70,6 +74,7 @@ export class Player extends Character {
     }
 
     loadElemental(elementalDescriptor) {
+        this.damageReductionFactor = elementalDescriptor.damageReductionFactor;
         this.jumpSpeed = elementalDescriptor.jumpSpeed;
         this.moveSpeed = elementalDescriptor.moveSpeed;
         this.attackSpeed = elementalDescriptor.attackSpeed;
@@ -102,6 +107,11 @@ export class Player extends Character {
         if (!this.controlOverride) {
             this.attemptAnim("basicAttack", this.attackSpeed, false);
         }
+        const s = this.sprite;
+        collisions.collideBox(s.x + 5, s.y + 5, 20, 20, globals.enemyGroup, enemy => {
+            enemy.wrapper.damage(1 + this.damageReductionFactor);
+            console.log(enemy.wrapper.health);
+        });
     }
 
     update() {

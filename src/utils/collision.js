@@ -19,10 +19,11 @@ import Phaser from "phaser";
  */
 export function collideBox(x, y, width, height, group, callback) {
     const collideRect = new Phaser.Rectangle(x - width / 2, y - height / 2, width, height);
-    group.forEach(function (sprite) {
+    group.forEachAlive(sprite => {
         if (sprite.body) {
             let /*the*/ body /*hit the floor*/ = sprite.body;
             let otherRect = new Phaser.Rectangle(body.x, body.y, body.width, body.height);
+            console.log(collideRect, otherRect);
             if (collideRect.intersects(otherRect)) {
                 callback(sprite);
             }

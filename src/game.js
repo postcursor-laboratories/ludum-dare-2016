@@ -73,7 +73,12 @@ export class Game {
     }
 
     update() {
-        this.allSprites.forEach(s => s.update());
+        this.allSprites.forEach(s => {
+            if (!s.sprite.alive) {
+                return;
+            }
+            s.update();
+        });
     }
 
 }
