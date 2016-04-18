@@ -13,6 +13,15 @@ export class Game {
             create: () => this.create(),
             update: () => this.update()
         }, antialias, antialias);
+        // 1337 H4CK5
+        var client = new XMLHttpRequest();
+        client.open("GET", "config/baseurl.txt");
+        client.onreadystatechange = () => {
+            if (client.readyState == 4) {
+                this.phaserGame.load.baseURL = client.responseText;
+            }
+        };
+        client.send();
         this.phaserGame.promethium = this;
     }
 

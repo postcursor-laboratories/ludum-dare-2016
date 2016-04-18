@@ -102,14 +102,21 @@ gulp.copy = function (src, dest, doWatch) {
     }
     return stream.pipe(gulp.dest(dest));
 };
+function write(text, file) {
+    utilities.magicTouchFile(file);
+    fs.writeFile(file, text);
+}
+gulp.task("write-base-url", function () {
+    write(require("process").env.LD_BASE_URL || "/", "bin/config/baseurl.txt");
+});
 gulp.task("copy-static", function () {
     return gulp.copy(["static/**"], "bin", false);
 });
 gulp.task("copy-static-on-my-watch", function () {
     gulp.copy(["static/**"], "bin", true);
 });
-gulp.task("site", ["transform", "copy-static", "sheets"]);
-gulp.task("dev-server", ["transform-on-my-watch", "copy-static-on-my-watch", "sheets-watch"], function () {
+gulp.task("site", ["transform", "copy-static", "sheets", "write-base-url"]);
+gulp.task("dev-server", ["transform-on-my-watch", "copy-static-on-my-watch", "sheets-watch", "write-base-url"], function () {
     connect.server({
         root: "bin",
         port: 1337,
