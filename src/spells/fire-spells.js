@@ -100,7 +100,7 @@ export class HeatwaveSpell extends Spell
 			flame.sprite.body.velocity.x = 0;
 			flame.sprite.body.velocity.y = -150;
 			flame.update = () => {
-				fireball.checkCollision();
+				flame.checkCollision();
 				if((flame.sprite.body.touching.down || flame.sprite.body.onFloor()))
 				{
 					flame.sprite.body.velocity.y = 0;
