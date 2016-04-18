@@ -2,9 +2,12 @@ import {Sprite} from "../sprite-wrapper";
 import {DIRECTION} from "../entity";
 import {Spell} from "./spell";
 
+import {collideBox} from "utils/collision";
+
 const ROCKTHROW_NAME = "Rock Throw";
 const ROCKTHROW_MANA = 10;
 const ROCKTHROW_COOLDOWN = 1;
+const ROCKTHROW_DAMAGE = 1;
 
 export class RockThrowSpell extends Spell {
 
@@ -29,11 +32,19 @@ export class RockThrowSpell extends Spell {
         game.physics.arcade.enable(rock.sprite);
         rock.sprite.body.velocity.x = facingSign * 400;
         rock.sprite.body.velocity.y = -50;
+        
+        rock.hitEnemy = (other) => {
+            game.promethium.ezEmit.emit("rockParticle", rock.sprite.x, rock.sprite.y, 2000, 10);
+            rock.destroy();
+            other.damage()
+        }
+        
         rock.update = () => {
             if (rock.checkCollision()) {
                 game.promethium.ezEmit.emit("rockParticle", rock.sprite.x, rock.sprite.y, 2000, 10);
-                rock.destroy();
+                rock.destroy(ROCKTHROW_DAMAGE);
             }
+            collideBox(rock.sprite.x, rock.sprite.y, 16, 16, globals.enemyGroup, rock.hitEnemy); // if we hit an enemy call hitEnemy
         };
 
     }
