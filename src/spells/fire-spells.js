@@ -52,7 +52,7 @@ export class FireballSpell extends Spell {
             if (fireball.checkCollision()) {
                 fireball.explode();
             }
-            collideBox(fireball.sprite.x+4, fireball.sprite.y+4, 8, 8, globals.enemyGroup, explode);
+            collideBox(fireball.sprite.x+4, fireball.sprite.y+4, 8, 8, globals.enemyGroup, fireball.explode);
             
         };
         let timer = game.time.create(true);
@@ -67,7 +67,7 @@ export class FireballSpell extends Spell {
 const HEATWAVE_NAME = "Heatwave";
 const HEATWAVE_MANA = 10;
 const HEATWAVE_COOLDOWN = 1;
-const HEATWAVE_DAMAGE = 1;
+const HEATWAVE_DAMAGE = 2;
 
 export class HeatwaveSpell extends Spell {
     constructor() {
@@ -142,7 +142,7 @@ export class HeatwaveSpell extends Spell {
                 if ((flameBody.touching.down || flameBody.onFloor())) {
                     flameBody.velocity.y = 0;
                     flameBody.allowGravity = false;
-                    if(Math.random() > 0.8){
+                    if(Math.random() > 0.6){
                         collideBox(flameBody.sprite.x+8, flameBody.sprite.y+4, 16, 8, globals.enemyGroup, hitEnemy);
                     }
                     
