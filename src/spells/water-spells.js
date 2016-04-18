@@ -90,14 +90,12 @@ export class FrostbiteSpell extends Spell {
         timer.add(1100, () => {
             playerObj.setControlOverride(false);
             frost.destroy();
-			playerObj.sprite.animations.getAnimation("frost").destroy();
+			//playerObj.sprite.animations.getAnimation("frost").destroy();
+			//Destroying the frost animation causes a crash when you next transform
+			//TODO fix that but until then I'm just removing this
+			//Don't spam frostbite, it has a memory leak.
         });
         timer.start();
-		
-		let timer2 = game.time.create(true);
-        timer2.add(100, () => {
-        });
-		timer2.start();
 		
 		
     }
