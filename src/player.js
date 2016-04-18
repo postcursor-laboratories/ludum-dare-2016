@@ -1,6 +1,5 @@
 import {DIRECTION} from "./entity";
 import {Character} from "./character";
-import {globals} from "./globals";
 import Phaser from "phaser";
 import {Sprite} from "./sprite-wrapper";
 
@@ -34,43 +33,40 @@ export class Player extends Character {
         this.spellTwoKey.onDown.add(() => this.spellTwo());
 
         this.sprite.body.setSize(10, this.sprite.body.height * 0.8);
-		
-		this.controlOverride = false;
+
+        this.controlOverride = false;
     }
 
     spellTwo() {
-		if(! this.controlOverride)
-		{
-			this.currentElemental.spellTwo.castSpell(this);
-		}
+        if (!this.controlOverride) {
+            this.currentElemental.spellTwo.castSpell(this);
+        }
     }
 
     spellOne() {
-		if(! this.controlOverride)
-		{
-			this.currentElemental.spellOne.castSpell(this);
-		}
+        if (!this.controlOverride) {
+            this.currentElemental.spellOne.castSpell(this);
+        }
     }
 
     attemptShapeshift(elementalDescriptor) {
-		if(! this.controlOverride)
-		{
-			this.sprite.body.enable = false;
-			let transformationSprite = new Sprite("transformation", this.sprite.x - 48, this.sprite.y - 78);
-			transformationSprite.configure(this.gameRef);
-			transformationSprite.sprite.scale.setTo(2, 2);
-			transformationSprite.sprite.animations.add("forward", [0, 1, 2, 3, 4]);
-			transformationSprite.sprite.animations.add("backward", [5, 6, 7, 8, 9]);
-			transformationSprite.sprite.animations.play("forward", 10, false);
-			transformationSprite.sprite.animations.currentAnim.onComplete.add(event => {
-				this.loadElemental(elementalDescriptor);
-				transformationSprite.sprite.animations.play("backward", 10, false);
-				transformationSprite.sprite.animations.currentAnim.onComplete.add(event => {
-					this.sprite.body.enable = true;
-					transformationSprite.sprite.destroy();
-				});
-			});
-		}
+        if (!this.controlOverride) {
+            this.sprite.body.enable = false;
+            let transformationSprite = new Sprite("transformation", this.sprite.x - 48, this.sprite.y - 78);
+            transformationSprite.configure(this.gameRef);
+            transformationSprite.sprite.scale.setTo(2, 2);
+            transformationSprite.sprite.animations.add("forward", [0, 1, 2, 3, 4]);
+            transformationSprite.sprite.animations.add("backward", [5, 6, 7, 8, 9]);
+            transformationSprite.sprite.animations.play("forward", 10, false);
+            transformationSprite.sprite.animations.currentAnim.onComplete.add(event => {
+                this.loadElemental(elementalDescriptor);
+                transformationSprite.sprite.animations.play("backward", 10, false);
+                transformationSprite.sprite.animations.currentAnim.onComplete.add(event => {
+                    this.sprite.body.enable = true;
+                    transformationSprite.sprite.destroy();
+                });
+            });
+        }
     }
 
     loadElemental(elementalDescriptor) {
@@ -103,10 +99,9 @@ export class Player extends Character {
     }
 
     basicAttack() {
-		if(! this.controlOverride)
-		{
-			this.attemptAnim("basicAttack", this.attackSpeed, false);
-		}
+        if (!this.controlOverride) {
+            this.attemptAnim("basicAttack", this.attackSpeed, false);
+        }
     }
 
     update() {
@@ -122,20 +117,19 @@ export class Player extends Character {
             this.sprite.body.velocity.x *= 0.98;
         }
 
-        if(! this.controlOverride)
-		{
-			if (this.controls.left.isDown) {
-				this.move(DIRECTION.LEFT);
-			} else if (this.controls.right.isDown) {
-				this.move(DIRECTION.RIGHT);
-			} else {
-				this.attemptAnim("stationary", 4, true);
-			}
+        if (!this.controlOverride) {
+            if (this.controls.left.isDown) {
+                this.move(DIRECTION.LEFT);
+            } else if (this.controls.right.isDown) {
+                this.move(DIRECTION.RIGHT);
+            } else {
+                this.attemptAnim("stationary", 4, true);
+            }
 
-			if (this.controls.up.isDown && (this.sprite.body.touching.down || this.sprite.body.onFloor())) {
-				this.jump();
-			}
-		}
+            if (this.controls.up.isDown && (this.sprite.body.touching.down || this.sprite.body.onFloor())) {
+                this.jump();
+            }
+        }
 
         if (this.jumpAnimationCounter > 0) {
             this.attemptAnim("jump", 5, false);
@@ -152,13 +146,12 @@ export class Player extends Character {
             this.sprite.scale.x = Math.abs(this.sprite.scale.x);
         }
     }
-	
-	/**
-	*  If set to true, player's keypresses do nothing whatsoever.
-	*/
-	setControlOverride(override)
-	{
-		this.controlOverride = override;
-		
-	}
+
+    /**
+     *  If set to true, player's keypresses do nothing whatsoever.
+     */
+    setControlOverride(override) {
+        this.controlOverride = override;
+
+    }
 }

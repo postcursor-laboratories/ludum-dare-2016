@@ -32,19 +32,18 @@ export class Spell {
         this.cooldown = cooldown;
         this.mana = mana;
     }
-	
-	/**
-	*  @return {boolean} True if the player can cast the spell.
-	*/
-	prerequisite()
-	{
-		return true;
-	}
+
+    /**
+     *  @return {boolean} True if the player can cast the spell.
+     */
+    prerequisite() {
+        return true;
+    }
 
     /**
      * @return {SpellSprite} The new SpellSprite
      */
-    castSpell() {
+    castSpell(playerObj) {
     }
 
     onCollideGround() {
@@ -55,7 +54,7 @@ export class Spell {
      */
     onCollideEnemy(enemy) {
     }
-    
+
     magicParticles(x, y) {
         mainGame.ezEmit.emit("magicParticle", x, y, 2000, 20, -200, 200, -200, 200, 0);
     }

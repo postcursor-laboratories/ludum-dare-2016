@@ -5,25 +5,25 @@ import {DIRECTION} from "./entity";
 export class MeleeEnemy extends Enemy {
 
     constructor(x, y) {
-		super("robot-melee", x, y);
+        super("robot-melee", x, y);
         this.attacking = false;
     }
 
     configure(game) {
-		super.configure(game);
-		this.sprite.animations.add("forward", [0, 1, 2, 3, 4, 5, 6, 7]);
-		this.sprite.animations.add("basicAttack", [9, 10, 11, 12, 13, 14, 15, 16]);
-		this.sprite.animations.play("forward", 10, true);
+        super.configure(game);
+        this.sprite.animations.add("forward", [0, 1, 2, 3, 4, 5, 6, 7]);
+        this.sprite.animations.add("basicAttack", [9, 10, 11, 12, 13, 14, 15, 16]);
+        this.sprite.animations.play("forward", 10, true);
     }
 
     update() {
-		super.update();
+        super.update();
 
-		let player = mainGame.getPlayer();
-		let stillBuf = 5;
+        let player = mainGame.getPlayer();
+        let stillBuf = 5;
 
-		// are we close enough to punch the player with our plunger and/or eggbeater?
-		if (!this.attacking) {
+        // are we close enough to punch the player with our plunger and/or eggbeater?
+        if (!this.attacking) {
             if (Math.abs(this.x - player.x) <= 40 && Math.abs(this.y - player.y) < 15) {
                 this.basicAttack();
             }
@@ -37,25 +37,25 @@ export class MeleeEnemy extends Enemy {
     }
 
     basicAttack() {
-	//let player = mainGame.getPlayer();
-	//let game = player.gameRef;
-		this.attacking = true;
-		this.sprite.animations.play("basicAttack", 5, false);
-		this.sprite.animations.currentAnim.onComplete.add(event => {
+        //let player = mainGame.getPlayer();
+        //let game = player.gameRef;
+        this.attacking = true;
+        this.sprite.animations.play("basicAttack", 5, false);
+        this.sprite.animations.currentAnim.onComplete.add(event => {
             this.attacking = false;
-			this.sprite.animations.play("forward", 10, true);
-		});
+            this.sprite.animations.play("forward", 10, true);
+        });
 
-	// game.promethium.ezEmit.emit("magicParticle", this.x, this.y, 200, 1);
-	// let pew = new Sprite("rockProjectile", this.x, this.y);
-	// pew.configure(game);
-	// game.promethium.allSprites.push(pew);
-	// game.physics.arcade.enable(pew);
+        // game.promethium.ezEmit.emit("magicParticle", this.x, this.y, 200, 1);
+        // let pew = new Sprite("rockProjectile", this.x, this.y);
+        // pew.configure(game);
+        // game.promethium.allSprites.push(pew);
+        // game.physics.arcade.enable(pew);
 
-	// /*
-	// pew.sprite.body.velocity.x = (player.facing == DIRECTION.LEFT ? -1 : 1) * 800;
-	// pew.sprite.body.velocity.y = 0;
-	// pew.update = () => {};
-	// */
+        // /*
+        // pew.sprite.body.velocity.x = (player.facing == DIRECTION.LEFT ? -1 : 1) * 800;
+        // pew.sprite.body.velocity.y = 0;
+        // pew.update = () => {};
+        // */
     }
 }
