@@ -35,7 +35,7 @@ export class Player extends Character {
 
         this.sprite.body.setSize(10, this.sprite.body.height * 0.8);
 		
-		this.controlOverride = true;
+		this.controlOverride = false;
     }
 
     spellTwo() {
