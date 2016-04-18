@@ -39,13 +39,13 @@ export class SurfSpell extends Spell {
 			surfHandler.setPosition(playerObj.sprite.x,playerObj.sprite.y);
 			game.promethium.ezEmit.emit("waterParticle", surfHandler.sprite.x, surfHandler.sprite.y, 1000, 5);
 			playerObj.sprite.body.velocity.x= SURF_SPEED * facingSign;
-		}
+		};
 		
 		let timer = game.time.create(true);
 		timer.add(SURF_DURATION, () => {
 			playerObj.setControlOverride(false);
 			playerObj.sprite.body.velocity.x= SURF_SPEED *.3* facingSign;
-		}
+		});
 	}
 }
 
