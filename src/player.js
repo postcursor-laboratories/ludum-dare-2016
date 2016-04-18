@@ -37,7 +37,7 @@ export class Player extends Character {
     }
 
     spellTwo() {
-        this.currentElemental.spellTwo(this);
+        this.currentElemental.spellTwo.castSpell(this);
     }
 
     spellOne() {

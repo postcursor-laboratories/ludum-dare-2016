@@ -37,7 +37,7 @@ export class Spell {
 	*/
 	prerequisite()
 	{
-		
+		return true;
 	}
 
     /**
