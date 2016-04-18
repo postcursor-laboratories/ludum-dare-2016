@@ -74,9 +74,9 @@ export class FrostbiteSpell extends Spell {
 		
 		let frost = new Sprite("frostbite", xCoord, yCoord); 
 		frost.configure(game);
-
+		frost.sprite.anchor.x = 0;
 		
-		frost.sprite.scale.setTo(2, 2);
+		frost.sprite.scale.setTo(2*facingSign, 2);
 		frost.sprite.animations.add("frost2", [0,1,2,3]);
 		frost.sprite.animations.play("frost2",4,false);
 		
