@@ -2,6 +2,8 @@ import {Sprite} from "../sprite-wrapper";
 import {DIRECTION} from "../entity";
 import {Spell} from "./spell";
 import {nullFn} from "../utils/nulls";
+import {collideBox} from "../utils/collision";
+import {globals} from "../globals";
 
 const FIREBALL_NAME = "Fireball";
 const FIREBALL_MANA = 10;
