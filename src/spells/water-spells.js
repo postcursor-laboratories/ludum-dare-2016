@@ -35,7 +35,7 @@ export class SurfSpell extends Spell {
         playerObj.setControlOverride(true); //take that!
 
         let hitEnemy = (other) => {
-            other.body.velocity.x += facingSign*40;
+            other.body.velocity.x += facingSign*80;
             other.wrapper.damage(SURF_DAMAGE);
         };
         
@@ -60,7 +60,8 @@ export class SurfSpell extends Spell {
 const FROSTBITE_NAME = "Frostbite";
 const FROSTBITE_MANA = 10;
 const FROSTBITE_COOLDOWN = 1;
-const FROSTBITE_DAMAGE = 10;
+const FROSTBITE_DAMAGE = 4;
+const FROSTBITE_DAMAGE_AMP = 1;
 
 export class FrostbiteSpell extends Spell {
 
@@ -103,6 +104,7 @@ export class FrostbiteSpell extends Spell {
             other.body.enable = false;
             other.tint = 0x00c0ff;
             other.wrapper.damage(FROSTBITE_DAMAGE);
+            other.wrapper.damageReductionFactor = -FROSTBITE_DAMAGE_AMP; // Double damage;
             
             let endFreeze = game.time.create(true);
             endFreeze.add(3000, () => {
