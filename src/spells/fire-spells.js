@@ -30,7 +30,7 @@ export class FireballSpell extends Spell {
 		let fireball = new Sprite("fireballProjectile", xCoord, yCoord);
 		fireball.configure(game);
 		game.physics.arcade.enable(fireball.sprite);
-		fireball.sprite.allowGravity = false; //we don't obey that gravity thing here!
+		fireball.sprite.body.allowGravity = false; //we don't obey that gravity thing here!
 		fireball.sprite.body.velocity.x = facingSign * 400;
 		fireball.sprite.body.velocity.y = 0;
 		fireball.explode = () => {
