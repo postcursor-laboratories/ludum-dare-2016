@@ -67,7 +67,7 @@ export class Player extends Character {
                 transformationSprite.sprite.animations.play("backward", 10, false);
                 transformationSprite.sprite.animations.currentAnim.onComplete.add(event => {
                     this.sprite.body.enable = true;
-                    transformationSprite.sprite.destroy();
+                    transformationSprite.destroy();
                 });
             });
         }

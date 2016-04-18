@@ -31,10 +31,14 @@ export class FireballSpell extends Spell {
         fireball.sprite.body.allowGravity = false; //we don't obey that gravity thing here!
         fireball.sprite.body.velocity.x = facingSign * 400;
         fireball.sprite.body.velocity.y = 0;
+        let isDestroyed = false;
         fireball.explode = () => {
-            fireball.destroy();
-            game.promethium.ezEmit.emit("fireballParticle", fireball.sprite.x, fireball.sprite.y, 250, 50);
-            //Deal damage to surroundings here please
+            if (!isDestroyed) {
+                fireball.destroy();
+                game.promethium.ezEmit.emit("fireballParticle", fireball.sprite.x, fireball.sprite.y, 250, 50);
+                isDestroyed = true;
+                //Deal damage to surroundings here please
+            }
         };
         fireball.update = () => {
             if (fireball.checkCollision()) {
