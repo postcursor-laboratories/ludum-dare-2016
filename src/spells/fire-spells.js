@@ -41,6 +41,7 @@ export class FireballSpell extends Spell {
                 fireball.explode();
             }
         };
+        let timer = game.time.create(true);
         timer.add(2000, () => {
 
             fireball.explode();
