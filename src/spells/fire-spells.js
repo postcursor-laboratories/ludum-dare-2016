@@ -93,12 +93,12 @@ export class HeatwaveSpell extends Spell
 			}
 		};
 		wave1.summonFire = () => {
-			game.promethium.ezEmit.emit("fireballParticle", (lastPosition +16) * wave1.facingSign), yCoord, 2000, 5);
-			let flame = new Sprite("heatwaveProjectile", (lastPosition +16) * wave1.facingSign), yCoord);
+			game.promethium.ezEmit.emit("fireballParticle", (wave1.lastPosition +16) * wave1.facingSign), yCoord, 2000, 5);
+			let flame = new Sprite("heatwaveProjectile", (wave1.lastPosition +16) * wave1.facingSign, yCoord);
 			flame.configure(game);
 			game.physics.arcade.enable(flame.sprite);
 			flame.sprite.body.velocity.x = 0;
-			flame.sprite.body.velocity.y = -50;
+			flame.sprite.body.velocity.y = -200;
 			flame.update = () => {
 				if(flame.checkCollision())
 				{
