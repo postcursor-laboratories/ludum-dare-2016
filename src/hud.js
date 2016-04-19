@@ -6,22 +6,29 @@ function rgbToHex(r, g, b) {
     return "0x" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }
 
+function confText(text) {
+    text.stroke = "#000000";
+    text.strokeThickness = 6;
+    text.fill = "#43d637";
+    return text;
+}
+
 export class HUD extends GameConfigurable {
 
     configure(game) {
         this.game = game;
         this.hudGroup = game.add.group();
         this.hudGroup.fixedToCamera = true;
-        this.spell1 = new SpellIcon("human1", 900 - 32 - 5, 600, this.hudGroup);
-        this.spell2 = new SpellIcon("human2", 900, 600, this.hudGroup);
+        this.spell1 = new SpellIcon("human1", 900 - 32 - 4, 600 + 2, this.hudGroup);
+        this.spell2 = new SpellIcon("human2", 900 + 1, 600 + 2, this.hudGroup);
         this.spell1.configure(game);
         this.spell2.configure(game);
     }
 
     bind(player) {
         this.game.world.bringToTop(this.hudGroup);
-        this.hudGroup.add(new Phaser.Text(this.game, 900 - 32, 600, "X"));
-        this.hudGroup.add(new Phaser.Text(this.game, 900 + 5, 600, "C"));
+        this.hudGroup.add(confText(new Phaser.Text(this.game, 900 - 32, 600, "X")));
+        this.hudGroup.add(confText(new Phaser.Text(this.game, 900 + 5, 600, "C")));
         const drawRect = produceDrawRectangle(this.game, 0, this.game.height - 60, this.game.width, 60, 0, 0.3);
         this.hudGroup.add(drawRect);
         const bar = player.healthBar;
