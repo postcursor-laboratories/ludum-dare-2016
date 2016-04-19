@@ -24,7 +24,13 @@ export class RangedEnemy extends Enemy {
         let stillBuf = 5;
 
         if (!this.attacking) {
-            if (this.sprite.position.distance(player.sprite.position) < 500) {
+            if (this.x >= player.x) {
+                this.setFacing(DIRECTION.LEFT);
+            } else if (this.x < player.x) {
+                this.setFacing(DIRECTION.RIGHT);
+            }
+
+            if (this.sprite.position.distance(player.sprite.position) < 400) {
                 this.basicAttack();
             }
             // move towards player
