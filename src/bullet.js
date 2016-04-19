@@ -13,7 +13,7 @@ export class Bullet extends Sprite {
         this.initalPos = new Phaser.Point(x, y);
         this.angle = angle;
     }
-    
+
     configure(game) {
         super.configure(game);
         globals.bulletsGroup.add(this.sprite);
@@ -25,8 +25,17 @@ export class Bullet extends Sprite {
     }
 
     update() {
+        if (this.checkCollision() || this.gameRef.physics.arcade.collide(this.sprite, globals.player,
+                (sprite, enemy) => this.onCollideEnemy(enemy.wrapper))) {
+            this.destroy();
+        }
         if (this.initalPos.distance(this.sprite.position) >= 600) {
             this.destroy();
         }
     }
+
+    onCollideEnemy(wrapper) {
+        wrapper.damage(1);
+    }
+
 }
