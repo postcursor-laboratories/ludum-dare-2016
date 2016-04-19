@@ -103,7 +103,7 @@ export class HealthBar extends GameConfigurable {
         this.health = entity.health;
         if (this.lastHealth !== this.health) {
             if (this.text !== undefined) {
-                this.text.setText(`${this.health}/${this.maxHealth}`);
+                this.text.setText(`${this.health.toFixed(2)}/${this.maxHealth.toFixed(2)}`);
             }
             graphics.clear();
             let health = (this.health / this.maxHealth) * 100;
