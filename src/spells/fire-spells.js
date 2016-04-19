@@ -67,7 +67,7 @@ export class FireballSpell extends Spell {
 const HEATWAVE_NAME = "Heatwave";
 const HEATWAVE_MANA = 10;
 const HEATWAVE_COOLDOWN = 1;
-const HEATWAVE_DAMAGE = 5;
+const HEATWAVE_DAMAGE = 0.2;
 
 export class HeatwaveSpell extends Spell {
     constructor() {
@@ -142,9 +142,10 @@ export class HeatwaveSpell extends Spell {
                 if ((flameBody.touching.down || flameBody.onFloor())) {
                     flameBody.velocity.y = 0;
                     flameBody.allowGravity = false;
-                    collideBox(flameBody.sprite.x+8, flameBody.sprite.y+4, 16, 8, globals.enemyGroup, hitEnemy);
-                    
+                                        
                 }
+                collideBox(flameBody.sprite.x+8, flameBody.sprite.y+4, 16, 8, globals.enemyGroup, hitEnemy);
+
             };
 
         };
