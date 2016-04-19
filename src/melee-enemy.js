@@ -37,25 +37,11 @@ export class MeleeEnemy extends Enemy {
     }
 
     basicAttack() {
-        //let player = mainGame.getPlayer();
-        //let game = player.gameRef;
         this.attacking = true;
         this.sprite.animations.play("basicAttack", 5, false);
         this.sprite.animations.currentAnim.onComplete.add(event => {
             this.attacking = false;
             this.sprite.animations.play("forward", 10, true);
         });
-
-        // game.promethium.ezEmit.emit("magicParticle", this.x, this.y, 200, 1);
-        // let pew = new Sprite("rockProjectile", this.x, this.y);
-        // pew.configure(game);
-        // game.promethium.allSprites.push(pew);
-        // game.physics.arcade.enable(pew);
-
-        // /*
-        // pew.sprite.body.velocity.x = (player.facing == DIRECTION.LEFT ? -1 : 1) * 800;
-        // pew.sprite.body.velocity.y = 0;
-        // pew.update = () => {};
-        // */
     }
 }

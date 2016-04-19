@@ -12,6 +12,7 @@ import * as EarthSpells from "./spells/earth-spells";
 import * as WaterSpells from "./spells/water-spells";
 import * as FireSpells from "./spells/fire-spells";
 import * as AirSpells from "./spells/air-spells";
+import {RangedEnemy} from "./ranged-enemy";
 
 class MainGame extends Game {
 
@@ -30,7 +31,8 @@ class MainGame extends Game {
             new Resource("waterParticle", "img/waterParticle.png"),
             new Resource("fireballProjectile", "img/fireballProjectile.png"),
             new Resource("fireballParticle", "img/fireballParticle.png"),
-            new Resource("heatwaveProjectile", "img/heatwaveProjectile.png")];
+            new Resource("heatwaveProjectile", "img/heatwaveProjectile.png"),
+            new Resource("bullet", "img/bullet.png")];
 
     }
 
@@ -70,12 +72,17 @@ class MainGame extends Game {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         setupPlatformGroup(game);
         globals.enemyGroup = game.add.group();
+        globals.bulletsGroup = game.add.group();
+        this._playerRef = new Player(this.elementalPlayers, 100, 1400, 0);
+        globals.player = game.add.group();
+        this._playerRef.configure(game);
+        globals.player.add(this._playerRef.sprite);
         game.physics.arcade.gravity.y = 300;
         game.stage.smoothed = false;
         game.stage.backgroundColor = 0x694400;
         return [
-            this._playerRef = new Player(this.elementalPlayers, 100, 1400, 0),
-            new MeleeEnemy(400, 1400)
+            new MeleeEnemy(400, 1400),
+            new RangedEnemy(500, 1400)
         ];
     }
 

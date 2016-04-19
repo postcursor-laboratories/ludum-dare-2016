@@ -132,8 +132,6 @@ export class FrostbiteSpell extends Spell {
             //Don't spam frostbite, it has a memory leak.
         });
         timer.start();
-
-
     }
 
 }
