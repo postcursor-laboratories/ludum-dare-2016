@@ -1,7 +1,10 @@
 import {Enemy} from "./enemy";
 import {mainGame} from "./main";
 import {DIRECTION} from "./entity";
-import {globals} from "../globals";
+import {globals} from "./globals";
+import {collideBox} from "./utils/collision";
+
+const ATTACK_DAMAGE = 10;
 
 export class MeleeEnemy extends Enemy {
 
@@ -37,8 +40,6 @@ export class MeleeEnemy extends Enemy {
         }
     }
 
-    
-    const ATTACK_DAMAGE = 10;
     basicAttack() {
         this.attacking = true;
         this.sprite.animations.play("basicAttack", 5, false);
@@ -53,6 +54,7 @@ export class MeleeEnemy extends Enemy {
         
         let attackTimer = this.gameRef.time.create(true);
         attackTimer.add(750, () => {
+            let facingSign = this.facing == DIRECTION.LEFT ? -1 : 1;
             collideBox(this.sprite.x+16*facingSign, this.sprite.y - 32, 32, 64, globals.player, hitEnemy);
         });
         attackTimer.start();
