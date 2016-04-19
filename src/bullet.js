@@ -9,7 +9,8 @@ export class Bullet extends Sprite {
 
     constructor(x, y, angle) {
         super("bullet", x, y);
-        this.velocity = new Phaser.Point(Math.cos(angle) * 200, Math.sin(angle) * 200);
+        this.velocity = new Phaser.Point(Math.cos(angle) * BULLET_SPEED, Math.sin(angle) * BULLET_SPEED);
+        this.initalPos = new Phaser.Point(x, y);
         this.angle = angle;
     }
     
@@ -24,6 +25,8 @@ export class Bullet extends Sprite {
     }
 
     update() {
-        
+        if (this.initalPos.distance(this.sprite.position) >= 600) {
+            this.destroy();
+        }
     }
 }
