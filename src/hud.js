@@ -35,7 +35,11 @@ export class HUD extends GameConfigurable {
         this.hudGroup.add(bar.healthbar);
         bar.width *= 10;
         bar.height *= 1.5;
-        bar.healthbar.position.setTo(10, this.game.height - bar.height);
+        const barY = this.game.height - bar.height;
+        bar.healthbar.position.setTo(10, barY);
+        const barText = confText(new Phaser.Text(this.game, 10 + bar.width + 10, barY - bar.height * 2, ""));
+        this.hudGroup.add(barText);
+        bar.text = barText;
         this.reloadSpells(player.currentElemental.elementalName);
     }
 
@@ -79,6 +83,7 @@ export class HealthBar extends GameConfigurable {
         this.useEntityPos = useEntityPos;
         this.width = width;
         this.height = height;
+        this.text = undefined;
     }
 
     configure(game) {
@@ -97,6 +102,9 @@ export class HealthBar extends GameConfigurable {
         }
         this.health = entity.health;
         if (this.lastHealth !== this.health) {
+            if (this.text !== undefined) {
+                this.text.setText(`${this.health}/${this.maxHealth}`);
+            }
             graphics.clear();
             let health = (this.health / this.maxHealth) * 100;
             var colour =
