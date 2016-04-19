@@ -9,6 +9,7 @@ import {TileMap} from "./tilemap";
 import {globals} from "./globals";
 import {ElementalPlayerDescriptor} from "./elemental-player";
 import {ExplosionEmitterHelper} from "./explosion-emitter-helper";
+import {HUD} from "./hud";
 import * as EarthSpells from "./spells/earth-spells";
 import * as WaterSpells from "./spells/water-spells";
 import * as FireSpells from "./spells/fire-spells";
@@ -24,7 +25,7 @@ class MainGame extends Game {
     }
 
     getImages() {
-        return [new Resource("ground", "img/StoneFloorSmooth.png"),
+        const arr = [new Resource("ground", "img/StoneFloorSmooth.png"),
             new Resource("rockProjectile", "img/rockProjectile.png"),
             new Resource("rockParticle", "img/rockParticle.png"),
             new Resource("magicParticle", "img/magicParticle.png"),
@@ -33,6 +34,12 @@ class MainGame extends Game {
             new Resource("fireballParticle", "img/fireballParticle.png"),
             new Resource("heatwaveProjectile", "img/heatwaveProjectile.png"),
             new Resource("bullet", "img/bullet.png")];
+        ["Air", "Fire", "Human", "Earth", "Water"].forEach(name => {
+            for (let i = 1; i <= 2; i++) {
+                arr.push(new Resource(name.toLowerCase() + i, `icon/${name}${i}.png`));
+            }
+        });
+        return arr;
 
     }
 
@@ -73,15 +80,18 @@ class MainGame extends Game {
         setupPlatformGroup(game);
         globals.enemyGroup = game.add.group();
         globals.player = game.add.group();
-        this._playerRef = new Player(this.elementalPlayers, 100, 1400, 0);
+        this._playerRef = new Player(this.elementalPlayers, 100, game.height - 150, 0);
         this._playerRef.configure(game);
         globals.player.add(this._playerRef.sprite);
         globals.bulletsGroup = game.add.group();
         game.physics.arcade.gravity.y = 300;
         game.stage.smoothed = false;
         game.stage.backgroundColor = 0x694400;
-
-        let things = [];
+        
+        let things = [
+            this.hud = new HUD(),
+            GameConfigurable.of(game => this.hud.bind(this._playerRef))
+        ];
         
         for (var i = 2; i < 12; i++)
         {

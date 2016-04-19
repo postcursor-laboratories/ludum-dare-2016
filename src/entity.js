@@ -17,6 +17,7 @@ export class Entity extends Sprite {
         this.maxHealth = maxHealth;
         this.__health = maxHealth;
         this.healthBar = new hud.HealthBar(this.maxHealth);
+        this.autoControlHealthBar = true;
         this.damageReductionFactor = 0;
     }
 
@@ -47,6 +48,14 @@ export class Entity extends Sprite {
         }
     }
 
+    get autoControlHealthBar() {
+        return this.healthBar.useEntityPos;
+    }
+
+    set autoControlHealthBar(on) {
+        this.healthBar.useEntityPos = on;
+    }
+
     /**
      * Called when health is set to 0. Override this to cancel the call to kill.
      */
@@ -58,6 +67,8 @@ export class Entity extends Sprite {
      * Override to add logic. Make sure to call super.kill() to actually destory the entity.
      */
     kill() {
+        this.healthBar.healthbar.destroy();
+        this.healthBar = undefined;
         this.destroy();
     }
 

@@ -5,7 +5,6 @@ import {globals} from "./globals";
 import {collideBox} from "./utils/collision";
 
 const ATTACK_DAMAGE = 10;
-
 export class MeleeEnemy extends Enemy {
 
     constructor(x, y) {
@@ -47,11 +46,11 @@ export class MeleeEnemy extends Enemy {
             this.attacking = false;
             this.sprite.animations.play("forward", 10, true);
         });
-        
+
         let hitEnemy = (other) => {
             other.wrapper.damage(ATTACK_DAMAGE);
         };
-        
+
         let attackTimer = this.gameRef.time.create(true);
         attackTimer.add(750, () => {
             let facingSign = this.facing == DIRECTION.LEFT ? -1 : 1;

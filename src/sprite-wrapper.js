@@ -31,7 +31,12 @@ export class Sprite extends GameConfigurable {
     }
 
     destroy() {
-        this.gameRef.promethium.allSprites.splice(this.gameRef.promethium.allSprites.indexOf(this), 1);
+        const index = this.gameRef.promethium.allSprites.indexOf(this);
+        if (index == -1) {
+            console.warn("ASKED TO DESTROY", this, "BUT NOBODY CAME");
+        } else {
+            this.gameRef.promethium.allSprites.splice(index, 1);
+        }
         this.sprite.destroy();
     }
 
