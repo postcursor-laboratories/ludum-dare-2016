@@ -73,10 +73,16 @@ class MainGame extends Game {
         game.physics.arcade.gravity.y = 300;
         game.stage.smoothed = false;
         game.stage.backgroundColor = 0x694400;
-        return [
-            this._playerRef = new Player(this.elementalPlayers, 100, 1400, 0),
-            new MeleeEnemy(400, 1400)
+        let things = [
+            this._playerRef = new Player(this.elementalPlayers, 100, game.height-150, 0),
+            
         ];
+        
+        for (var i = 2; i < 12; i++)
+        {
+            things.push(new MeleeEnemy(400*i, game.height-150));
+        }
+        return things;
     }
 
     getPlayer() {
