@@ -104,7 +104,11 @@ export class FissureSpell extends Spell {
                 rock.destroy();
             });
             spritesToReenable.forEach(other => {
-                other.body.enable = true;
+                if(other.alive)
+                {
+                    other.body.enable = true;
+                }
+                
             });
         });
         timer.start();

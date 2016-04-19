@@ -1,6 +1,7 @@
 import {Enemy} from "./enemy";
 import {mainGame} from "./main";
 import {DIRECTION} from "./entity";
+import {globals} from "../globals";
 
 export class MeleeEnemy extends Enemy {
 
@@ -36,6 +37,8 @@ export class MeleeEnemy extends Enemy {
         }
     }
 
+    
+    const ATTACK_DAMAGE = 10;
     basicAttack() {
         //let player = mainGame.getPlayer();
         //let game = player.gameRef;
@@ -45,6 +48,16 @@ export class MeleeEnemy extends Enemy {
             this.attacking = false;
             this.sprite.animations.play("forward", 10, true);
         });
+        
+        let hitEnemy = (other) => {
+            other.wrapper.damage(ATTACK_DAMAGE);
+        };
+        
+        let attackTimer = this.gameRef.time.create(true);
+        attackTimer.add(750, () => {
+            collideBox(this.sprite.x+16*facingSign, this.sprite.y - 32, 32, 64, globals.player, hitEnemy);
+        });
+        attackTimer.start();
 
         // game.promethium.ezEmit.emit("magicParticle", this.x, this.y, 200, 1);
         // let pew = new Sprite("rockProjectile", this.x, this.y);
