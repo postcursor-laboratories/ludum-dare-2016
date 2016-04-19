@@ -97,7 +97,7 @@ export class HeatwaveSpell extends Spell {
         wave1.facingSign = facingSign;
 
         let hitEnemy = (other) => {
-            game.promethium.ezEmit.emit("fireballParticle", other.x, other.y, 250, 10);
+            game.promethium.ezEmit.emit("fireballParticle", other.x, other.y, 500, 1);
             other.wrapper.damage(HEATWAVE_DAMAGE);
         };
         
@@ -144,8 +144,11 @@ export class HeatwaveSpell extends Spell {
                     flameBody.allowGravity = false;
                                         
                 }
-                collideBox(flameBody.sprite.x+8, flameBody.sprite.y+4, 16, 8, globals.enemyGroup, hitEnemy);
-
+                if (Math.random() > 0.8)
+                {
+                    collideBox(flameBody.sprite.x+8, flameBody.sprite.y+4, 16, 8, globals.enemyGroup, hitEnemy);
+                }
+                
             };
 
         };
