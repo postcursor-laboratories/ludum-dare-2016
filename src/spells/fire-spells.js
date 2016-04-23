@@ -1,7 +1,6 @@
 import {ExtendedSprite} from "../sprite-extension";
 import {DIRECTION} from "../entity";
 import {Spell} from "./spell";
-import {nullFn} from "../utils/nulls";
 import {collideBox} from "../utils/collision";
 import {globals} from "../globals";
 
@@ -40,7 +39,7 @@ export class FireballSpell extends Spell {
                 
                 let hitEnemy = (other) => {
                     other.extension.damage(FIREBALL_DAMAGE);
-                }
+                };
                 
                 collideBox(fireball.sprite.x+4, fireball.sprite.y+4, 64, 64, globals.enemyGroup, hitEnemy);
                 fireball.destroy();

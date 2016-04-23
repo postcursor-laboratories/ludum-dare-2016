@@ -1,8 +1,6 @@
-import {nullFn} from "./utils/nulls";
-
 const NULL_SPELL = {
-    castSpell: nullFn
-}
+    castSpell: () => {}
+};
 
 export class ElementalPlayerDescriptor {
 
