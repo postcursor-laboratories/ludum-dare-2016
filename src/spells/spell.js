@@ -1,8 +1,8 @@
-import {Sprite} from "../sprite-wrapper";
+import {ExtendedSprite} from "../sprite-extension";
 import {globals} from "../globals";
 import {mainGame} from "../main";
 
-export class SpellSprite extends Sprite {
+export class SpellSprite extends ExtendedSprite {
 
     constructor(image, onCollideGround, onCollideEnemy) {
         super(image);
@@ -17,7 +17,7 @@ export class SpellSprite extends Sprite {
             this.onCollideGround();
         }
         this.gameRef.physics.arcade.collide(this.sprite, globals.enemyGroup,
-            (sprite, enemy) => this.onCollideEnemy(enemy.wrapper));
+            (sprite, enemy) => this.onCollideEnemy(enemy.extension));
         return collisionGround;
     }
 }

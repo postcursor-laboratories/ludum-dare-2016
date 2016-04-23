@@ -1,4 +1,4 @@
-import {Sprite} from "../sprite-wrapper";
+import {ExtendedSprite} from "../sprite-extension";
 import {DIRECTION} from "../entity";
 import {Spell} from "./spell";
 import {collideBox} from "../utils/collision";
@@ -29,7 +29,7 @@ export class SurfSpell extends Spell {
         let xCoord = playerObj.sprite.x + (facingSign * 8);
         let yCoord = playerObj.sprite.y - 48;
 
-        let surfHandler = new Sprite("waterParticle", xCoord, yCoord); // we need a small, near invisible sprite
+        let surfHandler = new ExtendedSprite("waterParticle", xCoord, yCoord); // we need a small, near invisible sprite
         surfHandler.configure(game);
         surfHandler.sprite.visible = false;
 
@@ -37,7 +37,7 @@ export class SurfSpell extends Spell {
 
         let hitEnemy = (other) => {
             other.body.velocity.x += facingSign*80;
-            other.wrapper.damage(SURF_DAMAGE);
+            other.extension.damage(SURF_DAMAGE);
         };
         
         surfHandler.update = () => {
@@ -85,7 +85,7 @@ export class FrostbiteSpell extends Spell {
         playerObj.sprite.animations.add("frost", [9]);
         playerObj.sprite.animations.play("frost", 1, false);
 
-        let frost = new Sprite("frostbite", xCoord, yCoord);
+        let frost = new ExtendedSprite("frostbite", xCoord, yCoord);
         frost.configure(game);
         frost.sprite.anchor.x = 0;
 
@@ -104,8 +104,8 @@ export class FrostbiteSpell extends Spell {
             other.body.velocity.x = 0;
             other.body.enable = false;
             other.tint = 0x00c0ff;
-            other.wrapper.damage(FROSTBITE_DAMAGE);
-            other.wrapper.damageReductionFactor = -FROSTBITE_DAMAGE_AMP; // Double damage;
+            other.extension.damage(FROSTBITE_DAMAGE);
+            other.extension.damageReductionFactor = -FROSTBITE_DAMAGE_AMP; // Double damage;
             
             let endFreeze = game.time.create(true);
             endFreeze.add(3000, () => {

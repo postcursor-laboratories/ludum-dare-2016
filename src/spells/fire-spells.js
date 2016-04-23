@@ -1,4 +1,4 @@
-import {Sprite} from "../sprite-wrapper";
+import {ExtendedSprite} from "../sprite-extension";
 import {DIRECTION} from "../entity";
 import {Spell} from "./spell";
 import {nullFn} from "../utils/nulls";
@@ -28,7 +28,7 @@ export class FireballSpell extends Spell {
         let xCoord = playerObj.sprite.x + (facingSign * 8);
         let yCoord = playerObj.sprite.y - 48;
         this.magicParticles(xCoord + (facingSign * 16), yCoord);
-        let fireball = new Sprite("fireballProjectile", xCoord, yCoord);
+        let fireball = new ExtendedSprite("fireballProjectile", xCoord, yCoord);
         fireball.configure(game);
         game.physics.arcade.enable(fireball.sprite);
         fireball.sprite.body.allowGravity = false; //we don't obey that gravity thing here!
@@ -39,7 +39,7 @@ export class FireballSpell extends Spell {
             if (!isDestroyed) {
                 
                 let hitEnemy = (other) => {
-                    other.wrapper.damage(FIREBALL_DAMAGE);
+                    other.extension.damage(FIREBALL_DAMAGE);
                 }
                 
                 collideBox(fireball.sprite.x+4, fireball.sprite.y+4, 64, 64, globals.enemyGroup, hitEnemy);
@@ -85,7 +85,7 @@ export class HeatwaveSpell extends Spell {
         let xCoord = playerObj.sprite.x + (facingSign * 8);
         let yCoord = playerObj.sprite.y - 16; //skim ground
         game.promethium.ezEmit.emit("magicParticle", xCoord + (facingSign * 16), yCoord, 2000, 20);
-        let wave1 = new Sprite("fireballProjectile", xCoord, yCoord);
+        let wave1 = new ExtendedSprite("fireballProjectile", xCoord, yCoord);
         wave1.configure(game);
         game.physics.arcade.enable(wave1.sprite);
         wave1.sprite.body.allowGravity = false; //we don't obey that gravity thing here!
@@ -98,7 +98,7 @@ export class HeatwaveSpell extends Spell {
 
         let hitEnemy = (other) => {
             game.promethium.ezEmit.emit("fireballParticle", other.x, other.y, 500, 1);
-            other.wrapper.damage(HEATWAVE_DAMAGE);
+            other.extension.damage(HEATWAVE_DAMAGE);
         };
         
         wave1.update = () => {
@@ -113,7 +113,7 @@ export class HeatwaveSpell extends Spell {
         };
         wave1.summonFire = () => {
             game.promethium.ezEmit.emit("fireballParticle", xCoord + wave1.lastPosition * wave1.facingSign, yCoord, 2000, 5);
-            let flame = new Sprite("heatwaveProjectile", xCoord + wave1.lastPosition * wave1.facingSign, yCoord);
+            let flame = new ExtendedSprite("heatwaveProjectile", xCoord + wave1.lastPosition * wave1.facingSign, yCoord);
             flame.configure(game);
             game.physics.arcade.enable(flame.sprite);
 

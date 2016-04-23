@@ -1,5 +1,5 @@
 import {GameConfigurable} from "./game-helpers";
-import {Sprite} from "./sprite-wrapper";
+import {ExtendedSprite} from "./sprite-extension";
 import Phaser from "phaser";
 
 function rgbToHex(r, g, b) {
@@ -58,7 +58,7 @@ function produceDrawRectangle(game, x, y, width, height, color, alpha = 1) {
     return g;
 }
 
-export class SpellIcon extends Sprite {
+export class SpellIcon extends ExtendedSprite {
 
     constructor(image, x, y, group) {
         super(image, x, y, group);
