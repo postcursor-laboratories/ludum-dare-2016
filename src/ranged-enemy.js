@@ -45,7 +45,7 @@ export class RangedEnemy extends Enemy {
     basicAttack() {
         this.attacking = true;
         this.sprite.animations.play("basicAttack", 8, false);
-        this.sprite.animations.currentAnim.onComplete.add(event => {
+        this.sprite.animations.currentAnim.onComplete.addOnce(() => {
             this.attacking = false;
             let player = mainGame.getPlayer();
             let bullet = new Bullet(this.sprite.x + 16 * (this.facing == DIRECTION.LEFT ? -1 : 1), 
