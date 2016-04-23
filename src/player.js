@@ -1,7 +1,7 @@
 import {DIRECTION} from "./entity";
 import {Character} from "./character";
 import Phaser from "phaser";
-import {Sprite} from "./sprite-wrapper";
+import {ExtendedSprite} from "./sprite-extension";
 import {globals} from "./globals";
 import * as collisions from "./utils/collision";
 
@@ -57,7 +57,7 @@ export class Player extends Character {
     attemptShapeshift(elementalDescriptor) {
         if (!this.controlOverride) {
             this.sprite.body.enable = false;
-            let transformationSprite = new Sprite("transformation", this.sprite.x - 48, this.sprite.y - 78);
+            let transformationSprite = new ExtendedSprite("transformation", this.sprite.x - 48, this.sprite.y - 78);
             transformationSprite.configure(this.gameRef);
             transformationSprite.sprite.scale.setTo(2, 2);
             transformationSprite.sprite.animations.add("forward", [0, 1, 2, 3, 4]);
@@ -122,7 +122,7 @@ export class Player extends Character {
         }
         const yOffset = (2.5 * s.height) / 5;
         collisions.collideBox(s.x + xOffset, s.y - yOffset, width, 10, globals.enemyGroup, enemy => {
-            enemy.wrapper.damage(this.attackDamage);
+            enemy.extension.damage(this.attackDamage);
         });
     }
 

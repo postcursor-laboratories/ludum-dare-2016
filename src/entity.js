@@ -1,4 +1,4 @@
-import {Sprite} from "./sprite-wrapper";
+import {ExtendedSprite} from "./sprite-extension";
 import * as hud from "./hud";
 import Phaser from "phaser";
 
@@ -9,7 +9,7 @@ export const DIRECTION = {
     RIGHT: 3
 };
 
-export class Entity extends Sprite {
+export class Entity extends ExtendedSprite {
 
     constructor(image, x, y, maxHealth) {
         super(image, x, y);

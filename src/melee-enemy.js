@@ -48,7 +48,7 @@ export class MeleeEnemy extends Enemy {
         });
 
         let hitEnemy = (other) => {
-            other.wrapper.damage(ATTACK_DAMAGE);
+            other.extension.damage(ATTACK_DAMAGE);
         };
 
         let attackTimer = this.gameRef.time.create(true);

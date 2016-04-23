@@ -1,4 +1,4 @@
-import {Sprite} from "../sprite-wrapper";
+import {ExtendedSprite} from "../sprite-extension";
 import {DIRECTION} from "../entity";
 import {Spell} from "./spell";
 import Phaser from "phaser"; // Gust uses keyboard controls because I'm bad.
@@ -30,7 +30,7 @@ export class GustSpell extends Spell {
         this.magicParticles(xCoord + (facingSign * 16), yCoord);
 
 
-        let gustHandler = new Sprite("magicParticle", xCoord, yCoord); // we need a small, near invisible sprite
+        let gustHandler = new ExtendedSprite("magicParticle", xCoord, yCoord); // we need a small, near invisible sprite
         gustHandler.configure(game);
         gustHandler.sprite.visible = false;
 

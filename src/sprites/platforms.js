@@ -1,4 +1,4 @@
-import {Sprite} from "../sprite-wrapper";
+import {ExtendedSprite} from "../sprite-extension";
 import PIXI from "pixi";
 
 export let platformGroup = undefined;
@@ -6,7 +6,7 @@ export function setupPlatformGroup(game) {
     platformGroup = game.add.group();
 }
 
-export class Platform extends Sprite {
+export class Platform extends ExtendedSprite {
 
     constructor(image, x, y) {
         super(image, x, y, platformGroup);

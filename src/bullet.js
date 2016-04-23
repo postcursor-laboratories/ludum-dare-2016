@@ -1,11 +1,11 @@
-import {Sprite} from "./sprite-wrapper";
+import {ExtendedSprite} from "./sprite-extension";
 import {globals} from "./globals";
 import Phaser from "phaser";
 
 
 const BULLET_SPEED = 200;
 
-export class Bullet extends Sprite {
+export class Bullet extends ExtendedSprite {
 
     constructor(x, y, angle) {
         super("bullet", x, y);
@@ -26,7 +26,7 @@ export class Bullet extends Sprite {
 
     update() {
         if (this.checkCollision() || this.gameRef.physics.arcade.collide(this.sprite, globals.player,
-                (sprite, enemy) => this.onCollideEnemy(enemy.wrapper))) {
+                (sprite, enemy) => this.onCollideEnemy(enemy.extension))) {
             this.destroy();
         }
         if (this.initalPos.distance(this.sprite.position) >= 600) {
@@ -34,8 +34,8 @@ export class Bullet extends Sprite {
         }
     }
 
-    onCollideEnemy(wrapper) {
-        wrapper.damage(1);
+    onCollideEnemy(extension) {
+        extension.damage(1);
     }
 
 }

@@ -1,4 +1,4 @@
-import {Sprite} from "../sprite-wrapper";
+import {ExtendedSprite} from "../sprite-extension";
 import {DIRECTION} from "../entity";
 import {Spell} from "./spell";
 import {collideBox} from "../utils/collision";
@@ -27,7 +27,7 @@ export class RockThrowSpell extends Spell {
         let xCoord = playerObj.sprite.x + (facingSign * 8);
         let yCoord = playerObj.sprite.y - 48;
         this.magicParticles(xCoord + (facingSign * 16), yCoord);
-        let rock = new Sprite("rockProjectile", xCoord, yCoord);
+        let rock = new ExtendedSprite("rockProjectile", xCoord, yCoord);
         rock.configure(game);
         game.physics.arcade.enable(rock.sprite);
         rock.sprite.body.velocity.x = facingSign * 400;
@@ -36,7 +36,7 @@ export class RockThrowSpell extends Spell {
         rock.hitEnemy = (other) => {
             game.promethium.ezEmit.emit("rockParticle", rock.sprite.x, rock.sprite.y, 2000, 10);
             rock.destroy();
-            other.wrapper.damage(ROCKTHROW_DAMAGE);
+            other.extension.damage(ROCKTHROW_DAMAGE);
         };
 
         rock.update = () => {
@@ -76,7 +76,7 @@ export class FissureSpell extends Spell {
         let yCoord = playerObj.sprite.y - 4;
         let rocks = [];
         for (let i = 0; i < FISSURE_NUM_ROCKS; i++) {
-            let rock = new Sprite("rockProjectile", xCoord + (i * FISSURE_ROCK_SPACING * facingSign), yCoord);
+            let rock = new ExtendedSprite("rockProjectile", xCoord + (i * FISSURE_ROCK_SPACING * facingSign), yCoord);
             rock.configure(game);
             rock.sprite.anchor.setTo(0.5, 0.5);
             rock.sprite.rotation = Math.random() * 2 * Math.PI;
@@ -90,7 +90,7 @@ export class FissureSpell extends Spell {
             other.body.velocity.y = 0;
             other.body.velocity.x = 0;
             other.body.enable = false;
-            other.wrapper.damage(FISSURE_DAMAGE);
+            other.extension.damage(FISSURE_DAMAGE);
             spritesToReenable.push(other);
         };
         

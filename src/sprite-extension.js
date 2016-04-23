@@ -4,7 +4,7 @@ import {globals} from "./globals";
 /**
  * A wrapper around a Phaser sprite. Essentially just a little interfacing.
  */
-export class Sprite extends GameConfigurable {
+export class ExtendedSprite extends GameConfigurable {
 
     constructor(image, x, y, group = undefined) {
         super();
@@ -26,7 +26,7 @@ export class Sprite extends GameConfigurable {
         this.gameRef = game;
         let addSprite = group ? group.create.bind(group) : game.add.sprite.bind(game.add);
         this.__gameSprite = addSprite(data.x, data.y, data.image);
-        this.sprite.wrapper = this;
+        this.sprite.extension = this;
         game.promethium.allSprites.push(this);
     }
 
