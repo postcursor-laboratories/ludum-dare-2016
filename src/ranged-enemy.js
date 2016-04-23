@@ -48,8 +48,8 @@ export class RangedEnemy extends Enemy {
         this.sprite.animations.currentAnim.onComplete.addOnce(() => {
             this.attacking = false;
             let player = mainGame.getPlayer();
-            let bullet = new Bullet(this.sprite.x + 16 * (this.facing == DIRECTION.LEFT ? -1 : 1), 
-                this.sprite.y - 32 * (2/3), 
+            let bullet = new Bullet(this.sprite.x + 16 * (this.facing == DIRECTION.LEFT ? -1 : 1),
+                this.sprite.y - 32 * (2 / 3),
                 Math.atan2(player.sprite.y - this.sprite.y, player.sprite.x - this.sprite.x));
             bullet.configure(this.gameRef);
             this.sprite.animations.play("forward", 10, true);

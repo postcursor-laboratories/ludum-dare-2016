@@ -22,4 +22,3 @@ export class Enemy extends Character {
         throw "cannot call basicAttack on generic Enemy";
     }
 }
-;

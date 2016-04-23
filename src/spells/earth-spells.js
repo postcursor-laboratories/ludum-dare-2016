@@ -83,9 +83,9 @@ export class FissureSpell extends Spell {
             rocks.push(rock);
             this.magicParticles(xCoord + (i * FISSURE_ROCK_SPACING * facingSign), yCoord);
         }
-        
+
         let spritesToReenable = [];
-        
+
         let hitEnemy = (other) => {
             other.body.velocity.y = 0;
             other.body.velocity.x = 0;
@@ -93,10 +93,10 @@ export class FissureSpell extends Spell {
             other.extension.damage(FISSURE_DAMAGE);
             spritesToReenable.push(other);
         };
-        
+
         collideBox(xCoord + FISSURE_ROCK_SPACING * FISSURE_NUM_ROCKS * 0.5 * facingSign, yCoord - 8,
             FISSURE_NUM_ROCKS * FISSURE_ROCK_SPACING * 0.5, 16, globals.enemyGroup, hitEnemy); // if we hit an enemy call hitEnemy
-        
+
         let timer = game.time.create(true);
         timer.add(2000, () => {
             rocks.forEach(rock => {
@@ -104,11 +104,10 @@ export class FissureSpell extends Spell {
                 rock.destroy();
             });
             spritesToReenable.forEach(other => {
-                if(other.alive)
-                {
+                if (other.alive) {
                     other.body.enable = true;
                 }
-                
+
             });
         });
         timer.start();

@@ -1,5 +1,6 @@
 const NULL_SPELL = {
-    castSpell: () => {}
+    castSpell: () => {
+    }
 };
 
 export class ElementalPlayerDescriptor {

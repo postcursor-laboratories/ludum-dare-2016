@@ -54,7 +54,7 @@ export class MeleeEnemy extends Enemy {
         let attackTimer = this.gameRef.time.create(true);
         attackTimer.add(750, () => {
             let facingSign = this.facing == DIRECTION.LEFT ? -1 : 1;
-            collideBox(this.sprite.x+16*facingSign, this.sprite.y - 32, 32, 64, globals.player, hitEnemy);
+            collideBox(this.sprite.x + 16 * facingSign, this.sprite.y - 32, 32, 64, globals.player, hitEnemy);
         });
         attackTimer.start();
     }

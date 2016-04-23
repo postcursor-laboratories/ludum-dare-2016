@@ -87,16 +87,15 @@ class MainGame extends Game {
         game.physics.arcade.gravity.y = 300;
         game.stage.smoothed = false;
         game.stage.backgroundColor = 0x694400;
-        
+
         let things = [
             this.hud = new HUD(),
             GameConfigurable.of(game => this.hud.bind(this._playerRef))
         ];
-        
-        for (var i = 2; i < 12; i++)
-        {
-            things.push(new MeleeEnemy(400*i, 2048-160));
-            things.push(new RangedEnemy(400*i + 50, 2048-160));
+
+        for (var i = 2; i < 12; i++) {
+            things.push(new MeleeEnemy(400 * i, 2048 - 160));
+            things.push(new RangedEnemy(400 * i + 50, 2048 - 160));
         }
         return things;
     }

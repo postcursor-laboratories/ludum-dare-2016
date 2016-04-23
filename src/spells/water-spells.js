@@ -36,16 +36,16 @@ export class SurfSpell extends Spell {
         playerObj.setControlOverride(true); //take that!
 
         let hitEnemy = (other) => {
-            other.body.velocity.x += facingSign*80;
+            other.body.velocity.x += facingSign * 80;
             other.extension.damage(SURF_DAMAGE);
         };
-        
+
         surfHandler.update = () => {
             surfHandler.setPosition(playerObj.sprite.x, playerObj.sprite.y);
             game.promethium.ezEmit.emit("waterParticle", surfHandler.sprite.x,
                 surfHandler.sprite.y - ((Math.random() - (1 / 3)) * 40), 2000, 20, -100, 100, -200, 0, 10);
             playerObj.sprite.body.velocity.x = SURF_SPEED * facingSign;
-            
+
             collideBox(playerObj.sprite.x, playerObj.sprite.y - 32, 32, 64, globals.enemyGroup, hitEnemy);
         };
 
@@ -98,7 +98,7 @@ export class FrostbiteSpell extends Spell {
         frost.update = () => {
             //deal damage here!
         };
-        
+
         let hitEnemy = (other) => {
             other.body.velocity.y = 0;
             other.body.velocity.x = 0;
@@ -106,22 +106,22 @@ export class FrostbiteSpell extends Spell {
             other.tint = 0x00c0ff;
             other.extension.damage(FROSTBITE_DAMAGE);
             other.extension.damageReductionFactor = -FROSTBITE_DAMAGE_AMP; // Double damage;
-            
+
             let endFreeze = game.time.create(true);
             endFreeze.add(3000, () => {
                 other.body.enable = true;
                 other.tint = 0xffffff;
             });
             endFreeze.start();
-            
+
         };
 
         let attackTimer = game.time.create(true);
         attackTimer.add(750, () => {
-            collideBox(playerObj.sprite.x+32*facingSign, playerObj.sprite.y - 32, 96, 64, globals.enemyGroup, hitEnemy);
+            collideBox(playerObj.sprite.x + 32 * facingSign, playerObj.sprite.y - 32, 96, 64, globals.enemyGroup, hitEnemy);
         });
         attackTimer.start();
-        
+
         let timer = game.time.create(true);
         timer.add(1100, () => {
             playerObj.setControlOverride(false);
