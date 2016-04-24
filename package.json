@@ -1,7 +1,6 @@
 {
-  "name": "legendary-spoon",
+  "name": "promethium",
   "version": "0.0.1",
-  "description": "A JS Clone of Zelda",
   "browser": {
     "phaser": "./node_modules/phaser/dist/phaser.js"
   },
@@ -9,6 +8,7 @@
     "phaser": "global:Phaser",
     "pixi": "global:PIXI"
   },
+  "description": "A shapeshifting game of fun!",
   "dependencies": {
     "bootstrap": "^3.3.6",
     "jquery": "^2.2.1",
@@ -43,13 +43,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:postcursor-laboratories/legendary-spoon"
+    "url": "git@github.com:postcursor-laboratories/ludum-dare-2016"
   },
   "author": "Postcursor Laboratories",
   "contributors": [
     "Charlie Green",
     "Kenzie Togami",
-    "Kenyon Prater"
+    "Kenyon Prater",
+    "Paul Grosen"
   ],
   "license": "MIT"
 }
