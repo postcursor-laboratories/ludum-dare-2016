@@ -1,3 +1,5 @@
+// Entry point: initialize babel-polyfill
+import "babel-polyfill";
 import {Resource, GameConfigurable} from "./game-helpers";
 import {Game} from "./game";
 import {setupPlatformGroup} from "./sprites/platforms";
@@ -7,13 +9,9 @@ import {MeleeEnemy} from "./melee-enemy";
 import {RangedEnemy} from "./ranged-enemy";
 import {TileMap} from "./tilemap";
 import {globals} from "./globals";
-import {ElementalPlayerDescriptor} from "./elemental-player";
 import {ExplosionEmitterHelper} from "./explosion-emitter-helper";
 import {HUD} from "./hud";
-import * as EarthSpells from "./spells/earth-spells";
-import * as WaterSpells from "./spells/water-spells";
-import * as FireSpells from "./spells/fire-spells";
-import * as AirSpells from "./spells/air-spells";
+import {elementalPlayers} from "./stages/boot-stage";
 
 class MainGame extends Game {
 
@@ -40,21 +38,11 @@ class MainGame extends Game {
             }
         });
         return arr;
-
     }
 
     getPreLoadConfigurables() {
         this.ezEmit = new ExplosionEmitterHelper();
-        return [
-            GameConfigurable.of(game => {
-                this.elementalPlayers = [
-                    new ElementalPlayerDescriptor(game, "human", 32, 32, 400, 300, 10, 4, [4, 2, 4, 1], 0, 5),
-                    new ElementalPlayerDescriptor(game, "earth", 32, 32, 200, 100, 3, 4, [4, 2, 4, 1], 0.6, 20, new EarthSpells.RockThrowSpell(), new EarthSpells.FissureSpell()),
-                    new ElementalPlayerDescriptor(game, "water", 32, 32, 300, 200, 6, 4, [4, 4, 4, 2], 0.2, 10, new WaterSpells.SurfSpell(), new WaterSpells.FrostbiteSpell()),
-                    new ElementalPlayerDescriptor(game, "fire", 32, 32, 350, 300, 6, 4, [4, 4, 4, 4], 0.3, 10, new FireSpells.FireballSpell(), new FireSpells.HeatwaveSpell()),
-                    new ElementalPlayerDescriptor(game, "air", 32, 32, 400, 400, 8, 4, [4, 4, 4, 4], 0.4, 2, new AirSpells.GustSpell(), new AirSpells.LightningSpell())
-                ];
-            }),
+        const ret = [
             GameConfigurable.of(game =>
                 game.load.spritesheet("transformation", "img/transform.png", 48, 48)),
             GameConfigurable.of(game =>
@@ -66,6 +54,10 @@ class MainGame extends Game {
             this.ezEmit,
             this.tileMap
         ];
+        for (let value of elementalPlayers.values()) {
+            ret.push(value);
+        }
+        return ret;
     }
 
     getConfigurables() {
@@ -80,7 +72,7 @@ class MainGame extends Game {
         setupPlatformGroup(game);
         globals.enemyGroup = game.add.group();
         globals.player = game.add.group();
-        this._playerRef = new Player(this.elementalPlayers, 100, game.height - 150, 0);
+        this._playerRef = new Player(100, game.height - 150);
         this._playerRef.configure(game);
         globals.player.add(this._playerRef.sprite);
         globals.bulletsGroup = game.add.group();

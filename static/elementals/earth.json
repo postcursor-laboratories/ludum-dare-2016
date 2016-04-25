@@ -1,0 +1,18 @@
+{
+  "unitWidth": 32,
+  "unitHeight": 32,
+  "jumpSpeed": 200,
+  "moveSpeed": 100,
+  "attackSpeed": 3,
+  "spriteSheetWidth": 4,
+  "animationLengths": [
+    4,
+    2,
+    4,
+    1
+  ],
+  "damageReductionFactor": 0.6,
+  "attackDamage": 20,
+  "spellOne": "Rock Throw",
+  "spellTwo": "Fissure"
+}

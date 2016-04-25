@@ -11,7 +11,7 @@ const SURF_SPEED = 700;
 const SURF_DURATION = 400;
 const SURF_DAMAGE = 1;
 
-export class SurfSpell extends Spell {
+class SurfSpell extends Spell {
 
     constructor() {
         super(SURF_NAME, SURF_COOLDOWN, SURF_MANA);
@@ -57,6 +57,7 @@ export class SurfSpell extends Spell {
         timer.start();
     }
 }
+new SurfSpell();
 
 const FROSTBITE_NAME = "Frostbite";
 const FROSTBITE_MANA = 10;
@@ -64,7 +65,7 @@ const FROSTBITE_COOLDOWN = 1;
 const FROSTBITE_DAMAGE = 4;
 const FROSTBITE_DAMAGE_AMP = 1;
 
-export class FrostbiteSpell extends Spell {
+class FrostbiteSpell extends Spell {
 
     constructor() {
         super(FROSTBITE_NAME, FROSTBITE_COOLDOWN, FROSTBITE_MANA);
@@ -132,8 +133,7 @@ export class FrostbiteSpell extends Spell {
             //Don't spam frostbite, it has a memory leak.
         });
         timer.start();
-
-
     }
 
 }
+new FrostbiteSpell();

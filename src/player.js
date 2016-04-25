@@ -4,30 +4,32 @@ import Phaser from "phaser";
 import {ExtendedSprite} from "./sprite-extension";
 import {globals} from "./globals";
 import * as collisions from "./utils/collision";
+import {elementalPlayers} from "./stages/boot-stage";
+import {AIR, EARTH, FIRE, HUMAN, WATER} from "./elemental-player";
 
 const PLAYER_HEALTH = 100;
 
 export class Player extends Character {
 
-    constructor(elementalPlayers, x, y, firstElemental) {
-        super("human", x, y, PLAYER_HEALTH);
-        this.elementalPlayers = elementalPlayers;
-        this.firstElemental = firstElemental;
+    constructor(x, y) {
+        super(HUMAN, x, y, PLAYER_HEALTH);
     }
 
     configure(game) {
         super.configure(game);
         this.gameRef.camera.follow(this.sprite, Phaser.Camera.FOLLOW_PLATFORMER);
         this.controls = game.input.keyboard.createCursorKeys();
-        this.loadElemental(this.elementalPlayers[this.firstElemental]);
-        this.shapeshiftKeys = [game.input.keyboard.addKey(Phaser.KeyCode.ONE),
-            game.input.keyboard.addKey(Phaser.KeyCode.TWO),
-            game.input.keyboard.addKey(Phaser.KeyCode.THREE),
-            game.input.keyboard.addKey(Phaser.KeyCode.FOUR),
-            game.input.keyboard.addKey(Phaser.KeyCode.FIVE)];
-        this.shapeshiftKeys.forEach((obj, index) =>
-            obj.onDown.add(event => {
-                this.attemptShapeshift(this.elementalPlayers[index]);
+        this.loadElemental(elementalPlayers.get(HUMAN));
+        // unused this.shapeshiftKeys is for GC holding
+        const keys = this.shapeshiftKeys = new Map();
+        keys.set(HUMAN, game.input.keyboard.addKey(Phaser.KeyCode.ONE));
+        keys.set(EARTH, game.input.keyboard.addKey(Phaser.KeyCode.TWO));
+        keys.set(WATER, game.input.keyboard.addKey(Phaser.KeyCode.THREE));
+        keys.set(FIRE, game.input.keyboard.addKey(Phaser.KeyCode.FOUR));
+        keys.set(AIR, game.input.keyboard.addKey(Phaser.KeyCode.FIVE));
+        keys.forEach((obj, ele) =>
+            obj.onDown.add(() => {
+                this.attemptShapeshift(elementalPlayers.get(ele));
             }));
         this.basicAttackKey = game.input.keyboard.addKey(Phaser.KeyCode.Z);
         this.basicAttackKey.onDown.add(() => this.basicAttack());
@@ -63,10 +65,10 @@ export class Player extends Character {
             transformationSprite.sprite.animations.add("forward", [0, 1, 2, 3, 4]);
             transformationSprite.sprite.animations.add("backward", [5, 6, 7, 8, 9]);
             transformationSprite.sprite.animations.play("forward", 10, false);
-            transformationSprite.sprite.animations.currentAnim.onComplete.add(event => {
+            transformationSprite.sprite.animations.currentAnim.onComplete.addOnce(event => {
                 this.loadElemental(elementalDescriptor);
                 transformationSprite.sprite.animations.play("backward", 10, false);
-                transformationSprite.sprite.animations.currentAnim.onComplete.add(event => {
+                transformationSprite.sprite.animations.currentAnim.onComplete.addOnce(event => {
                     this.sprite.body.enable = true;
                     transformationSprite.destroy();
                 });
@@ -85,27 +87,25 @@ export class Player extends Character {
         this.moveSpeed = elementalDescriptor.moveSpeed;
         this.attackSpeed = elementalDescriptor.attackSpeed;
         this.setTexture(elementalDescriptor.elementalName, 0);
-        this.addAnimations(elementalDescriptor.spritesheetWidth, elementalDescriptor.animationLengths);
+        this.addAnimations(elementalDescriptor.spriteSheetWidth, elementalDescriptor.animationLengths);
         this.currentElemental = elementalDescriptor;
     }
 
     addAnimations(sheetWidth, animationLengths) {
         let names = ["walk", "stationary", "basicAttack", "jump"];
         let index = 0;
-        let j = 0;
-        for (let animation of animationLengths) {
+        animationLengths.forEach((animation, j) => {
             if (animation > sheetWidth) {
                 throw "sheetWidth exceeded: " + animation + " of " + animationLengths;
             }
             let array = [];
-            let i = 0;
-            for (i = 0; i < animation; i++) {
+            for (let i = 0; i < animation; i++) {
                 array.push(i + index);
             }
             index += sheetWidth;
+            console.log(`${index} + ${animation} => ${names[j]} =`, array);
             this.sprite.animations.add(names[j], array);
-            j++;
-        }
+        });
         this.sprite.animations.stop();
     }
 
@@ -175,6 +175,6 @@ export class Player extends Character {
      */
     setControlOverride(override) {
         this.controlOverride = override;
-
     }
+
 }

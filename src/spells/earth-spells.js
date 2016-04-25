@@ -9,7 +9,7 @@ const ROCKTHROW_MANA = 10;
 const ROCKTHROW_COOLDOWN = 1;
 const ROCKTHROW_DAMAGE = 1;
 
-export class RockThrowSpell extends Spell {
+class RockThrowSpell extends Spell {
 
     constructor() {
         super(ROCKTHROW_NAME, ROCKTHROW_COOLDOWN, ROCKTHROW_MANA);
@@ -50,6 +50,7 @@ export class RockThrowSpell extends Spell {
 
     }
 }
+new RockThrowSpell();
 
 const FISSURE_NAME = "Fissure";
 const FISSURE_MANA = 10;
@@ -58,7 +59,7 @@ const FISSURE_DAMAGE = 10;
 const FISSURE_ROCK_SPACING = 13;
 const FISSURE_NUM_ROCKS = 10;
 
-export class FissureSpell extends Spell {
+class FissureSpell extends Spell {
 
     constructor() {
         super(FISSURE_NAME, FISSURE_COOLDOWN, FISSURE_MANA);
@@ -114,3 +115,4 @@ export class FissureSpell extends Spell {
     }
 
 }
+new FissureSpell();

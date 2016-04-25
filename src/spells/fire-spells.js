@@ -9,7 +9,7 @@ const FIREBALL_MANA = 10;
 const FIREBALL_COOLDOWN = 1;
 const FIREBALL_DAMAGE = 10;
 
-export class FireballSpell extends Spell {
+class FireballSpell extends Spell {
 
     constructor() {
         super(FIREBALL_NAME, FIREBALL_COOLDOWN, FIREBALL_MANA);
@@ -62,13 +62,14 @@ export class FireballSpell extends Spell {
         timer.start();
     }
 }
+new FireballSpell();
 
 const HEATWAVE_NAME = "Heatwave";
 const HEATWAVE_MANA = 10;
 const HEATWAVE_COOLDOWN = 1;
 const HEATWAVE_DAMAGE = 0.2;
 
-export class HeatwaveSpell extends Spell {
+class HeatwaveSpell extends Spell {
     constructor() {
         super(HEATWAVE_NAME, HEATWAVE_COOLDOWN, HEATWAVE_MANA);
     }
@@ -154,3 +155,4 @@ export class HeatwaveSpell extends Spell {
     }
 
 }
+new HeatwaveSpell();

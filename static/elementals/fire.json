@@ -1,0 +1,18 @@
+{
+  "unitWidth": 32,
+  "unitHeight": 32,
+  "jumpSpeed": 350,
+  "moveSpeed": 300,
+  "attackSpeed": 6,
+  "spriteSheetWidth": 4,
+  "animationLengths": [
+    4,
+    4,
+    4,
+    4
+  ],
+  "damageReductionFactor": 0.3,
+  "attackDamage": 10,
+  "spellOne": "Fireball",
+  "spellTwo": "Heatwave"
+}

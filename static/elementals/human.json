@@ -1,0 +1,18 @@
+{
+  "unitWidth": 32,
+  "unitHeight": 32,
+  "jumpSpeed": 400,
+  "moveSpeed": 300,
+  "attackSpeed": 10,
+  "spriteSheetWidth": 4,
+  "animationLengths": [
+    4,
+    2,
+    4,
+    1
+  ],
+  "damageReductionFactor": 0,
+  "attackDamage": 5,
+  "spellOne": null,
+  "spellTwo": null
+}

@@ -3,22 +3,21 @@ import {globals} from "./globals";
 import Phaser from "phaser";
 import PIXI from "pixi";
 
-// TODO add regenerator runtime for generators and make this one
-function tileLoopGen(map, layer, cb) {
+function* tileLoopGen(map, layer) {
     for (let x = 0; x < layer.width; x++) {
         for (let y = 0; y < layer.height; y++) {
             var tile = map.getTile(x, y, layer);
             if (tile) {
-                cb(tile);
+                yield tile;
             }
         }
     }
 }
 
 function dumpTiles(map, layer) {
-    tileLoopGen(map, layer, tile => {
+    for (let tile of tileLoopGen(map, layer)) {
         console.log(tile);
-    });
+    }
 }
 
 /**

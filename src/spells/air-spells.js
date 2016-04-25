@@ -10,7 +10,7 @@ const GUST_DURATION = 5000;
 const GUST_FORCE = 20;
 const GUST_DRAG = 0.98;
 
-export class GustSpell extends Spell {
+class GustSpell extends Spell {
 
     constructor() {
         super(GUST_NAME, GUST_COOLDOWN, GUST_MANA);
@@ -73,12 +73,14 @@ export class GustSpell extends Spell {
         timer.start();
     }
 }
+new GustSpell();
 
 const LIGHTNING_NAME = "Lightning";
 const LIGHTNING_MANA = 10;
 const LIGHTNING_COOLDOWN = 1;
 
-export class LightningSpell extends Spell {
+class LightningSpell extends Spell {
+
     constructor() {
         super(LIGHTNING_NAME, LIGHTNING_COOLDOWN, LIGHTNING_MANA);
     }
@@ -98,3 +100,4 @@ export class LightningSpell extends Spell {
     }
 
 }
+new LightningSpell();

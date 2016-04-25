@@ -1,0 +1,18 @@
+{
+  "unitWidth": 32,
+  "unitHeight": 32,
+  "jumpSpeed": 300,
+  "moveSpeed": 200,
+  "attackSpeed": 6,
+  "spriteSheetWidth": 4,
+  "animationLengths": [
+    4,
+    4,
+    4,
+    2
+  ],
+  "damageReductionFactor": 0.2,
+  "attackDamage": 10,
+  "spellOne": "Surf",
+  "spellTwo": "Frostbite"
+}

@@ -2,6 +2,13 @@ import {ExtendedSprite} from "../sprite-extension";
 import {globals} from "../globals";
 import {mainGame} from "../main";
 
+export const spellMap = new Map();
+
+// spellMap.set = function (k, v) {
+//     console.log("[spellMap.set]", k, "=>", v);
+//     Map.prototype.set.call(spellMap, k, v);
+// };
+
 export class SpellSprite extends ExtendedSprite {
 
     constructor(image, onCollideGround, onCollideEnemy) {
@@ -31,6 +38,7 @@ export class Spell {
         this.name = name;
         this.cooldown = cooldown;
         this.mana = mana;
+        spellMap.set(name, this);
     }
 
     /**

@@ -1,19 +1,21 @@
 import Phaser from "phaser";
+import {PLAY as NAME, BOOT as bootStageName} from "./stages/stage-names";
+import * as staging from "./stages/stage-abc";
+import "./stages/boot-stage";
+import "./stages/init-stage";
 
 /**
  * A basic game container. Extend this for your actual game.
  */
-export class Game {
+export class Game extends staging.Stage {
 
-    constructor(width, height, antialias = false) {
+    constructor(width, height) {
+        super(NAME);
         this.allSprites = [];
-        this.phaserGame = new Phaser.Game(width, height, Phaser.AUTO, "", {
-            preload: () => this.preload(),
-            create: () => this.create(),
-            update: () => this.update(),
-            render: () => this.render()
-        }, antialias, antialias);
+        this.phaserGame = new Phaser.Game(width, height, Phaser.AUTO, "");
         this.phaserGame.promethium = this;
+        staging.loadAllStages(this.phaserGame);
+        this.phaserGame.state.start(bootStageName);
     }
 
     getImages() {
