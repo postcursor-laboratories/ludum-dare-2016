@@ -27,7 +27,7 @@
     "dateformat": "^1.0.12",
     "gulp": "^3.9.1",
     "gulp-batch": "^1.0.5",
-    "gulp-connect": "^3.2.3",
+    "gulp-connect": "^4.0.0",
     "gulp-plumber": "^1.1.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-watch": "^4.3.5",
